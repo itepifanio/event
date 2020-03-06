@@ -46,4 +46,8 @@ class User extends Authenticatable
     {
         return $this->morphOne(Address::class, 'addressable');
     }
+
+    public function organization(){
+        //TODO::pegar a organização atual do usuário
+    }
 }
