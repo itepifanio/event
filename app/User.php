@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function organizations()
+    {
+        return $this->belongsToMany(Organization::class, 'user_organizations');
+    }
+
+    public function address()
+    {
+        return $this->morphOne(Address::class, 'addressable');
+    }
 }
