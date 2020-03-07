@@ -28,6 +28,9 @@ class EventStoreRequest extends FormRequest
             'description' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
+            'address_name' => 'required',
+            'lat' => 'required',
+            'lng' => 'required',
         ];
     }
 }

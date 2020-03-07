@@ -1,3 +1,4 @@
+{{-- Arquivo base para telas de login e registro --}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>

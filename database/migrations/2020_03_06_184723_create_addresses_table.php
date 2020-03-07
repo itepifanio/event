@@ -10,8 +10,9 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->float('x');
-            $table->float('y');
+            $table->string('name');
+            $table->float('lat');
+            $table->float('lng');
             $table->integer('addressable_id');
             $table->string('addressable_type');
             $table->timestamps();

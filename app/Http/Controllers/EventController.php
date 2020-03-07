@@ -23,11 +23,17 @@ class EventController extends Controller
 
     public function store(EventStoreRequest $request)
     {
-        Event::create(array_merge(
+        $event = Event::create(array_merge(
                 $request->all(), [
                 'organization_id' => Auth::user()->organizations->first()->id
             ])
         );
+
+        $event->address()->create([
+            'name' => $request->get('address_name'),
+            'lat' => $request->get('lat'),
+            'lng' => $request->get('lng'),
+        ]);
 
         return redirect()->route('events.index', [
             'events' => Event::all()
