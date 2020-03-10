@@ -6,8 +6,8 @@
          * element that contains the map. */
         #map {
             height: 50vh;
-            margin-bottom: 10px;
-            display: none;
+            margin-top: 16px;
+            display: block;
         }
         /*!* Optional: Makes the sample page fill the window. *!*/
         /*html, body {*/
@@ -15,19 +15,6 @@
             /*margin: 0;*/
             /*padding: 0;*/
         /*}*/
-        #floating-panel {
-            position: absolute;
-            top: 10px;
-            left: 25%;
-            z-index: 5;
-            background-color: #fff;
-            padding: 5px;
-            border: 1px solid #999;
-            text-align: center;
-            font-family: 'Roboto','sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-        }
     </style>
 @endpush
 
@@ -47,11 +34,9 @@
                 <div class="col-md-8 offset-md-2">
                     <!-- general form elements -->
                     <div class="card">
-                        @if(Auth::user()->organizations()->count() > 0)
-                            <div class="card-header">
-                                <h3 class="card-title">Create event</h3>
-                            </div>
-                        @endif
+                        <div class="card-header">
+                            <h3 class="card-title">Create event</h3>
+                        </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form role="form" method="POST" action="{{ route('events.store') }}" class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
@@ -91,10 +76,15 @@
                                         <div class="invalid-feedback">{{ $errors->get('end_date')[0] }}</div>
                                     @endif
                                 </div>
-                                <div id="floating-panel">
-                                    <input id="address" type="textbox">
-                                    <input id="submit" type="button" value="Search">
+
+                                <label for="address">Address</label>
+                                <div class="input-group">
+                                    <input id="address" type="textbox" class="form-control">
+                                    <span class="input-group-append">
+                                        <input id="submit" type="button" class="btn btn-default" value="Search">
+                                    </span>
                                 </div>
+
                                 <div id="map"></div>
 
                             </div>
