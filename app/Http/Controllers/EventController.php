@@ -63,6 +63,12 @@ class EventController extends Controller
             )
         );
 
+        Event::find($id)->address()->update([
+            'name' => $request->get('address_name'),
+            'lat' => $request->get('lat'),
+            'lng' => $request->get('lng'),
+        ]);
+
         return redirect()->route('events.index', [
             'events' => Event::all()
         ])->with('success', 'Event updated with success.');
