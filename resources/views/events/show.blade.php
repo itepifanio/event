@@ -27,19 +27,22 @@
                                 <img src="{{ asset('dist/img/photo1.png') }}" width="100%">
                             </div>
 
-                            <p><b>Description:</b></p>
+                            <p><b>Description</b></p>
                             <p>{{ $event->description }}</p>
 
-                            <p><b>Start date:</b> {{ $event->start_date }}</p>
-                            <p><b>End date:</b> {{ $event->end_date }}</p>
+                            <p><b>Start date</b></p>
+                            <p>{{ $event->start_date }}</p>
 
-                            <p><b>Address:</b></p>
+                            <p><b>End date</b></p>
+                            <p>{{ $event->end_date }}</p>
+
+                            <p><b>Address</b></p>
                             <p>{{ $event->address->name }}</p>
 
                             <div id="map"></div>
                         </div>
                         <div class="card-footer">
-                            <a href="{{ route('events.index') }}" class="btn btn-sm btn-primary">Back</a>
+                            <a href="{{ route('events.index') }}" class="btn btn-default">Back to list</a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +80,7 @@
                         var bounds = new google.maps.LatLngBounds();
                         bounds.extend(marker.getPosition());
                         map.fitBounds(bounds);
-                        map.setZoom(map.getZoom()-5);
+                        map.setZoom(map.getZoom() - 5);
 
                     } else {
                         window.alert('No results found');
