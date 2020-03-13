@@ -8,17 +8,17 @@
     <title>EventUp - Event and Conference Template</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('home/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('event-home/css/bootstrap.min.css') }}">
     <!-- Icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('home/fonts/line-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('event-home/fonts/line-icons.css') }}">
     <!-- Nivo Lightbox -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('home/css/nivo-lightbox.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('event-home/css/nivo-lightbox.css') }}">
     <!-- Animate -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('home/css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('event-home/css/animate.css') }}">
     <!-- Main Style -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('home/css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('event-home/css/main.css') }}">
     <!-- Responsive Style -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('home/css/responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('event-home') }}">
 
 </head>
 <body>
@@ -29,7 +29,7 @@
     <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <a href="index.html" class="navbar-brand"><img src="{{ asset('home/img/logo.png') }}" alt=""></a>
+            <a href="index.html" class="navbar-brand"><img src="{{ asset('event-home/img/logo.png') }}" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="lni-menu"></i>
             </button>
@@ -135,7 +135,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-12 col-xs-12">
                 <div class="img-thumb">
-                    <img class="img-fluid" src="{{ asset('home/img/about/img1.png') }}" alt="">
+                    <img class="img-fluid" src="{{ asset('event-home/img/about/img1.png') }}" alt="">
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-xs-12">
@@ -164,7 +164,7 @@
 <!-- Video Section Start -->
 <div class="ready-to-play">
     <video id="bgvid" class="stop" loop>
-        <source src="{{ asset('home/video/event.webm') }}" type="video/mp4">
+        <source src="{{ asset('event-home/video/event.webm') }}" type="video/mp4">
     </video>
     <div id="polina" class="video-text">
         <div class="tb-t">
@@ -414,7 +414,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -437,7 +437,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
                                                 </div>
                                                 <h4>15 Free Productive Design Tools</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -460,7 +460,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-3.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Getting Started With SketchApp</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -487,7 +487,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -510,7 +510,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="false" aria-controls="collapseOne1">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -537,7 +537,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="false" aria-controls="collapseOne3">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -560,7 +560,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo3" aria-expanded="false" aria-controls="collapseTwo3">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -583,7 +583,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-3.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -610,7 +610,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="false" aria-controls="collapseOne4">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -633,7 +633,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo4" aria-expanded="false" aria-controls="collapseTwo4">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -656,7 +656,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseThree4" aria-expanded="false" aria-controls="collapseThree4">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-3.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -683,7 +683,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -706,7 +706,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -729,7 +729,7 @@
                                             </div>
                                             <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('home/img/speaker/speakers-3.jpg') }}" alt="">
+                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}" alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
@@ -771,7 +771,7 @@
                 <!-- Team Item Starts -->
                 <div class="team-item wow fadeInUp" data-wow-delay="0.2s">
                     <div class="team-img">
-                        <img class="img-fluid" src="{{ asset('home/img/team/team-01.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('event-home/img/team/team-01.jpg') }}" alt="">
                         <div class="team-overlay">
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
@@ -794,7 +794,7 @@
                 <!-- Team Item Starts -->
                 <div class="team-item wow fadeInUp" data-wow-delay="0.4s">
                     <div class="team-img">
-                        <img class="img-fluid" src="{{ asset('home/img/team/team-02.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('event-home/img/team/team-02.jpg') }}" alt="">
                         <div class="team-overlay">
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
@@ -818,7 +818,7 @@
                 <!-- Team Item Starts -->
                 <div class="team-item wow fadeInUp" data-wow-delay="0.6s">
                     <div class="team-img">
-                        <img class="img-fluid" src="{{ asset('home/img/team/team-03.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('event-home/img/team/team-03.jpg') }}" alt="">
                         <div class="team-overlay">
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
@@ -842,7 +842,7 @@
                 <!-- Team Item Starts -->
                 <div class="team-item wow fadeInUp" data-wow-delay="0.8s">
                     <div class="team-img">
-                        <img class="img-fluid" src="{{ asset('home/img/team/team-04.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('event-home/img/team/team-04.jpg') }}" alt="">
                         <div class="team-overlay">
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
@@ -866,7 +866,7 @@
                 <!-- Team Item Starts -->
                 <div class="team-item wow fadeInUp" data-wow-delay="1s">
                     <div class="team-img">
-                        <img class="img-fluid" src="{{ asset('home/img/team/team-05.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('event-home/img/team/team-05.jpg') }}" alt="">
                         <div class="team-overlay">
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
@@ -890,7 +890,7 @@
                 <!-- Team Item Starts -->
                 <div class="team-item wow fadeInUp" data-wow-delay="1.2s">
                     <div class="team-img">
-                        <img class="img-fluid" src="{{ asset('home/img/team/team-06.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('event-home/img/team/team-06.jpg') }}" alt="">
                         <div class="team-overlay">
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
@@ -914,7 +914,7 @@
                 <!-- Team Item Starts -->
                 <div class="team-item wow fadeInUp" data-wow-delay="1.4s">
                     <div class="team-img">
-                        <img class="img-fluid" src="{{ asset('home/img/team/team-07.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('event-home/img/team/team-07.jpg') }}" alt="">
                         <div class="team-overlay">
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
@@ -938,7 +938,7 @@
                 <!-- Team Item Starts -->
                 <div class="team-item wow fadeInUp" data-wow-delay="1.6s">
                     <div class="team-img">
-                        <img class="img-fluid" src="{{ asset('home/img/team/team-08.jpg') }}" alt="">
+                        <img class="img-fluid" src="{{ asset('event-home/img/team/team-08.jpg') }}" alt="">
                         <div class="team-overlay">
                             <div class="overlay-social-icon text-center">
                                 <ul class="social-icons">
@@ -999,7 +999,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-6 col-xs-12">
                 <div class="event-item">
-                    <img class="img-fluid" src="{{ asset('home/img/event/img1.jpg') }}" alt="">
+                    <img class="img-fluid" src="{{ asset('event-home/img/event/img1.jpg') }}" alt="">
                     <div class="overlay-text">
                         <div class="content">
                             <h3>Business Confrence</h3>
@@ -1010,7 +1010,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-xs-12">
                 <div class="event-item">
-                    <img class="img-fluid" src="{{ asset('home/img/event/img2.jpg') }}" alt="">
+                    <img class="img-fluid" src="{{ asset('event-home/img/event/img2.jpg') }}" alt="">
                     <div class="overlay-text">
                         <div class="content">
                             <h3>Designer Confrence</h3>
@@ -1021,7 +1021,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-xs-12">
                 <div class="event-item">
-                    <img class="img-fluid" src="{{ asset('home/img/event/img3.jpg') }}" alt="">
+                    <img class="img-fluid" src="{{ asset('event-home/img/event/img3.jpg') }}" alt="">
                     <div class="overlay-text">
                         <div class="content">
                             <h3>Marketer Confrence</h3>
@@ -1032,7 +1032,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-xs-12">
                 <div class="event-item">
-                    <img class="img-fluid" src="{{ asset('home/img/event/img4.jpg') }}" alt="">
+                    <img class="img-fluid" src="{{ asset('event-home/img/event/img4.jpg') }}" alt="">
                     <div class="overlay-text">
                         <div class="content">
                             <h3>JS Confrence</h3>
@@ -1147,7 +1147,7 @@
                 <div class="blog-item">
                     <div class="blog-image">
                         <a href="#">
-                            <img class="img-fluid" src="{{ asset('home/img/blog/img-1.jpg') }}" alt="">
+                            <img class="img-fluid" src="{{ asset('event-home/img/blog/img-1.jpg') }}" alt="">
                         </a>
                     </div>
                     <div class="descr">
@@ -1171,7 +1171,7 @@
                 <div class="blog-item">
                     <div class="blog-image">
                         <a href="#">
-                            <img class="img-fluid" src="{{ asset('home/img/blog/img-2.jpg') }}" alt="">
+                            <img class="img-fluid" src="{{ asset('event-home/img/blog/img-2.jpg') }}" alt="">
                         </a>
                     </div>
                     <div class="descr">
@@ -1195,7 +1195,7 @@
                 <div class="blog-item">
                     <div class="blog-image">
                         <a href="#">
-                            <img class="img-fluid" src="{{ asset('home/img/blog/img-3.jpg') }}" alt="">
+                            <img class="img-fluid" src="{{ asset('event-home/img/blog/img-3.jpg') }}" alt="">
                         </a>
                     </div>
                     <div class="descr">
@@ -1238,15 +1238,15 @@
         <div class="row mb-30 text-center wow fadeInDown" data-wow-delay="0.3s">
             <div class="col-lg-12">
                 <div class="sponsors-logo text-center">
-                    <a href=""><img src="{{ asset('home/img/sponsors/logo-1.png') }}" alt=""></a>
-                    <a href=""><img src="{{ asset('home/img/sponsors/logo-2.png') }}" alt=""></a>
-                    <a href=""><img src="{{ asset('home/img/sponsors/logo-3.png') }}" alt=""></a>
-                    <a href=""><img src="{{ asset('home/img/sponsors/logo-4.png') }}" alt=""></a>
-                    <a href=""><img src="{{ asset('home/img/sponsors/logo-5.png') }}" alt=""></a>
-                    <a href=""><img src="{{ asset('home/img/sponsors/logo-6.png') }}" alt=""></a>
-                    <a href=""><img src="{{ asset('home/img/sponsors/logo-7.png') }}" alt=""></a>
-                    <a href=""><img src="{{ asset('home/img/sponsors/logo-8.png') }}" alt=""></a>
-                    <a href=""><img src="{{ asset('home/img/sponsors/logo-9.png') }}" alt=""></a>
+                    <a href=""><img src="{{ asset('event-home/img/sponsors/logo-1.png') }}" alt=""></a>
+                    <a href=""><img src="{{ asset('event-home/img/sponsors/logo-2.png') }}" alt=""></a>
+                    <a href=""><img src="{{ asset('event-home/img/sponsors/logo-3.png') }}" alt=""></a>
+                    <a href=""><img src="{{ asset('event-home/img/sponsors/logo-4.png') }}" alt=""></a>
+                    <a href=""><img src="{{ asset('event-home/img/sponsors/logo-5.png') }}" alt=""></a>
+                    <a href=""><img src="{{ asset('event-home/img/sponsors/logo-6.png') }}" alt=""></a>
+                    <a href=""><img src="{{ asset('event-home/img/sponsors/logo-7.png') }}" alt=""></a>
+                    <a href=""><img src="{{ asset('event-home/img/sponsors/logo-8.png') }}" alt=""></a>
+                    <a href=""><img src="{{ asset('event-home/img/sponsors/logo-9.png') }}" alt=""></a>
                 </div><!-- sponsors logo end-->
             </div>
         </div>
@@ -1367,7 +1367,7 @@
                     </form>
                 </div>
                 <div class="footer-logo">
-                    <img src="{{ asset('home/img/logo.png') }}" alt="">
+                    <img src="{{ asset('event-home/img/logo.png') }}" alt="">
                 </div>
                 <div class="social-icons-footer">
                     <ul>
@@ -1407,17 +1407,17 @@
 </div>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="{{ asset('home/js/jquery-min.js') }}"></script>
-<script src="{{ asset('home/js/popper.min.js') }}"></script>
-<script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('home/js/jquery.countdown.min.js') }}"></script>
-<script src="{{ asset('home/js/waypoints.min.js') }}"></script>
-<script src="{{ asset('home/js/jquery.counterup.min.js') }}"></script>
-<script src="{{ asset('home/js/jquery.nav.js') }}"></script>
-<script src="{{ asset('home/js/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('home/js/wow.js') }}"></script>
-<script src="{{ asset('home/js/nivo-lightbox.js') }}"></script>
-<script src="{{ asset('home/js/video.js') }}"></script>
-<script src="{{ asset('home/js/main.js') }}"></script>
+<script src="{{ asset('event-home/js/jquery-min.js') }}"></script>
+<script src="{{ asset('event-home/js/popper.min.js') }}"></script>
+<script src="{{ asset('event-home/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('event-home/js/jquery.countdown.min.js') }}"></script>
+<script src="{{ asset('event-home/js/waypoints.min.js') }}"></script>
+<script src="{{ asset('event-home/js/jquery.counterup.min.js') }}"></script>
+<script src="{{ asset('event-home/js/jquery.nav.js') }}"></script>
+<script src="{{ asset('event-home/js/jquery.easing.min.js') }}"></script>
+<script src="{{ asset('event-home/js/wow.js') }}"></script>
+<script src="{{ asset('event-home/js/nivo-lightbox.js') }}"></script>
+<script src="{{ asset('event-home/js/video.js') }}"></script>
+<script src="{{ asset('event-home/js/main.js') }}"></script>
 </body>
 </html>
