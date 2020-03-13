@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use App\Event;
 use App\Organization;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class EventTest extends TestCase
 {

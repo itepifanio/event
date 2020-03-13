@@ -13,6 +13,9 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
+            @foreach($errors as $error)
+                {{ $error }}
+            @endforeach
             @if($errors->has(['address_name', 'lat', 'lng']))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" style="color: white">
                     Please choose a valid address.
@@ -34,8 +37,7 @@
 
                             <input type="hidden" id="lat" name="lat" value="{{ $event->address->lat }}">
                             <input type="hidden" id="lng" name="lng" value="{{ $event->address->lng }}">
-                            <input type="hidden" id="address_name" name="address_name"
-                                   value="{{ $event->address->address_name }}">
+                            <input type="hidden" id="address_name" name="address_name" value="{{ $event->address->name }}">
 
                             <div class="card-body">
                                 <div class="form-group">
