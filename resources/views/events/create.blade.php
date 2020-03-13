@@ -2,19 +2,11 @@
 
 @push('stylesheets')
     <style>
-        /* Always set the map height explicitly to define the size of the div
-         * element that contains the map. */
         #map {
             height: 50vh;
             margin-top: 16px;
             display: block;
         }
-        /*!* Optional: Makes the sample page fill the window. *!*/
-        /*html, body {*/
-            /*height: 100%;*/
-            /*margin: 0;*/
-            /*padding: 0;*/
-        /*}*/
     </style>
 @endpush
 
@@ -39,7 +31,8 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" method="POST" action="{{ route('events.store') }}" class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
+                        <form role="form" method="POST" action="{{ route('events.store') }}"
+                              class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
                             @csrf
 
                             <input type="hidden" id="lat" name="lat">
@@ -49,14 +42,18 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" placeholder="Name" name="name">
+                                    <input type="text"
+                                           class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
+                                           placeholder="Name" name="name">
                                     @if($errors->has('name'))
                                         <div class="invalid-feedback">{{ $errors->get('name')[0] }}</div>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea type="text" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="description" name="description">
+                                    <textarea type="text"
+                                              class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                                              id="description" name="description">
                                     </textarea>
                                     @if($errors->has('description'))
                                         <div class="invalid-feedback">{{ $errors->get('description')[0] }}</div>
@@ -64,14 +61,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="start_date">Start Date</label>
-                                    <input type="date" class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}" id="start_date" name="start_date">
+                                    <input type="date"
+                                           class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}"
+                                           id="start_date" name="start_date">
                                     @if($errors->has('start_date'))
                                         <div class="invalid-feedback">{{ $errors->get('start_date')[0] }}</div>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="end_date">End Date</label>
-                                    <input type="date" class="form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}" id="end_date" name="end_date">
+                                    <input type="date"
+                                           class="form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}"
+                                           id="end_date" name="end_date">
                                     @if($errors->has('end_date'))
                                         <div class="invalid-feedback">{{ $errors->get('end_date')[0] }}</div>
                                     @endif
@@ -90,6 +91,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                <a href="{{ route('events.index') }}" class="btn btn-default">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -112,14 +114,14 @@
             });
             var geocoder = new google.maps.Geocoder();
 
-            document.getElementById('submit').addEventListener('click', function() {
+            document.getElementById('submit').addEventListener('click', function () {
                 geocodeAddress(geocoder, map);
             });
         }
 
         function geocodeAddress(geocoder, resultsMap) {
             var address = document.getElementById('address').value;
-            geocoder.geocode({'address': address}, function(results, status) {
+            geocoder.geocode({'address': address}, function (results, status) {
                 console.log(results);
                 if (status === 'OK') {
                     resultsMap.setCenter(results[0].geometry.location);

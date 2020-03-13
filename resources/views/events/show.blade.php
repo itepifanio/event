@@ -1,98 +1,97 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Reverse Geocoding</title>
+@extends('layouts.base')
+
+@push('stylesheets')
     <style>
-        /* Always set the map height explicitly to define the size of the div
-         * element that contains the map. */
         #map {
-            height: 100%;
-        }
-
-        /* Optional: Makes the sample page fill the window. */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        #floating-panel {
-            position: absolute;
-            top: 10px;
-            left: 25%;
-            z-index: 5;
-            background-color: #fff;
-            padding: 5px;
-            border: 1px solid #999;
-            text-align: center;
-            font-family: 'Roboto', 'sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-        }
-
-        #floating-panel {
-            position: absolute;
-            top: 5px;
-            left: 50%;
-            margin-left: -180px;
-            width: 350px;
-            z-index: 5;
-            background-color: #fff;
-            padding: 5px;
-            border: 1px solid #999;
-        }
-
-        #latlng {
-            width: 225px;
+            height: 50vh;
+            margin-top: 20px;
+            display: block;
         }
     </style>
-</head>
-<body>
-<div id="floating-panel">
-    <input id="latlng" type="text" value="{{ $event->address->lat }},{{$event->address->lng}}" disabled>
-</div>
-<div id="map"></div>
+@endpush
 
-{{--https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse--}}
-<script>
-    function initMap() {
-        var center = {lat: {{ $event->address->lat }}, lng: {{$event->address->lng}}};
+@section('content')
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-8 offset-md-2">
+                    <!-- general form elements -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ $event->name }}</h3>
+                        </div>
+                        <div class="card-body">
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 8,
-            center: center
-        });
+                            <div class="col-md-10 offset-md-1" style="margin-top:16px; margin-bottom: 26px;">
+                                <img src="{{ asset('dist/img/photo1.png') }}" width="100%">
+                            </div>
 
-        var geocoder = new google.maps.Geocoder;
-        var infowindow = new google.maps.InfoWindow;
+                            <p><b>Description</b></p>
+                            <p>{{ $event->description }}</p>
 
-        geocodeLatLng(geocoder, map, infowindow, center);
-    }
+                            <p><b>Start date</b></p>
+                            <p>{{ $event->start_date }}</p>
 
-    function geocodeLatLng(geocoder, map, infowindow, latlng) {
-        geocoder.geocode({'location': latlng}, function (results, status) {
-            if (status === 'OK') {
-                if (results[0]) {
-                    map.setZoom(11);
-                    var marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map
-                    });
-                    infowindow.setContent(results[0].formatted_address);
-                    infowindow.open(map, marker);
+                            <p><b>End date</b></p>
+                            <p>{{ $event->end_date }}</p>
+
+                            <p><b>Address</b></p>
+                            <p>{{ $event->address->name }}</p>
+
+                            <div id="map"></div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ route('events.index') }}" class="btn btn-default">Back to list</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+
+{{--https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse--}}]
+@push('scripts')
+    <script>
+        function initMap() {
+            var center = {lat: {{ $event->address->lat }}, lng: {{$event->address->lng}}};
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: center
+            });
+
+            var geocoder = new google.maps.Geocoder;
+            var infowindow = new google.maps.InfoWindow;
+
+            geocodeLatLng(geocoder, map, infowindow, center);
+        }
+
+        function geocodeLatLng(geocoder, map, infowindow, latlng) {
+            geocoder.geocode({'location': latlng}, function (results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        var marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                        });
+
+                        var bounds = new google.maps.LatLngBounds();
+                        bounds.extend(marker.getPosition());
+                        map.fitBounds(bounds);
+                        map.setZoom(map.getZoom() - 5);
+
+                    } else {
+                        window.alert('No results found');
+                    }
                 } else {
-                    window.alert('No results found');
+                    window.alert('Geocoder failed due to: ' + status);
                 }
-            } else {
-                window.alert('Geocoder failed due to: ' + status);
-            }
-        });
-    }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_GEOCODER') }}&callback=initMap">
-</script>
-</body>
-</html>
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_GEOCODER') }}&callback=initMap">
+    </script>
+@endpush
