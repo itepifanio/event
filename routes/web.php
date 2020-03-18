@@ -24,4 +24,5 @@ Route::middleware(['auth'])->group(function(){
 
 Auth::routes();
 
+Route::resource('organizations', 'OrganizationController');
 Route::get('/home', 'HomeController@index')->name('home');
