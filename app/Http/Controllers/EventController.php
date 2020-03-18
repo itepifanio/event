@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Http\Requests\EventStoreRequest;
+use App\Http\Requests\EventRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,9 +21,10 @@ class EventController extends Controller
         return view('events.create');
     }
 
-    public function store(EventStoreRequest $request)
+    public function store(EventRequest $request)
     {
-        $event = Event::create(array_merge(
+        $event = Event::create(
+            array_merge(
                 $request->all(), [
                 'organization_id' => Auth::user()->organizations->first()->id
             ])
@@ -54,7 +55,7 @@ class EventController extends Controller
         ]);
     }
 
-    public function update(EventStoreRequest $request, $id)
+    public function update(EventRequest $request, $id)
     {
         Event::find($id)->update(
             array_merge(

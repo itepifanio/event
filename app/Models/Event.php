@@ -11,12 +11,13 @@ class Event extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'description', 'start_date', 'end_date', 'image', 'organization_id'
+        'name', 'description', 'start_date', 'end_date',
+        'image', 'organization_id',
     ];
 
     protected $dates = [
         'start_date',
-        'end_date'
+        'end_date',
     ];
 
     public function organization()
