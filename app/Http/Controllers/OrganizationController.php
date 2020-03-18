@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organization;
-use App\Http\Requests\OrganizationStoreRequest;
+use App\Http\Requests\OrganizationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,11 +21,11 @@ class OrganizationController extends Controller
         return view('organizations.create');
     }
 
-    public function store(OrganizationStoreRequest $request)
+    public function store(OrganizationRequest $request)
     {
         $input = $request->validated();
 
-        $organization = Organization::create($input);
+        Organization::create($input);
 
         return redirect()->route('organizations.index', [
             'organizations' => Organization::all()
@@ -46,11 +46,12 @@ class OrganizationController extends Controller
         ]);
     }
 
-    public function update(OrganizationStoreRequest $request, $id)
+    public function update(OrganizationRequest $request, $id)
     {
         $organization = Organization::find($id);
         $input = $request->validated();
         $organization->update($input);
+
         return redirect()->route('organizations.index', [
             'organizations' => Organization::all()
         ])->with('success', 'Organization updated with success.');
