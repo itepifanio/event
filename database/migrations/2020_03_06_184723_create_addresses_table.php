@@ -9,11 +9,11 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('name');
             $table->float('lat');
             $table->float('lng');
-            $table->integer('addressable_id');
+            $table->unsignedInteger('addressable_id');
             $table->string('addressable_type');
             $table->timestamps();
         });
