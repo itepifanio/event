@@ -175,6 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Custom app service provider...
+         */
+        App\Providers\GeolocalizationProvider::class,
     ],
 
     /*
@@ -226,7 +230,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Geolocalization' => App\Facades\Geolocalization::class,
     ],
 
 ];

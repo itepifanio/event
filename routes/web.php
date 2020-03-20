@@ -19,7 +19,14 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::resource('events', 'EventController');
+    Route::resource('organizations', 'OrganizationController');
+
+    Route::get('events', 'EventController@list')->name('events.list');
+    Route::group(['prefix' => 'organizations/{organization}'], function(){
+        Route::resource('events', 'EventController', [
+            'as' => 'organizations',
+        ]);
+    });
 });
 
 Auth::routes();

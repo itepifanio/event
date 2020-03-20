@@ -13,6 +13,9 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
+            @foreach($errors as $error)
+                {{ $error }}
+            @endforeach
             @if($errors->has(['address_name', 'lat', 'lng']))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" style="color: white">
                     Please choose a valid address.
@@ -27,15 +30,14 @@
                         <div class="card-header">
                             <h3 class="card-title">Edit event</h3>
                         </div>
-                        <form role="form" method="POST" action="{{ route('events.update', $event->id) }}"
+                        <form role="form" method="POST" action="{{ route('organizations.events.update', [$organization->id, $event->id]) }}"
                               class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
                             @method('PUT')
                             @csrf
 
                             <input type="hidden" id="lat" name="lat" value="{{ $event->address->lat }}">
                             <input type="hidden" id="lng" name="lng" value="{{ $event->address->lng }}">
-                            <input type="hidden" id="address_name" name="address_name"
-                                   value="{{ $event->address->address_name }}">
+                            <input type="hidden" id="address_name" name="address_name" value="{{ $event->address->name }}">
 
                             <div class="card-body">
                                 <div class="form-group">
@@ -90,7 +92,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{ route('events.index') }}" class="btn btn-default">Cancel</a>
+                                <a href="{{ route('organizations.events.index', $organization->id) }}" class="btn btn-default">Cancel</a>
                             </div>
                         </form>
                     </div>

@@ -29,9 +29,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Create event</h3>
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form role="form" method="POST" action="{{ route('events.store') }}"
+                        <form role="form" method="POST" action="{{ route('organizations.events.store', $organization->id) }}"
                               class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
                             @csrf
 
@@ -91,7 +89,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{ route('events.index') }}" class="btn btn-default">Cancel</a>
+                                <a href="{{ route('organizations.events.index', $organization->id) }}" class="btn btn-default">Cancel</a>
                             </div>
                         </form>
                     </div>

@@ -12,10 +12,18 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('events.index') }}" class="nav-link">
+            <a href="{{ route('events.list') }}" class="nav-link">
                 <i class="nav-icon fas fa-calendar"></i>
                 <p>
                     Event
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('organizations.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-building"></i>
+                <p>
+                    Organization
                 </p>
             </a>
         </li>
