@@ -4,13 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrganizationRequest;
 use App\Models\Organization;
+use App\Models\User;
 
 class OrganizationController extends Controller
 {
+    public function getOrganizationInfo($id){
+
+        $organization = Organization::find($id);
+        $user_organization = User::find($organization->user_id);
+        return array(
+            'id' => $organization->id,
+            'user_id' => $user_organization->id,
+            'name' => $user_organization->name,
+            'email' => $user_organization->email,
+        );
+
+    }
     public function index()
     {
+        $organizations = Organization::all();
+        $organizations_info = array();
+        foreach ($organizations as &$ong) {
+            array_push($organizations_info, $this->getOrganizationInfo($ong->id));
+        }
         return view('organizations.index', [
-            'organizations' => Organization::all()
+            'organizations' => $organizations_info
         ]);
     }
 
@@ -33,7 +51,7 @@ class OrganizationController extends Controller
     public function show($id)
     {
         return view('organizations.show', [
-            'organization' => Organization::find($id)
+            'organization' => $this->getOrganizationInfo($id)
         ]);
     }
 

@@ -60,13 +60,19 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="form-group row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-block">
                                     {{ __('Register') }}
                                 </button>
                             </div>
+                            <div class="col">
+                                <div class="input-group-text">
+                                    <input class= "mr-1" type="checkbox"   class="form-control" name="is_organization" aria-label="Checkbox for following text input">
+                                    Registro como organização
+                                </div>  
+                            </div>
+                                
                         </div>
                     </form>
                 </div>
