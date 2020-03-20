@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Organization;
 use App\Http\Requests\OrganizationRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Organization;
 
 class OrganizationController extends Controller
 {
