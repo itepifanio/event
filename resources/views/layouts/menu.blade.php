@@ -12,7 +12,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('events.index') }}" class="nav-link">
+            <a href="{{ route('events.list') }}" class="nav-link">
                 <i class="nav-icon fas fa-calendar"></i>
                 <p>
                     Event

@@ -3,29 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Http\Requests\EventStoreRequest;
+use App\Http\Requests\EventRequest;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    public function index()
+    public function list(){
+        return view('events.list');
+    }
+
+    public function index(Organization $organization)
     {
         return view('events.index', [
-            'events' => Event::all()
+            'events' => Event::all(),
+            'organization' => $organization,
         ]);
     }
 
-    public function create()
+    public function create(Organization $organization)
     {
-        return view('events.create');
+        return view('events.create', [
+            'organization' => $organization,
+        ]);
     }
 
-    public function store(EventStoreRequest $request)
+    public function store(EventRequest $request, Organization $organization)
     {
-        $event = Event::create(array_merge(
+        $event = Event::create(
+            array_merge(
                 $request->all(), [
-                'organization_id' => Auth::user()->organizations->first()->id
+                'organization_id' => $organization->id,
             ])
         );
 
@@ -35,31 +44,34 @@ class EventController extends Controller
             'lng' => $request->get('lng'),
         ]);
 
-        return redirect()->route('events.index', [
-            'events' => Event::all()
+        return redirect()->route('organizations.events.index', [
+            'events' => Event::all(),
+            'organization' => $organization,
         ])->with('success', 'Event created with success.');
     }
 
-    public function show($id)
+    public function show(Organization $organization, $id)
     {
         return view('events.show', [
-            'event' => Event::find($id)
+            'event' => Event::find($id),
+            'organization' => $organization,
         ]);
     }
 
-    public function edit($id)
+    public function edit(Organization $organization, $id)
     {
         return view('events.edit', [
             'event' => Event::find($id),
+            'organization' => $organization,
         ]);
     }
 
-    public function update(EventStoreRequest $request, $id)
+    public function update(EventRequest $request, Organization $organization, $id)
     {
         Event::find($id)->update(
             array_merge(
                 $request->all(),
-                ['organization_id' => Auth::user()->organizations->first()->id]
+                ['organization_id' => $organization->id]
             )
         );
 
@@ -69,17 +81,19 @@ class EventController extends Controller
             'lng' => $request->get('lng'),
         ]);
 
-        return redirect()->route('events.index', [
-            'events' => Event::all()
+        return redirect()->route('organizations.events.index', [
+            'events' => Event::all(),
+            'organization' => $organization
         ])->with('success', 'Event updated with success.');
     }
 
-    public function destroy($id)
+    public function destroy(Organization $organization, $id)
     {
         Event::find($id)->delete();
 
-        return redirect()->route('events.index', [
-            'events' => Event::all()
+        return redirect()->route('organizations.events.index', [
+            'events' => Event::all(),
+            'organization' => $organization,
         ])->with('success', 'Event deleted with success.');
     }
 }

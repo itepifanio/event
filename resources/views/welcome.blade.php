@@ -18,7 +18,7 @@
     <!-- Main Style -->
     <link rel="stylesheet" type="text/css" href="{{ asset('event-home/css/main.css') }}">
     <!-- Responsive Style -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('event-home') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('event-home/css/responsive.css') }}">
 
 </head>
 <body>
@@ -30,7 +30,8 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <a href="index.html" class="navbar-brand"><img src="{{ asset('event-home/img/logo.png') }}" alt=""></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="lni-menu"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -99,7 +100,8 @@
                         <p class="banner-info">15, Oct 2020 - Maria Hall, NY, United states</p>
                         <h2 class="head-title">Developers Conference</h2>
                         <p class="banner-desc">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, nobis nesciunt atque perferendis, ipsa doloremque deserunt cum qui.</p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, nobis nesciunt atque
+                            perferendis, ipsa doloremque deserunt cum qui.</p>
                         <div class="banner-btn">
                             <a href="#" class="btn btn-common">Get Ticket</a>
                         </div>
@@ -143,7 +145,10 @@
                     <div>
                         <div class="about-text">
                             <h2>About The Conference</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod ncididunt ametfh consectetur dolore magna aliqua. Ut enim ad minim veniam dolor sitame magnaelit ate consectetur adipisicing. Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod.</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod ncididunt ametfh
+                                consectetur dolore magna aliqua. Ut enim ad minim veniam dolor sitame magnaelit ate
+                                consectetur adipisicing. Lorem ipsum dolor sit amet consectetur adipisicing elit sed do
+                                eiusmod.</p>
                         </div>
                         <ul class="stylish-list mb-3">
                             <li><i class="lni-check-mark-circle"></i>Networking Sessions</li>
@@ -169,7 +174,9 @@
     <div id="polina" class="video-text">
         <div class="tb-t">
             <div class="tb-c">
-                <div class="polina"><button><i class='lni-play'></i></button></div>
+                <div class="polina">
+                    <button><i class='lni-play'></i></button>
+                </div>
             </div>
         </div>
     </div>
@@ -224,7 +231,8 @@
             <div class="col-12">
                 <div class="section-title-header text-center">
                     <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Why You Should Join?</h2>
-                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro.
+                        Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
                 </div>
             </div>
         </div>
@@ -359,7 +367,8 @@
             <div class="col-12">
                 <div class="section-title-header text-center">
                     <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Event Schedules</h2>
-                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro.
+                        Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
                 </div>
             </div>
         </div>
@@ -367,7 +376,8 @@
             <div class="col-12 mb-5 text-center">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="monday-tab" data-toggle="tab" href="#monday" role="tab" aria-controls="monday" aria-expanded="true">
+                        <a class="nav-link active" id="monday-tab" data-toggle="tab" href="#monday" role="tab"
+                           aria-controls="monday" aria-expanded="true">
                             <div class="item-text">
                                 <h4>Day 01</h4>
                                 <h5>14 February 2020</h5>
@@ -375,7 +385,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="tuesday-tab" data-toggle="tab" href="#tuesday" role="tab" aria-controls="tuesday">
+                        <a class="nav-link" id="tuesday-tab" data-toggle="tab" href="#tuesday" role="tab"
+                           aria-controls="tuesday">
                             <div class="item-text">
                                 <h4>Day 02</h4>
                                 <h5>15 February 2020</h5>
@@ -383,7 +394,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="wednesday-tab" data-toggle="tab" href="#wednesday" role="tab" aria-controls="wednesday">
+                        <a class="nav-link" id="wednesday-tab" data-toggle="tab" href="#wednesday" role="tab"
+                           aria-controls="wednesday">
                             <div class="item-text">
                                 <h4>Day 03</h4>
                                 <h5>16 February 2020</h5>
@@ -391,7 +403,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="thursday-tab" data-toggle="tab" href="#thursday" role="tab" aria-controls="thursday">
+                        <a class="nav-link" id="thursday-tab" data-toggle="tab" href="#thursday" role="tab"
+                           aria-controls="thursday">
                             <div class="item-text">
                                 <h4>Day 04</h4>
                                 <h5>17 February 2020</h5>
@@ -404,7 +417,8 @@
                 <div class="schedule-area row wow fadeInDown" data-wow-delay="0.3s">
                     <div class="schedule-tab-content col-12 clearfix">
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="monday" role="tabpanel" aria-labelledby="monday-tab">
+                            <div class="tab-pane fade show active" id="monday" role="tabpanel"
+                                 aria-labelledby="monday-tab">
                                 <div id="accordion">
                                     <div class="card">
                                         <div id="headingOne">
@@ -412,19 +426,31 @@
                                                 <span> 9.30 - 10.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseOne" aria-expanded="false"
+                                                 aria-controls="collapseOne">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                             data-parent="#accordion">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -435,19 +461,31 @@
                                                 <span> 10.30 - 11.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseTwo" aria-expanded="false"
+                                                 aria-controls="collapseTwo">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>15 Free Productive Design Tools</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                             data-parent="#accordion">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -458,19 +496,31 @@
                                                 <span> 11.30 - 12.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseThree" aria-expanded="false"
+                                                 aria-controls="collapseThree">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Getting Started With SketchApp</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                             data-parent="#accordion">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -485,19 +535,31 @@
                                                 <span> 1.30 - 2.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseTwo2" aria-expanded="false"
+                                                 aria-controls="collapseTwo2">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne1" data-parent="#accordion2">
+                                        <div id="collapseOne1" class="collapse show" aria-labelledby="headingOne1"
+                                             data-parent="#accordion2">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -508,19 +570,31 @@
                                                 <span> 9.30 - 10.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="false" aria-controls="collapseOne1">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseOne1" aria-expanded="false"
+                                                 aria-controls="collapseOne1">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2" data-parent="#accordion2">
+                                        <div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo2"
+                                             data-parent="#accordion2">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -535,19 +609,31 @@
                                                 <span> 10.30 - 11.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="false" aria-controls="collapseOne3">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseOne3" aria-expanded="false"
+                                                 aria-controls="collapseOne3">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseOne3" class="collapse show" aria-labelledby="headingOne3" data-parent="#accordion3">
+                                        <div id="collapseOne3" class="collapse show" aria-labelledby="headingOne3"
+                                             data-parent="#accordion3">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -558,19 +644,31 @@
                                                 <span> 11.30 - 12.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo3" aria-expanded="false" aria-controls="collapseTwo3">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseTwo3" aria-expanded="false"
+                                                 aria-controls="collapseTwo3">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseTwo3" class="collapse" aria-labelledby="headingTwo3" data-parent="#accordion3">
+                                        <div id="collapseTwo3" class="collapse" aria-labelledby="headingTwo3"
+                                             data-parent="#accordion3">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -581,19 +679,31 @@
                                                 <span> 1.30 - 2.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseThree3" aria-expanded="false"
+                                                 aria-controls="collapseThree3">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseThree3" class="collapse" aria-labelledby="headingThree3" data-parent="#accordion3">
+                                        <div id="collapseThree3" class="collapse" aria-labelledby="headingThree3"
+                                             data-parent="#accordion3">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -608,19 +718,31 @@
                                                 <span> 9.30 - 10.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="false" aria-controls="collapseOne4">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseOne4" aria-expanded="false"
+                                                 aria-controls="collapseOne4">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseOne4" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion4">
+                                        <div id="collapseOne4" class="collapse show" aria-labelledby="headingOne"
+                                             data-parent="#accordion4">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -631,19 +753,31 @@
                                                 <span> 10.30 - 11.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo4" aria-expanded="false" aria-controls="collapseTwo4">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseTwo4" aria-expanded="false"
+                                                 aria-controls="collapseTwo4">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseTwo4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion4">
+                                        <div id="collapseTwo4" class="collapse" aria-labelledby="headingTwo"
+                                             data-parent="#accordion4">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -654,19 +788,31 @@
                                                 <span> 11.30 - 12.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseThree4" aria-expanded="false" aria-controls="collapseThree4">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseThree4" aria-expanded="false"
+                                                 aria-controls="collapseThree4">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseThree4" class="collapse" aria-labelledby="headingThree" data-parent="#accordion4">
+                                        <div id="collapseThree4" class="collapse" aria-labelledby="headingThree"
+                                             data-parent="#accordion4">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -681,19 +827,31 @@
                                                 <span> 9.30 - 10.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseTwo" aria-expanded="false"
+                                                 aria-controls="collapseTwo">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-2.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                             data-parent="#accordion">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -704,19 +862,31 @@
                                                 <span> 10.30 - 11.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseOne" aria-expanded="false"
+                                                 aria-controls="collapseOne">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-1.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                             data-parent="#accordion">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -727,19 +897,31 @@
                                                 <span> 11.30 - 12.30 AM</span>
                                                 Workshop
                                             </div>
-                                            <div class="collapsed card-header" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                 data-target="#collapseThree" aria-expanded="false"
+                                                 aria-controls="collapseThree">
                                                 <div class="images-box">
-                                                    <img class="img-fluid" src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}" alt="">
+                                                    <img class="img-fluid"
+                                                         src="{{ asset('event-home/img/speaker/speakers-3.jpg') }}"
+                                                         alt="">
                                                 </div>
                                                 <h4>Web Design Principles and Best Practices</h4>
                                                 <h5 class="name">David Warner</h5>
                                             </div>
                                         </div>
-                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                             data-parent="#accordion">
                                             <div class="card-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima dolores rerum maiores qui at commodi quas, reprehenderit eius consectetur quae magni molestias veniam, provident illum facere iure libero asperiores! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat assumenda suscipit, accusantium, necessitatibus reiciendis odit sed, vero amet blanditiis?</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet minima
+                                                    dolores rerum maiores qui at commodi quas, reprehenderit eius
+                                                    consectetur quae magni molestias veniam, provident illum facere iure
+                                                    libero asperiores! Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit. Veniam earum nihil ex ipsa magni eligendi fugiat
+                                                    assumenda suscipit, accusantium, necessitatibus reiciendis odit sed,
+                                                    vero amet blanditiis?</p>
                                                 <div class="location">
-                                                    <span>Location:</span> Hall 1 , Building A, Golden Street, Southafrica
+                                                    <span>Location:</span> Hall 1 , Building A, Golden Street,
+                                                    Southafrica
                                                 </div>
                                             </div>
                                         </div>
@@ -762,7 +944,8 @@
             <div class="col-12">
                 <div class="section-title-header text-center">
                     <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Our Speakers</h2>
-                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro.
+                        Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
                 </div>
             </div>
         </div>
@@ -981,7 +1164,8 @@
                 <br>
                 <a href="https://rebrand.ly/eventup-gg" target="_blank" class="btn btn-common btn-lg">Purchase Now</a>
             </div>
-        </div>      </div>
+        </div>
+    </div>
 </section>
 <!-- Gallary Section End -->
 
@@ -992,7 +1176,8 @@
             <div class="col-12">
                 <div class="section-title-header text-center">
                     <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Upcoming Events</h2>
-                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro.
+                        Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
                 </div>
             </div>
         </div>
@@ -1044,7 +1229,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-12 text-center">
-                <a href="#" class="btn btn-common">More Event</a>
+                <button id="more-events" class="btn btn-common" onclick="getLocation()">Events by your geolocalization</button>
             </div>
         </div>
     </div>
@@ -1058,7 +1243,8 @@
             <div class="col-12">
                 <div class="section-title-header text-center">
                     <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Ticket Pricing</h2>
-                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro.
+                        Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
                 </div>
             </div>
         </div>
@@ -1138,7 +1324,8 @@
             <div class="col-12">
                 <div class="section-title-header text-center">
                     <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Latest News</h2>
-                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro.
+                        Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
                 </div>
             </div>
         </div>
@@ -1159,7 +1346,8 @@
                                 Learn Something New
                             </a>
                         </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipsing elit, sed do eiusmodincididunt ut labore et dolore</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipsing elit, sed do eiusmodincididunt ut labore et
+                            dolore</p>
                     </div>
                     <div class="meta-tags">
                         <span class="date"><i class="lni-calendar"></i> Jan 20, 2020</span>
@@ -1183,7 +1371,8 @@
                                 Call for sponsors
                             </a>
                         </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipsing elit, sed do eiusmodincididunt ut labore et dolore</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipsing elit, sed do eiusmodincididunt ut labore et
+                            dolore</p>
                     </div>
                     <div class="meta-tags">
                         <span class="date"><i class="lni-calendar"></i> Jan 20, 2020</span>
@@ -1207,7 +1396,8 @@
                                 Elon Musk joining the event
                             </a>
                         </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipsing elit, sed do eiusmodincididunt ut labore et dolore</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipsing elit, sed do eiusmodincididunt ut labore et
+                            dolore</p>
                     </div>
                     <div class="meta-tags">
                         <span class="date"><i class="lni-calendar"></i> Jan 20, 2020</span>
@@ -1231,7 +1421,8 @@
             <div class="col-12">
                 <div class="section-title-header text-center">
                     <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Sponsors</h2>
-                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro.
+                        Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
                 </div>
             </div>
         </div>
@@ -1261,7 +1452,8 @@
             <div class="col-12">
                 <div class="section-title-header text-center">
                     <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">Contact Us</h2>
-                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro. Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">Lorem ipsum dolor sit amet, in quodsi vulputate pro.
+                        Ius illum vocent mediocritatem an <br> cule dicta iriure at phaedrum.</p>
                 </div>
             </div>
         </div>
@@ -1273,28 +1465,35 @@
                             <div class="row">
                                 <div class="col-md-6 form-line">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="name" name="email" placeholder="First Name" required data-error="Please enter your name">
+                                        <input type="text" class="form-control" id="name" name="email"
+                                               placeholder="First Name" required data-error="Please enter your name">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 form-line">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required data-error="Please enter your Email">
+                                        <input type="email" class="form-control" id="email" name="email"
+                                               placeholder="Email" required data-error="Please enter your Email">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-line">
                                     <div class="form-group">
-                                        <input type="tel" class="form-control" id="msg_subject" name="subject" placeholder="Subject" required data-error="Please enter your message subject">
+                                        <input type="tel" class="form-control" id="msg_subject" name="subject"
+                                               placeholder="Subject" required
+                                               data-error="Please enter your message subject">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" rows="4" id="message" name="message" required data-error="Write your message"></textarea>
+                                        <textarea class="form-control" rows="4" id="message" name="message" required
+                                                  data-error="Write your message"></textarea>
                                     </div>
                                     <div class="form-submit">
-                                        <button type="submit" class="btn btn-common" id="form-submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
+                                        <button type="submit" class="btn btn-common" id="form-submit"><i
+                                                    class="fa fa-paper-plane" aria-hidden="true"></i> Send Message
+                                        </button>
                                         <div id="msgSubmit" class="h3 text-center hidden"></div>
                                     </div>
                                 </div>
@@ -1313,7 +1512,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <object style="border:0; height: 450px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15864.15480778837!2d-77.44908382752939!3d38.953293865566366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6775cb22a9fa1341!2sThe+Firkin+%26+Fox!5e0!3m2!1sen!2sbd!4v1543773685573"></object>
+                <object style="border:0; height: 450px; width: 100%;"
+                        data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15864.15480778837!2d-77.44908382752939!3d38.953293865566366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6775cb22a9fa1341!2sThe+Firkin+%26+Fox!5e0!3m2!1sen!2sbd!4v1543773685573"></object>
             </div>
         </div>
     </div>
@@ -1361,7 +1561,8 @@
                     <h2 class="subscribe-title">To Get Nearly Updates</h2>
                     <form class="text-center form-inline">
                         <input class="mb-20 form-control" name="email" placeholder="Enter Your Email Here">
-                        <button type="submit" class="btn btn-common sub-btn" data-style="zoom-in" data-spinner-size="30" name="submit" id="submit">
+                        <button type="submit" class="btn btn-common sub-btn" data-style="zoom-in" data-spinner-size="30"
+                                name="submit" id="submit">
                             <span class="ladda-label"><i class="lni-check-box"></i> Subscribe</span>
                         </button>
                     </form>
@@ -1419,5 +1620,7 @@
 <script src="{{ asset('event-home/js/nivo-lightbox.js') }}"></script>
 <script src="{{ asset('event-home/js/video.js') }}"></script>
 <script src="{{ asset('event-home/js/main.js') }}"></script>
+
 </body>
+
 </html>
