@@ -30,7 +30,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Edit event</h3>
                         </div>
-                        <form role="form" method="POST" action="{{ route('events.update', $event->id) }}"
+                        <form role="form" method="POST" action="{{ route('organizations.events.update', [$organization->id, $event->id]) }}"
                               class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
                             @method('PUT')
                             @csrf
@@ -92,7 +92,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{ route('events.index') }}" class="btn btn-default">Cancel</a>
+                                <a href="{{ route('organizations.events.index', $organization->id) }}" class="btn btn-default">Cancel</a>
                             </div>
                         </form>
                     </div>
