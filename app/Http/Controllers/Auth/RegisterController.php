@@ -73,6 +73,8 @@ class RegisterController extends Controller
         if($data['is_organization'] == "on"){
             Organization::create([
                 'user_id' => $user->id,
+                'description' => $data['description'],
+                'foudation_date' => $data['foudation_date']
             ]);
         }
         return $user;
