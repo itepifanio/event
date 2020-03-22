@@ -38,14 +38,27 @@ class Event extends Model
         return "{$start_date} - {$end_date}";
     }
 
-    public function scopeClosestTo($query, $lat, $lng, $dist)
+    /**
+     * Use Haversine formula to return
+     * closest event in kilometers
+     * @param $query
+     * @param float $lat
+     * @param float $lng
+     * @param int $limit
+     * @return mixed
+     */
+    public function scopeClosestTo($query, $lat, $lng, $limit = 10)
     {
-        return $this->address()->select(DB::raw(
-            '(3959 * acos(cos(radians(' . $lat .
-            ')) * cos(radians(lat)) * cos( radians(lng) - radians(' .
-            $lng . ')) + sin(radians(' . $lat .
-            ')) * sin(radians(lat)) )) AS distance'
-        ));
+        return $query->join('addresses', 'events.id', '=', 'addresses.addressable_id')
+            ->where('addressable_type', 'App\Models\Event')
+            ->select(
+                DB::raw(
+                    '*, (6371 * acos(cos(radians(' . $lat .
+                    ')) * cos(radians(lat)) * cos( radians(lng) - radians(' .
+                    $lng . ')) + sin(radians(' . $lat .
+                    ')) * sin(radians(lat)) )) AS distance'
+                )
+            )->limit($limit);
     }
 
     public function getStartDateAttribute($value)
