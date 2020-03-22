@@ -9,7 +9,7 @@ class Organization extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id', 'description', 'foundation_date'];
 
     public function users(){
         return $this->belongsToMany(User::class, 'user_organizations');

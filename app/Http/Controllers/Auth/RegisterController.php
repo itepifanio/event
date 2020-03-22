@@ -70,11 +70,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        if($data['is_organization'] == "on"){
+        if(isset($data['is_organization'])){
             Organization::create([
                 'user_id' => $user->id,
                 'description' => $data['description'],
-                'foudation_date' => $data['foudation_date']
+                'foundation_date' => $data['foundation_date']
             ]);
         }
         return $user;
