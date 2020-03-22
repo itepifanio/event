@@ -58,15 +58,20 @@ class OrganizationController extends Controller
     public function edit($id)
     {
         return view('organizations.edit', [
-            'organization' => Organization::find($id),
+            'organization' => $this->getOrganizationInfo($id),
         ]);
     }
 
     public function update(OrganizationRequest $request, $id)
     {
-        $organization = Organization::find($id);
-        $input = $request->validated();
+
+        $organization_info = $this->getOrganizationInfo($id);
+        $user_organization = User::find($organization_info['user_id']);
+        $organization = Organization::find($organization_info['id']);
+
+        $input = $request->validated(); // A VALIDAÇÃO DEVE SER ALTERADA, UM NOVO TIPO REQUEST DEVE SER CRIADO
         $organization->update($input);
+        $user_organization->update($input);
 
         return redirect()->route('organizations.index', [
             'organizations' => Organization::all()

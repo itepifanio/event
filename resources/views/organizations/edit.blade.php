@@ -12,7 +12,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Edit organization</h3>
                         </div>
-                        <form role="form" method="POST" action="{{ route('organizations.update', $organization->id) }}"
+                        <form role="form" method="POST" action="{{ route('organizations.update', $organization['id']) }}"
                               class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
                             @method('PUT')
                             @csrf
@@ -22,9 +22,20 @@
                                     <label for="name">Name</label>
                                     <input type="text"
                                            class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
-                                           placeholder="Name" name="name" value="{{ $organization->name }}">
+                                           placeholder="Name" name="name" value="{{ $organization['name'] }}">
                                     @if($errors->has('name'))
                                         <div class="invalid-feedback">{{ $errors->get('name')[0] }}</div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="name">Email</label>
+                                    <input type="email"
+                                           class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
+                                           placeholder="Name" name="email" value="{{ $organization['email'] }}">
+                                    @if($errors->has('email'))
+                                        <div class="invalid-feedback">{{ $errors->get('email')[0] }}</div>
                                     @endif
                                 </div>
                             </div>
