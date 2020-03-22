@@ -21,6 +21,11 @@
                             <p><b>Email</b></p>
                             <p>{{ $organization['email'] }}</p>
 
+                            <p><b>Description</b></p>
+                            <p>{{ $organization['description']  }}</p>
+
+                            <p><b>Foundation date</b></p>
+                            <p>{{ $organization['foundation_date']  }}</p>
                             <div id="map"></div>
                         </div>
                         <div class="card-footer">

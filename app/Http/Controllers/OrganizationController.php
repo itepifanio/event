@@ -17,6 +17,8 @@ class OrganizationController extends Controller
             'user_id' => $user_organization->id,
             'name' => $user_organization->name,
             'email' => $user_organization->email,
+            'description' => $organization->description,
+            'foundation_date' => explode(" ", $organization->foundation_date)[0],
         );
 
     }
@@ -57,6 +59,7 @@ class OrganizationController extends Controller
 
     public function edit($id)
     {
+
         return view('organizations.edit', [
             'organization' => $this->getOrganizationInfo($id),
         ]);

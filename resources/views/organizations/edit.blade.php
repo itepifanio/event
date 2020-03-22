@@ -39,6 +39,31 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <textarea type="text"
+                                                  class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                                                  id="description" name="description" >
+                                                  {{ $organization['description'] }}
+                                        </textarea>
+                                        @if($errors->has('description'))
+                                            <div class="invalid-feedback">{{ $errors->get('description')[0] }}</div>
+                                        @endif
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="foundation_date">Foundation Date</label>
+                                    <input type="date"
+                                           class="form-control {{ $errors->has('foundation_date') ? 'is-invalid' : '' }}"
+                                           id="foundation_date" name="foundation_date" value="{{ $organization['foundation_date'] }}">
+                                    @if($errors->has('foundation_date'))
+                                        <div class="invalid-feedback">{{ $errors->get('foundation_date')[0] }}</div>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                                 <a href="{{ route('organizations.index') }}" class="btn btn-default">Cancel</a>
