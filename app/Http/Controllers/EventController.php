@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Geolocalization;
 use App\Models\Event;
 use App\Http\Requests\EventRequest;
 use App\Models\Organization;
@@ -11,13 +12,17 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     public function list(){
-        return view('events.list');
+        $geo = Geolocalization::current();
+
+        return view('events.list', [
+            'events' => Event::closestTo($geo->lat, $geo->long)
+        ]);
     }
 
     public function index(Organization $organization)
     {
         return view('events.index', [
-            'events' => Event::all(),
+            'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization,
         ]);
     }
@@ -45,7 +50,7 @@ class EventController extends Controller
         ]);
 
         return redirect()->route('organizations.events.index', [
-            'events' => Event::all(),
+            'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization,
         ])->with('success', 'Event created with success.');
     }
@@ -82,7 +87,7 @@ class EventController extends Controller
         ]);
 
         return redirect()->route('organizations.events.index', [
-            'events' => Event::all(),
+            'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization
         ])->with('success', 'Event updated with success.');
     }
@@ -92,7 +97,7 @@ class EventController extends Controller
         Event::find($id)->delete();
 
         return redirect()->route('organizations.events.index', [
-            'events' => Event::all(),
+            'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization,
         ])->with('success', 'Event deleted with success.');
     }

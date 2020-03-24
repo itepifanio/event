@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>EventUp - Event and Conference Template</title>
+    <title>EventUp - Event and Conference</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('event-home/css/bootstrap.min.css') }}">
@@ -48,7 +48,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#schedules">
-                            schedules
+                            Schedules
                         </a>
                     </li>
                     <li class="nav-item">
@@ -63,7 +63,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#pricing">
-                            pricing
+                            Pricing
                         </a>
                     </li>
                     <li class="nav-item">
@@ -97,14 +97,14 @@
                         <div class="icon">
                             <i class="lni-mic"></i>
                         </div>
-                        <p class="banner-info">15, Oct 2020 - Maria Hall, NY, United states</p>
-                        <h2 class="head-title">Developers Conference</h2>
+                        {{--<p class="banner-info"></p>--}}
+                        <h2 class="head-title">Host your event</h2>
                         <p class="banner-desc">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, nobis nesciunt atque
                             perferendis, ipsa doloremque deserunt cum qui.</p>
-                        <div class="banner-btn">
-                            <a href="#" class="btn btn-common">Get Ticket</a>
-                        </div>
+                        {{--<div class="banner-btn">--}}
+                            {{--<a href="#" class="btn btn-common">Get Ticket</a>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
             </div>
@@ -121,8 +121,30 @@
         <div class="row justify-content-center">
             <div class="col-10">
                 <div class="count-wrapper text-center">
-                    <div class="time-countdown wow fadeInUp" data-wow-delay="0.2s">
-                        <div id="clock" class="time-count"></div>
+                    <div class="row">
+                    {{--<div class="time-countdown wow fadeInUp" data-wow-delay="0.2s">--}}
+                        <div class="col-md-4">
+                            <div class="icon-stack">
+                                <i class="lni-mic" style="font-size: 50px; color: white;"></i>
+                                <br>
+                                <span class="icon-stack" style="font-size: 20px; color: white;">10 Organizations</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="icon-stack">
+                                <i class="lni-calendar" style="font-size: 50px; color: white;"></i>
+                                <br>
+                                <span class="icon-stack" style="font-size: 20px; color: white;">49 Events</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="icon-stack">
+                                <i class="lni-users" style="font-size: 50px; color: white;"></i>
+                                <br>
+                                <span class="icon-stack" style="font-size: 20px; color: white;">104 Users</span>
+                            </div>
+                        </div>
+                    {{--</div>--}}
                     </div>
                 </div>
             </div>

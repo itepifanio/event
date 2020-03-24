@@ -38,6 +38,11 @@ class Event extends Model
         return "{$start_date} - {$end_date}";
     }
 
+    public function scopeOfOrganization($query, $id)
+    {
+        return $query->whereOrganizationId($id);
+    }
+
     public function scopeClosestTo($query, $lat, $lng, $dist)
     {
         return $this->address()->select(DB::raw(
