@@ -3,19 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Geolocalization;
-use App\Models\Event;
 use App\Http\Requests\EventRequest;
+use App\Models\Event;
 use App\Models\Organization;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
     public function list(){
-        $geo = Geolocalization::current();
+        $geo = Geolocalization::current()->location;
 
         return view('events.list', [
-            'events' => Event::closestTo($geo->lat, $geo->long)
+            'events' => Event::closestTo($geo->lat, $geo->lng)->get()
         ]);
     }
 

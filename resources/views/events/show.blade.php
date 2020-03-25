@@ -23,9 +23,9 @@
                         </div>
                         <div class="card-body">
 
-                            <div class="col-md-10 offset-md-1" style="margin-top:16px; margin-bottom: 26px;">
-                                <img src="{{ asset('dist/img/photo1.png') }}" width="100%">
-                            </div>
+                            {{--<div class="col-md-10 offset-md-1" style="margin-top:16px; margin-bottom: 26px;">--}}
+                                {{--<img src="{{ asset('dist/img/photo1.png') }}" width="100%">--}}
+                            {{--</div>--}}
 
                             <p><b>Description</b></p>
                             <p>{{ $event->description }}</p>
@@ -42,7 +42,7 @@
                             <div id="map"></div>
                         </div>
                         <div class="card-footer">
-                            <a href="{{ route('events.index') }}" class="btn btn-default">Back to list</a>
+                            <a href="{{ route('organizations.events.index', $organization->id) }}" class="btn btn-default">Back to list</a>
                         </div>
                     </div>
                 </div>
