@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     public function list(){
-        return view('events.list');
+        return view('events.list', [
+            'events' => Event::all(),
+            'organizations'=>Organization::all()->keyBy('id')]);
     }
 
     public function index(Organization $organization)
