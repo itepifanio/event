@@ -30,8 +30,8 @@
                                     <tr>
                                         <td>{{ $organization->name }}</td>
                                         <td>
-                                            <a href="{{ route('organizations.show', $organization->id) }}"
-                                               class="btn btn-xs btn-primary">Show</a>
+                                            {{--<a href="{{ route('organizations.show', $organization->id) }}"--}}
+                                               {{--class="btn btn-xs btn-primary">Show</a>--}}
                                             <a href="{{ route('organizations.edit', $organization->id) }}"
                                                class="btn btn-xs btn-warning">Edit</a>
                                             <a href="{{ route('organizations.events.index', $organization->id) }}"

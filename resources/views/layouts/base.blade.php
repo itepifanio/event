@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Line icons -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('event-home/fonts/line-icons.css') }}">
 
     @stack('stylesheets')
 </head>
@@ -159,10 +161,14 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
-            <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                 style="opacity: .8">
-            <span class="brand-text font-weight-light">{{ env('APP_NAME') }}</span>
+        <a href="{{ route('home') }}" class="brand-link">
+
+            {{--<img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="Event logo" class="brand-image img-circle elevation-3"--}}
+                 {{--style="opacity: .8">--}}
+            <div class="icon" style="text-align: center">
+                <span class="lni-mic" style="font-size: 1.5em;"></span>
+                <span class="brand-text font-weight-light">Event UP</span>
+            </div>
         </a>
 
         <!-- Sidebar -->
