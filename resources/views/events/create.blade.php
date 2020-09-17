@@ -42,7 +42,8 @@
                                     <label for="name">Name</label>
                                     <input type="text"
                                            class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
-                                           placeholder="Name" name="name">
+                                           placeholder="Name" name="name"
+                                           value="{{ old('name') }}">
                                     @if($errors->has('name'))
                                         <div class="invalid-feedback">{{ $errors->get('name')[0] }}</div>
                                     @endif
@@ -51,7 +52,8 @@
                                     <label for="description">Description</label>
                                     <textarea type="text"
                                               class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
-                                              id="description" name="description">
+                                              id="description" name="description"
+                                              value="{{ old('description') }}">
                                     </textarea>
                                     @if($errors->has('description'))
                                         <div class="invalid-feedback">{{ $errors->get('description')[0] }}</div>
@@ -61,7 +63,8 @@
                                     <label for="start_date">Start Date</label>
                                     <input type="date"
                                            class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}"
-                                           id="start_date" name="start_date">
+                                           id="start_date" name="start_date"
+                                           value="{{ old('start_date') }}">
                                     @if($errors->has('start_date'))
                                         <div class="invalid-feedback">{{ $errors->get('start_date')[0] }}</div>
                                     @endif
@@ -70,7 +73,8 @@
                                     <label for="end_date">End Date</label>
                                     <input type="date"
                                            class="form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}"
-                                           id="end_date" name="end_date">
+                                           id="end_date" name="end_date"
+                                           value="{{ old('end_date') }}">
                                     @if($errors->has('end_date'))
                                         <div class="invalid-feedback">{{ $errors->get('end_date')[0] }}</div>
                                     @endif
@@ -78,7 +82,7 @@
 
                                 <label for="address">Address</label>
                                 <div class="input-group">
-                                    <input id="address" type="textbox" class="form-control">
+                                    <input id="address" name="address" type="textbox" class="form-control" value="{{ old('address') }}">
                                     <span class="input-group-append">
                                         <input id="submit" type="button" class="btn btn-default" value="Search">
                                     </span>
