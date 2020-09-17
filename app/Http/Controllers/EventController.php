@@ -17,9 +17,9 @@ class EventController extends Controller
     }
 
     public function index(Organization $organization)
-    {
+    {   
         return view('events.index', [
-            'events' => Event::all(),
+            'events' => Event::all()->where('organization_id', '=', $organization->id),
             'organization' => $organization,
         ]);
     }
