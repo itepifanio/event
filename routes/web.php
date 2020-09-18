@@ -20,14 +20,8 @@ Route::get('/', function () {
 Route::post('organizations', 'OrganizationController@store')->name('organizations.store');
 
 Route::middleware(['auth'])->group(function(){
-    // Route::resource('organizations', 'OrganizationController');
-
-	Route::get('organizations', 'OrganizationController@index')->name('organizations.index');
-    Route::put('organizations/{organization}', 'OrganizationController@update')->name('organizations.update');
-	Route::delete('organizations/{organization}', 'OrganizationController@destroy')->name('organizations.destroy');
-    Route::get('organizations/{organization}', 'OrganizationController@show')->name('organizations.show');
-    Route::get('organizations/{organization}/edit', 'OrganizationController@edit')->name('organizations.edit');
     
+    Route::resource('organizations', 'OrganizationController')->except(['store']);
 
     Route::get('events', 'EventController@list')->name('events.list');
     Route::group(['prefix' => 'organizations/{organization}'], function(){

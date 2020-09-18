@@ -100,7 +100,7 @@
                             <div class="col">
                                 <div class="input-group-text">
                                     <input class= "mr-1" type="checkbox"  id='is_organization' class="form-control" name="is_organization" aria-label="Checkbox for following text input" onChange="isOrganization()">
-                                    Registro como organização
+                                    Register as organization
                                 </div>  
                             </div>
                             

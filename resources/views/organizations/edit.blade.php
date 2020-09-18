@@ -12,7 +12,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Edit organization</h3>
                         </div>
-                        <form role="form" method="POST" action="{{ route('organizations.update', $organization['id']) }}"
+                        <form role="form" method="POST" action="{{ route('organizations.update', $organization->id) }}"
                               class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
                             @method('PUT')
                             @csrf
@@ -22,7 +22,7 @@
                                     <label for="name">Name</label>
                                     <input type="text"
                                            class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
-                                           placeholder="Name" name="name" value="{{ $organization['name'] }}">
+                                           placeholder="Name" name="name" value="{{ $userOrganization->name }}">
                                     @if($errors->has('name'))
                                         <div class="invalid-feedback">{{ $errors->get('name')[0] }}</div>
                                     @endif
@@ -33,7 +33,7 @@
                                     <label for="name">Email</label>
                                     <input type="email"
                                            class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
-                                           placeholder="Name" name="email" value="{{ $organization['email'] }}">
+                                           placeholder="Name" name="email" value="{{ $userOrganization->email }}">
                                     @if($errors->has('email'))
                                         <div class="invalid-feedback">{{ $errors->get('email')[0] }}</div>
                                     @endif
@@ -45,7 +45,7 @@
                                         <textarea type="text"
                                                   class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                                                   id="description" name="description" >
-                                                  {{ $organization['description'] }}
+                                                  {{ $organization->description }}
                                         </textarea>
                                         @if($errors->has('description'))
                                             <div class="invalid-feedback">{{ $errors->get('description')[0] }}</div>
@@ -57,7 +57,7 @@
                                     <label for="foundation_date">Foundation Date</label>
                                     <input type="date"
                                            class="form-control {{ $errors->has('foundation_date') ? 'is-invalid' : '' }}"
-                                           id="foundation_date" name="foundation_date" value="{{ $organization['foundation_date'] }}">
+                                           id="foundation_date" name="foundation_date" value="{{ $organization->foundation_date }}">
                                     @if($errors->has('foundation_date'))
                                         <div class="invalid-feedback">{{ $errors->get('foundation_date')[0] }}</div>
                                     @endif

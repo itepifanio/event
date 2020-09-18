@@ -10,7 +10,7 @@
                     <!-- general form elements -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">{{ $organization['name'] }}</h3>
+                            <h3 class="card-title">{{ $userOrganization->name }}</h3>
                         </div>
                         <div class="card-body">
 
@@ -19,13 +19,13 @@
                             </div>
 
                             <p><b>Email</b></p>
-                            <p>{{ $organization['email'] }}</p>
+                            <p>{{ $userOrganization->email }}</p>
 
                             <p><b>Description</b></p>
-                            <p>{{ $organization['description']  }}</p>
+                            <p>{{ $organization->description  }}</p>
 
                             <p><b>Foundation date</b></p>
-                            <p>{{ $organization['foundation_date']  }}</p>
+                            <p>{{ $organization->foundation_date  }}</p>
                             <div id="map"></div>
                         </div>
                         <div class="card-footer">
