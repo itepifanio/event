@@ -17,9 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('organizations', 'OrganizationController@store')->name('organizations.store');
 
 Route::middleware(['auth'])->group(function(){
-    Route::resource('organizations', 'OrganizationController');
+    
+    Route::resource('organizations', 'OrganizationController')->except(['store']);
 
     Route::get('events', 'EventController@list')->name('events.list');
     Route::group(['prefix' => 'organizations/{organization}'], function(){
@@ -30,5 +32,6 @@ Route::middleware(['auth'])->group(function(){
 });
 
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

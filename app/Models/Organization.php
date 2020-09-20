@@ -9,12 +9,11 @@ class Organization extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['user_id', 'description', 'foundation_date'];
 
     public function users(){
         return $this->belongsToMany(User::class, 'user_organizations');
     }
-
     public function events(){
         return $this->hasMany(Event::class);
     }
