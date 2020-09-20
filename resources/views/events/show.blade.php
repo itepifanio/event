@@ -42,7 +42,11 @@
                             <div id="map"></div>
                         </div>
                         <div class="card-footer">
+<<<<<<< HEAD
                             <a href="{{ route('organizations.events.index', $organization->id) }}" class="btn btn-default">Back to list</a>
+=======
+                            <a href="{{ route('events.list') }}" class="btn btn-default">Back to list</a>
+>>>>>>> issue-9
                         </div>
                     </div>
                 </div>
