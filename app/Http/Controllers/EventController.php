@@ -18,7 +18,7 @@ class EventController extends Controller
     }
 
     public function index(Organization $organization)
-    {
+    {   
         return view('events.index', [
             'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization,
