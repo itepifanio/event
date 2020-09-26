@@ -8,10 +8,19 @@ class Form implements RendarableInterface
 {
     /** @var RendarableInterface */
     private array $elements;
+    private string $id;
+    private string $name;
+    
+    public function __construct($id=null, $name=null)
+    {
+        if(isset($id)) $this->id = $id;
+        if(isset($name)) $this->name = $name;
+    }
 
     public function render() : string
     {
-        $form = '<form>';
+        $properties = $this->getProperties();
+        $form = "<form$properties>";
 
         foreach($this->elements as $element){
             $form .= $element->render();
@@ -20,6 +29,17 @@ class Form implements RendarableInterface
         $form .= '</form>';
 
         return $form;
+    }
+
+    public function getProperties(): string{
+        $properties = '';
+        if(isset($this->id)){
+            $properties .= " id=\"$this->id\"";
+        }
+        if(isset($this->name)){
+            $properties .= " name=\"$this->name\"";
+        }        
+        return $properties;
     }
 
     public function addElement(RendarableInterface $element) : void

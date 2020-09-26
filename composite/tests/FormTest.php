@@ -13,13 +13,13 @@ class FormTest extends TestCase
     /** @test */
     public function it_can_render_form()
     {
-        $form = new Form();
-        $form->addElement(new Label('Test'));
-        $form->addElement(new Input('test', 'text'));
+        $form = new Form();   //id, name
+        $form->addElement(new Label('Test')); //text, id, name
+        $form->addElement(new Input('text', null, 'test')); //type, id, name 
 
 
         $this->assertSame(
-            '<form><label>Test</label><input type="text" name="test" /></form>',
+            '<form><label>Test</label><input type="text" name="test"/></form>',
             $form->render()
         );
     }

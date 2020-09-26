@@ -8,15 +8,33 @@ class Input implements RendarableInterface
 {
     private string $name;
     private string $type;
+    private string $id;
 
-    public function __construct(string $name, string $type)
+    public function __construct($type, $id=null, $name=null)
     {
-        $this->name = $name;
-        $this->type = $type;
+
+        if(isset($type)) $this->type = $type;
+        if(isset($id)) $this->id = $id;
+        if(isset($name)) $this->name = $name;
     }
 
     public function render(): string
     {
-        return "<input type=\"{$this->type}\" name=\"{$this->name}\" />";
+        $properties = $this->getProperties();
+        return "<input$properties/>";
+    }
+    public function getProperties(): string{
+        $properties = "";
+    
+        if(isset($this->type)){
+            $properties .= " type=\"$this->type\"";
+        }   
+        if(isset($this->id)){
+            $properties .= " id=\"$this->id\"";
+        }
+        if(isset($this->name)){
+            $properties .= " name=\"$this->name\"";
+        }  
+        return $properties;
     }
 }

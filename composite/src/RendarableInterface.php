@@ -5,4 +5,5 @@ namespace Src;
 interface RendarableInterface 
 {
     public function render(): string;
+    public function getProperties(): string;
 }

@@ -4,18 +4,23 @@ namespace Src;
 
 use Src\RendarableInterface;
 
-class Div implements NewRendarableInterface
+class Div implements RendarableInterface
 {
     /** @var RendarableInterface */
     private array $elements;
     private string $id;
     private string $name;
     
-    
+    public function __construct($id=null, $name=null)
+    {
+        if(isset($id)) $this->id = $id;
+        if(isset($name)) $this->name = $name;
+    }
+
     public function render() : string
     {
         $properties = $this->getProperties();
-        $div = "<div $properties>";
+        $div = "<div$properties>";
 
         foreach($this->elements as $element){
             $div .= $element->render();
@@ -25,21 +30,14 @@ class Div implements NewRendarableInterface
 
         return $div;
     }
-    public function setId(string $id) : void
-    {
-        $this->id = $id;
-    }
-    public function setName(string $name) : void
-    {
-        $this->id = $id;
-    }
+    
     public function getProperties(): string{
         $properties = '';
         if(isset($this->id)){
-            $properties .= "id=$this->id ";
+            $properties .= " id=\"$this->id\"";
         }
         if(isset($this->name)){
-            $properties .= "name=$this->name ";
+            $properties .= " name=\"$this->name\"";
         }        
         return $properties;
     }

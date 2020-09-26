@@ -14,18 +14,16 @@ class DivTest extends TestCase
     /** @test */
     public function it_can_render_form()
     {
-        $div = new Div();
-        $div->setId('teste');
+        $div = new Div('teste'); //id, name
 
-        $form = new Form();
-        $form->addElement(new Label('Test'));
-        $form->addElement(new Input('test', 'text'));
-
+        $form = new Form();   //id, name
+        $form->addElement(new Label('Test')); //text, id, name
+        $form->addElement(new Input('text', null, 'test', )); //type, id, name
 
         $div->addElement($form);
-        
+
         $this->assertSame(
-            '<div id=teste ><form><label>Test</label><input type="text" name="test" /></form></div>',
+            '<div id="teste"><form><label>Test</label><input type="text" name="test"/></form></div>',
             $div->render()
         );
     }
