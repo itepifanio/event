@@ -1,8 +1,0 @@
-
-// SETUP pgsql
-alterar a psql config file postgresql.conf add:
-	listen_addresses = '*'
-	host    all         postgres       127.0.0.1/32          trust
-atualiza, run: /etc/init.d/postgresql restart
-sudo apt install phpX.Y-pgsql // x.y sua versao do php
-sudo systemctl restart apache2.service
