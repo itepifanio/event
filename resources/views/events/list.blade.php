@@ -1,77 +1,41 @@
 @extends('layouts.base')
 
 @push('stylesheets')
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/card-lists.css') }}">
 @endpush
+
 @section('content')
-    <section class="content">
+    <div class="container" style="padding-bottom: 15px">
         <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Events</h3>
-                    </div>
-                    <div class="card-body">
-                        @if($events->count() > 0)
-                            <table id="datatable" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-4">Name</th>
-                                    <th class="col-md-4">Organization</th>
-                                    <th class="col-md-4">Options</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($events as $event)
-                                    <tr>
-                                        <td>{{ $event->name }}</td>
-                                        <td>{{ $organizations[$event->organization_id]->name}}</td>
-                                        <td>
-                                            <a href="{{ route('organizations.events.show', [$event->organization_id, $event->id]) }}"
-                                               class="btn btn-xs btn-primary">Show</a>
-                                            <a href="{{ route('organizations.events.edit', [$event->organization_id, $event->id]) }}"
-                                            class="btn btn-xs btn-warning">Edit</a>
-                                            <form action="{{ route('organizations.events.destroy', [$event->organization_id, $event->id]) }}" method="post"
-                                                  style="display: inline">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-xs btn-danger" type="submit"
-                                                        onclick="return confirm('Do you want delete this event');">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                           
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        @else
-                            Any organization created. Create one and start to manage events.
-                        @endif
+            @foreach($events as $event)
+                <div class="col-md-4">
+                    <div class="card-content">
+                        <div class="card-img">
+                            <img src="https://placeimg.com/380/230/nature" alt="">
+                            <span><h4>{{ round($event->distance, 2) }} km</h4></span>
+                        </div>
+                        <div class="card-desc">
+                            <h3>{{ $event->event_name }}</h3>
+                            <p>{{ $event->description }}</p>
+                            <p>
+                                <div class="icon">
+                                    <span class="lni-map-marker" style="color: #747373">
+                                        {{ $event->address_name }}
+                                    </span>
+                                </div>
+                            </p>
+                            <p>
+                                <div class="icon">
+                                        <span class="lni-calendar" style="color: #747373">
+                                            {{ $event->date }}
+                                        </span>
+                                </div>
+                            </p>
+                            <a href="#" class="btn-card">Subscribe</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-    </section>
+    </div>
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
-    <script>
-        $(function () {
-            $('#datatable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "columnDefs": [
-                    {"orderable": false, "targets": 2}
-                ]
-            });
-        });
-    </script>
-@endpush

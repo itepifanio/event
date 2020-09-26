@@ -60,13 +60,50 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="organization_section" id="organization_section" name="organization_section" >
+                            <div class="form-group row">
+                                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                                <div class="col-md-6">
+                                    <textarea type="text"
+                                              class="form-control @error('description') is-invalid @enderror"
+                                              id="description" name="description" autocomplete="description">
+                                    </textarea>
+                                    @error('description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="form-group row">
+                                <label for="foundation_date" class="col-md-4 col-form-label text-md-right">{{ __('Foundation Date') }}</label>
+                                <div class="col-md-6">
+                                <input type="date"
+                                       class="form-control @error('foundation_date') is-invalid @enderror"
+                                       id="foundation_date" name="foundation_date">
+                                </div>
+                                @error('foundation_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror   
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-block">
                                     {{ __('Register') }}
                                 </button>
                             </div>
+                            <div class="col">
+                                <div class="input-group-text">
+                                    <input class= "mr-1" type="checkbox"  id='is_organization' class="form-control" name="is_organization" aria-label="Checkbox for following text input" onChange="isOrganization()">
+                                    Register as organization
+                                </div>  
+                            </div>
+                            
                         </div>
                     </form>
                 </div>
@@ -75,3 +112,23 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        window.onload = function() {
+          isOrganization();
+        };
+        function isOrganization() {
+            let is_organization = document.getElementById('is_organization');
+            let organization_section = document.getElementById('organization_section');
+            if(is_organization.checked){
+                organization_section.style.height = 'auto';
+                organization_section.style.visibility = 'visible';
+            }
+            else{
+                organization_section.style.height = 0;
+                organization_section.style.visibility = 'hidden'; 
+            }            
+        }
+    </script>
+@endpush

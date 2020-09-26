@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Facades\Geolocalization;
 use App\Http\Requests\EventRequest;
+use App\Models\Event;
 use App\Models\Organization;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
     public function list(){
+        $geo = Geolocalization::current()->location;
+
         return view('events.list', [
-            'events' => Event::all(),
-            'organizations'=>Organization::all()->keyBy('id')]);
+            'events' => Event::closestTo($geo->lat, $geo->lng)->get()
+        ]);
     }
 
     public function index(Organization $organization)
     {   
         return view('events.index', [
-            'events' => Event::all()->where('organization_id', '=', $organization->id),
+            'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization,
         ]);
     }
@@ -47,7 +48,7 @@ class EventController extends Controller
         ]);
 
         return redirect()->route('organizations.events.index', [
-            'events' => Event::all(),
+            'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization,
         ])->with('success', 'Event created with success.');
     }
@@ -84,7 +85,7 @@ class EventController extends Controller
         ]);
 
         return redirect()->route('organizations.events.index', [
-            'events' => Event::all(),
+            'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization
         ])->with('success', 'Event updated with success.');
     }
@@ -94,7 +95,7 @@ class EventController extends Controller
         Event::find($id)->delete();
 
         return redirect()->route('organizations.events.index', [
-            'events' => Event::all(),
+            'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization,
         ])->with('success', 'Event deleted with success.');
     }

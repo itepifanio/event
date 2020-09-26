@@ -11,13 +11,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Organizations</h3>
-                        <a href="{{ route('organizations.create') }}"
-                           class="btn btn-sm btn-primary float-right">
-                            Create
-                        </a>
+                        
                     </div>
                     <div class="card-body">
-                        @if($organizations->count() > 0)
+
+                        @if(count($organizations) > 0)   
                             <table id="datatable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
@@ -30,13 +28,13 @@
                                     <tr>
                                         <td>{{ $organization->name }}</td>
                                         <td>
-                                            <a href="{{ route('organizations.show', $organization->id) }}"
-                                               class="btn btn-xs btn-primary">Show</a>
+                                            {{--<a href="{{ route('organizations.show', $organization->id) }}"--}}
+                                               {{--class="btn btn-xs btn-primary">Show</a>--}}
                                             <a href="{{ route('organizations.edit', $organization->id) }}"
                                                class="btn btn-xs btn-warning">Edit</a>
                                             <a href="{{ route('organizations.events.index', $organization->id) }}"
                                                class="btn btn-xs btn-default">Manage events</a>
-                                            <form action="{{ route('organizations.destroy', $organization->id) }}"
+                                            <!-- <form action="{{ route('organizations.destroy', $organization->id) }}"
                                                   method="post"
                                                   style="display: inline">
                                                 @method('DELETE')
@@ -45,7 +43,7 @@
                                                         onclick="return confirm('Do you want delete this organization');">
                                                     Delete
                                                 </button>
-                                            </form>
+                                            </form> -->
                                         </td>
                                     </tr>
                                 @endforeach

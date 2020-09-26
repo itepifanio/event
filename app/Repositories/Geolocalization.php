@@ -12,7 +12,7 @@ class Geolocalization
         $this->geoUrl = 'https://www.googleapis.com/geolocation/v1/geolocate?key=' . env('GOOGLE_GEOCODER');
     }
 
-    public function current()
+    public function current() : \stdClass
     {
         $req = $this->geoApi->post($this->geoUrl, [
             'headers' => [
@@ -20,6 +20,6 @@ class Geolocalization
             ]
         ]);
 
-        return json_decode($req->getBody(), true);
+        return json_decode($req->getBody());
     }
 }
