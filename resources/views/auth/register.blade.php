@@ -66,8 +66,8 @@
                                 <div class="col-md-6">
                                     <textarea type="text"
                                               class="form-control @error('description') is-invalid @enderror"
-                                              id="description" name="description" autocomplete="description">
-                                    </textarea>
+                                              id="description" name="description"
+                                              autocomplete="description">{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -79,15 +79,15 @@
                             <div class="form-group row">
                                 <label for="foundation_date" class="col-md-4 col-form-label text-md-right">{{ __('Foundation Date') }}</label>
                                 <div class="col-md-6">
-                                <input type="date"
-                                       class="form-control @error('foundation_date') is-invalid @enderror"
-                                       id="foundation_date" name="foundation_date">
-                                </div>
-                                @error('foundation_date')
+                                    <input type="date"
+                                        class="form-control @error('foundation_date') is-invalid @enderror"
+                                        id="foundation_date" value="{{ old('foundation_date') }}" name="foundation_date">
+                                    @error('foundation_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                @enderror   
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 
@@ -99,11 +99,11 @@
                             </div>
                             <div class="col">
                                 <div class="input-group-text">
-                                    <input class= "mr-1" type="checkbox"  id='is_organization' class="form-control" name="is_organization" aria-label="Checkbox for following text input" onChange="isOrganization()">
+                                    <input class= "mr-1" type="checkbox"  id='is_organization' class="form-control" {{ (bool) old('is_organization') ? 'checked' : '' }} name="is_organization" aria-label="Checkbox for following text input" onChange="isOrganization()">
                                     Register as organization
-                                </div>  
+                                </div>
                             </div>
-                            
+
                         </div>
                     </form>
                 </div>
@@ -119,16 +119,25 @@
           isOrganization();
         };
         function isOrganization() {
-            let is_organization = document.getElementById('is_organization');
-            let organization_section = document.getElementById('organization_section');
+            const is_organization = document.getElementById('is_organization');
+            const organization_section = document.getElementById('organization_section');
+            const input_description = document.getElementById('description');
+            const input_foundation_date = document.getElementById('foundation_date');
+
+            const checked = Boolean(is_organization.checked);
+
+            // Se não estiver marcado cadastro como organização, desabilita os inputs
+            input_description.disabled = !checked;
+            input_foundation_date.disabled = !checked;
+
             if(is_organization.checked){
                 organization_section.style.height = 'auto';
                 organization_section.style.visibility = 'visible';
             }
             else{
                 organization_section.style.height = 0;
-                organization_section.style.visibility = 'hidden'; 
-            }            
+                organization_section.style.visibility = 'hidden';
+            }
         }
     </script>
 @endpush
