@@ -57,7 +57,7 @@
                                     <label for="foundation_date">Foundation Date</label>
                                     <input type="date"
                                            class="form-control {{ $errors->has('foundation_date') ? 'is-invalid' : '' }}"
-                                           id="foundation_date" name="foundation_date" value="{{ $organization->foundation_date }}">
+                                           id="foundation_date" name="foundation_date" value="{{ \Carbon\Carbon::parse($organization->foundation_date)->format('Y-m-d') }}">
                                     @if($errors->has('foundation_date'))
                                         <div class="invalid-feedback">{{ $errors->get('foundation_date')[0] }}</div>
                                     @endif

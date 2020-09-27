@@ -4,10 +4,11 @@ namespace App\Services\Dto;
 
 class EditOrganizationDto extends AbstractDto implements DtoInterface
 {
+    public $id;
     public $name;
     public $email;
-    public $desciption;
-    public $fundation_date;
+    public $description;
+    public $foundation_date;
 
     /**
      * @return array
@@ -15,9 +16,10 @@ class EditOrganizationDto extends AbstractDto implements DtoInterface
     protected function configureValidatorRules(): array
     {
         return [
+            'id' => 'required',
             'name' => 'required|string',
             'email' => 'required|email',
-            'description' => 'required|string',
+            'description' => 'required|max:150|string',
             'foundation_date' => 'required|date',
         ];
     }
@@ -28,6 +30,7 @@ class EditOrganizationDto extends AbstractDto implements DtoInterface
      */
     protected function map(array $data): bool
     {
+        $this->id = $data['id'];
         $this->name = $data['name'];
         $this->email = $data['email'];
         $this->description = $data['description'];

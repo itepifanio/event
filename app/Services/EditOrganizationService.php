@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Services\Dto\EditOrganizationDto;
 use App\Services\Dto\DtoInterface;
 use App\Models\Organization;
+use App\Models\User;
 use InvalidArgumentException;
 
 class EditOrganizationService implements ServiceInterface
@@ -34,7 +35,7 @@ class EditOrganizationService implements ServiceInterface
                 return false;
             }
 
-            $organization->update($this->editOrganizationDto->toArray());
+            $updated = $organization->update($this->editOrganizationDto->toArray());
 
             $user_organization = User::find($organization->user_id);
             if(!$user_organization) {
@@ -46,6 +47,7 @@ class EditOrganizationService implements ServiceInterface
             return true;
 
         } catch (\Throwable $th) {
+            dd($th);
             return false;
         }
     }
