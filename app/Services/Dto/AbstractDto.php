@@ -45,4 +45,11 @@ abstract class AbstractDto
      * @return bool
      */
     abstract protected function map(array $data): bool;
+
+    /**
+     * @return array
+     */
+    public function toArray(): array {
+        return (array) $this;
+    }
 }

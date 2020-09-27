@@ -52,11 +52,4 @@ class EditEventDto extends AbstractDto implements DtoInterface
 
         return true;
     }
-
-    /**
-     * @return array
-     */
-    public function toArray(): array {
-        return (array) $this;
-    }
 }
