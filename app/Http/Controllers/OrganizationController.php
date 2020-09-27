@@ -29,17 +29,6 @@ class OrganizationController extends Controller
         return view('organizations.create');
     }
 
-    public function store(OrganizationRequest $request)
-    {
-        $input = $request->validated();
-
-        Organization::create($input);
-
-        return redirect()->route('organizations.index', [
-            'organizations' => Organization::all()
-        ])->with('success', 'Organization created with success.');
-    }
-
     public function show($id)
     {
         $organization = Organization::find($id);
