@@ -8,13 +8,13 @@ class Form implements RendarableInterface
 {
     /** @var RendarableInterface */
     private array $elements;
-    private string $id;
-    private string $name;
+    private ?string $id;
+    private ?string $name;
     
     public function __construct($id=null, $name=null)
     {
-        if(isset($id)) $this->id = $id;
-        if(isset($name)) $this->name = $name;
+        $this->id = $id;
+        $this->name = $name;
     }
 
     public function render() : string

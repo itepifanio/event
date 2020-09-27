@@ -7,15 +7,15 @@ use Src\RendarableInterface;
 class Label implements RendarableInterface
 {
    
-    private string $name;
-    private string $text;
-    private string $id;
+    private ?string $name;
+    private ?string $text;
+    private ?string $id;
 
     public function __construct(string $text, $id=null, $name=null)
     {
         $this->text = $text;
-        if(isset($id)) $this->id = $id;
-        if(isset($name)) $this->name = $name;
+        $this->id = $id;
+        $this->name = $name;
     }
 
     public function render(): string
