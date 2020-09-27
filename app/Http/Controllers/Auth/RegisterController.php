@@ -68,13 +68,9 @@ class RegisterController extends Controller
 
         $registerService = RegisterService::make($registerDto);
 
-        $success = $registerService->execute();
+        $registerService->execute();
 
-        if($success) {
-            $user = User::where('email', $registerDto->email)->first();
-
-            return $user;
-        }
+        return User::where('email', $registerDto->email)->first();
 
     }
 }

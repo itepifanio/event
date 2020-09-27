@@ -49,9 +49,9 @@ class EventController extends Controller
 
         $createEventService = CreateEventService::make($createEventDto);
 
-        $success = $createEventService->execute();
+        $hasSuccess = $createEventService->execute();
 
-        if($success) {
+        if($hasSuccess) {
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,
@@ -89,9 +89,9 @@ class EventController extends Controller
 
         $editEventService = EditEventService::make($editEventDto);
 
-        $success = $editEventService->execute();
+        $hasSuccess = $editEventService->execute();
 
-        if($success) {
+        if($hasSuccess) {
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,
@@ -107,9 +107,9 @@ class EventController extends Controller
 
         $deleteEventService = DeleteEventService::make($deleteEventDto);
 
-        $success = $deleteEventService->execute();
+        $hasSuccess = $deleteEventService->execute();
 
-        if($success) {
+        if($hasSuccess) {
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,

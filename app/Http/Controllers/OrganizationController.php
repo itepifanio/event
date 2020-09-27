@@ -59,9 +59,9 @@ class OrganizationController extends Controller
 
         $editOrganizationService = EditOrganizationService::make($editOrganizationDto);
 
-        $success = $editOrganizationService->execute();
+        $hasSuccess = $editOrganizationService->execute();
 
-        if($success) {
+        if($hasSuccess) {
             return redirect()->route('organizations.index', [
                 'organizations' => Organization::all()
             ])->with('success', 'Organization updated with success.');
@@ -76,9 +76,9 @@ class OrganizationController extends Controller
 
         $deleteOrganizationService = DeleteOrganizationService::make($deleteOrganizationDto);
 
-        $success = $deleteOrganizationService->execute();
+        $hasSuccess = $deleteOrganizationService->execute();
 
-        if($success) {
+        if($hasSuccess) {
             return redirect()->route('organizations.index', [
                 'organizations' => Organizarion::all()
             ])->with('success', 'Organization deleted with success.');
