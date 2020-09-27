@@ -72,10 +72,16 @@ class OrganizationController extends Controller
 
     public function destroy($id)
     {
-        Organization::find($id)->delete();
+        $deleteOrganizationDto = new DeleteOrganizationDto([ 'id' => $id ]);
 
-        return redirect()->route('organizations.index', [
-            'organizations' => Organizarion::all()
-        ])->with('success', 'Organization deleted with success.');
+        $deleteOrganizationService = DeleteOrganizationService::make($deleteOrganizationDto);
+
+        $success = $deleteOrganizationService->execute();
+
+        if($success) {
+            return redirect()->route('organizations.index', [
+                'organizations' => Organizarion::all()
+            ])->with('success', 'Organization deleted with success.');
+        }
     }
 }
