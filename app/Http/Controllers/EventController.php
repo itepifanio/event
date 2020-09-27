@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Organization;
 use App\Services\Dto\CreateEventDto;
+use App\Services\Dto\EditEventDto;
 use App\Services\CreateEventService;
+use App\Services\EditEventService;
 
 class EventController extends Controller
 {
@@ -73,25 +75,28 @@ class EventController extends Controller
         ]);
     }
 
-    public function update(EventRequest $request, Organization $organization, $id)
+    public function update(Request $request, Organization $organization, $id)
     {
-        Event::find($id)->update(
-            array_merge(
-                $request->all(),
-                ['organization_id' => $organization->id]
-            )
-        );
-
-        Event::find($id)->address()->update([
-            'name' => $request->get('address_name'),
-            'lat' => $request->get('lat'),
-            'lng' => $request->get('lng'),
+        $data = array_merge(
+            $request->all(), [
+            'id' => $id,
+            'organization_id' => $organization->id,
         ]);
 
-        return redirect()->route('organizations.events.index', [
-            'events' => Event::ofOrganization($organization->id)->get(),
-            'organization' => $organization
-        ])->with('success', 'Event updated with success.');
+        $editEventDto = new EditEventDto($data);
+
+        $editEventService = EditEventService::make($editEventDto);
+
+        $success = $editEventService->execute();
+
+        if($success) {
+            return redirect()->route('organizations.events.index', [
+                'events' => Event::ofOrganization($organization->id)->get(),
+                'organization' => $organization,
+            ])->with('success', 'Event updated with success.');
+        }
+
+        return redirect()->back()->with('erro', 'Failed to update event.');
     }
 
     public function destroy(Organization $organization, $id)

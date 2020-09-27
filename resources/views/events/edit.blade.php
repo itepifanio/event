@@ -80,11 +80,14 @@
                                 <div class="form-group">
                                     <label for="address">Address</label>
                                     <div class="input-group">
-                                        <input id="address" type="textbox" class="form-control"
+                                        <input id="address" name="address" type="textbox" class="form-control"
                                                value="{{ $event->address->name }}">
                                         <span class="input-group-append">
-                                        <input id="submit" type="button" class="btn btn-default" value="Search">
-                                    </span>
+                                            <input id="submit" type="button" class="btn btn-default" value="Search">
+                                        </span>
+                                        @if($errors->has('address'))
+                                            <div class="invalid-feedback">{{ $errors->get('end_date')[0] }}</div>
+                                        @endif
                                     </div>
 
                                     <div id="map"></div>
