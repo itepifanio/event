@@ -3,19 +3,16 @@
 namespace Src;
 
 use Src\RendarableInterface;
+use Src\Tag;
 
-class Input implements RendarableInterface
+class Input extends Tag implements RendarableInterface
 {
-    private ?string $name;
     private ?string $type;
-    private ?string $id;
 
-    public function __construct($type, $id=null, $name=null)
+    public function __construct(string $type, ?string $id=null, ?string $name=null)
     {
-
         $this->type = $type;
-        $this->id = $id;
-        $this->name = $name;
+        Tag::__construct($id, $name);
     }
 
     public function render(): string
@@ -23,18 +20,12 @@ class Input implements RendarableInterface
         $properties = $this->getProperties();
         return "<input$properties/>";
     }
-    public function getProperties(): string{
-        $properties = "";
+    public function getProperties(?string $properties=null): string{
+        if(!isset($properties)) $properties = '';
     
         if(isset($this->type)){
             $properties .= " type=\"$this->type\"";
         }   
-        if(isset($this->id)){
-            $properties .= " id=\"$this->id\"";
-        }
-        if(isset($this->name)){
-            $properties .= " name=\"$this->name\"";
-        }  
-        return $properties;
+        return parent::getProperties($properties);
     }
 }

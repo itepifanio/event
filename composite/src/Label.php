@@ -3,34 +3,21 @@
 namespace Src;
 
 use Src\RendarableInterface;
+use Src\Tag;
 
-class Label implements RendarableInterface
+class Label extends Tag implements RendarableInterface
 {
-   
-    private ?string $name;
     private ?string $text;
-    private ?string $id;
 
-    public function __construct(string $text, $id=null, $name=null)
+    public function __construct(string $text, ?string $id=null, ?string $name=null)
     {
         $this->text = $text;
-        $this->id = $id;
-        $this->name = $name;
+        Tag::__construct($id, $name);
     }
 
     public function render(): string
     {
-        $properties = $this->getProperties();
+        $properties = Tag::getProperties();
         return "<label$properties>{$this->text}</label>";
-    }
-    public function getProperties(): string{
-        $properties = "";
-        if(isset($this->id)){
-            $properties .= " id=\"$this->id\"";
-        }
-        if(isset($this->name)){
-            $properties .= " name=\"$this->name\"";
-        } 
-        return $properties;
     }
 }

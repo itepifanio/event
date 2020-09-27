@@ -3,23 +3,21 @@
 namespace Src;
 
 use Src\RendarableInterface;
+use Src\Tag;
 
-class Form implements RendarableInterface
+class Form extends Tag implements RendarableInterface
 {
     /** @var RendarableInterface */
     private array $elements;
-    private ?string $id;
-    private ?string $name;
     
-    public function __construct($id=null, $name=null)
+    public function __construct(?string $id=null, ?string $name=null)
     {
-        $this->id = $id;
-        $this->name = $name;
+        Tag::__construct($id, $name);
     }
 
     public function render() : string
     {
-        $properties = $this->getProperties();
+        $properties = Tag::getProperties();
         $form = "<form$properties>";
 
         foreach($this->elements as $element){
@@ -29,17 +27,6 @@ class Form implements RendarableInterface
         $form .= '</form>';
 
         return $form;
-    }
-
-    public function getProperties(): string{
-        $properties = '';
-        if(isset($this->id)){
-            $properties .= " id=\"$this->id\"";
-        }
-        if(isset($this->name)){
-            $properties .= " name=\"$this->name\"";
-        }        
-        return $properties;
     }
 
     public function addElement(RendarableInterface $element) : void
