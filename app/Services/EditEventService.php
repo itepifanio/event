@@ -28,28 +28,23 @@ class EditEventService implements ServiceInterface
      */
     public function execute(): bool
     {
-        try {
-            $event = Event::find($this->editEventDto->id);
+        $event = Event::find($this->editEventDto->id);
 
-            if(!$event) {
-                return false;
-            }
-
-            $event->update(
-                $this->editEventDto->toArray()
-            );
-
-            $event->address()->update([
-                'name' => $this->editEventDto->address_name,
-                'lat' => $this->editEventDto->lat,
-                'lng' => $this->editEventDto->lng,
-            ]);
-
-            return true;
-
-        } catch (\Throwable $th) {
+        if(!$event) {
             return false;
         }
+
+        $event->update(
+            $this->editEventDto->toArray()
+        );
+
+        $event->address()->update([
+            'name' => $this->editEventDto->address_name,
+            'lat' => $this->editEventDto->lat,
+            'lng' => $this->editEventDto->lng,
+        ]);
+
+        return true;
     }
 
     /**

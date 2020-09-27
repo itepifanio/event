@@ -29,27 +29,21 @@ class EditOrganizationService implements ServiceInterface
      */
     public function execute(): bool
     {
-        try {
-            $organization = Organization::find($this->editOrganizationDto->id);
-            if(!$organization) {
-                return false;
-            }
-
-            $updated = $organization->update($this->editOrganizationDto->toArray());
-
-            $user_organization = User::find($organization->user_id);
-            if(!$user_organization) {
-                return false;
-            }
-
-            $user_organization->update($this->editOrganizationDto->toArray());
-
-            return true;
-
-        } catch (\Throwable $th) {
-            dd($th);
+        $organization = Organization::find($this->editOrganizationDto->id);
+        if(!$organization) {
             return false;
         }
+
+        $updated = $organization->update($this->editOrganizationDto->toArray());
+
+        $user_organization = User::find($organization->user_id);
+        if(!$user_organization) {
+            return false;
+        }
+
+        $user_organization->update($this->editOrganizationDto->toArray());
+
+        return true;
     }
 
     /**

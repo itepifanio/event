@@ -28,20 +28,15 @@ class CreateEventService implements ServiceInterface
      */
     public function execute(): bool
     {
-        try {
-            $event = Event::create($this->createEventDto->toArray());
+        $event = Event::create($this->createEventDto->toArray());
 
-            $event->address()->create([
-                'name' => $this->createEventDto->address_name,
-                'lat' => $this->createEventDto->lat,
-                'lng' => $this->createEventDto->lng,
-            ]);
+        $event->address()->create([
+            'name' => $this->createEventDto->address_name,
+            'lat' => $this->createEventDto->lat,
+            'lng' => $this->createEventDto->lng,
+        ]);
 
-            return true;
-
-        } catch (\Throwable $th) {
-            return false;
-        }
+        return true;
     }
 
     /**
