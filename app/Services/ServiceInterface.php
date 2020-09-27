@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Services\Dto\DtoInterface;
+
 interface ServiceInterface
 {
     /**

@@ -10,9 +10,9 @@ class CreateEventDto extends AbstractDto implements DtoInterface
     protected $start_date;
     protected $end_date;
     protected $address;
-    protected $address_name;
-    protected $lat;
-    protected $lng;
+    public $address_name;
+    public $lat;
+    public $lng;
 
     /* @return array */
     protected function configureValidatorRules(): array

@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Services\Dto\CreateEventDto;
+use App\Services\Dto\DtoInterface;
 use InvalidArgumentException;
 use App\Models\Event;
 
@@ -46,7 +48,6 @@ class CreateEventService implements ServiceInterface
      */
     public static function make(DtoInterface $dto): ServiceInterface
     {
-        dd($dto);
         // We check if this is a CreateEventDTO
         if (!$dto instanceof CreateEventDto) {
             throw new InvalidArgumentException('CreateEventService needs to receive a CreateEventDto.');
