@@ -101,11 +101,19 @@ class EventController extends Controller
 
     public function destroy(Organization $organization, $id)
     {
-        Event::find($id)->delete();
+        $deleteEventDto = new DeleteEventDto([ 'id' => $id ]);
 
-        return redirect()->route('organizations.events.index', [
-            'events' => Event::ofOrganization($organization->id)->get(),
-            'organization' => $organization,
-        ])->with('success', 'Event deleted with success.');
+        $deleteEventService = DeleteEventService::make($deleteEventDto);
+
+        $success = $deleteEventService->execute();
+
+        if($success) {
+            return redirect()->route('organizations.events.index', [
+                'events' => Event::ofOrganization($organization->id)->get(),
+                'organization' => $organization,
+            ])->with('success', 'Event deleted with success.');
+        }
+
+        return redirect()->back()->with('erro', 'Failed to delete event.');
     }
 }
