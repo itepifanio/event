@@ -44,9 +44,7 @@
                                         <label for="description">Description</label>
                                         <textarea type="text"
                                                   class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
-                                                  id="description" name="description" >
-                                                  {{ $organization->description }}
-                                        </textarea>
+                                                  id="description" name="description">{{ $organization->description }}</textarea>
                                         @if($errors->has('description'))
                                             <div class="invalid-feedback">{{ $errors->get('description')[0] }}</div>
                                         @endif
