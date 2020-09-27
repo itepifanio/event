@@ -35,7 +35,9 @@ abstract class AbstractDto
         }
     }
 
-    /* @return array */
+    /**
+     * @return array
+     */
     abstract protected function configureValidatorRules(): array;
 
     /**

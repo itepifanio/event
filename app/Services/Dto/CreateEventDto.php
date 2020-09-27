@@ -4,17 +4,19 @@ namespace App\Services\Dto;
 
 class CreateEventDto extends AbstractDto implements DtoInterface
 {
-
-    protected $name;
-    protected $description;
-    protected $start_date;
-    protected $end_date;
-    protected $address;
+    public $name;
+    public $description;
+    public $start_date;
+    public $end_date;
+    public $address;
     public $address_name;
     public $lat;
     public $lng;
+    public $organization_id;
 
-    /* @return array */
+    /**
+     * @return array
+     */
     protected function configureValidatorRules(): array
     {
         return [
@@ -26,11 +28,13 @@ class CreateEventDto extends AbstractDto implements DtoInterface
             'address_name' => 'required|string',
             'lat' => 'required',
             'lng' => 'required',
+            'organization_id' => 'required',
         ];
     }
 
     /**
-     * @inheritDoc
+     * @param array $data
+     * @return bool
      */
     protected function map(array $data): bool
     {
@@ -42,7 +46,15 @@ class CreateEventDto extends AbstractDto implements DtoInterface
         $this->address_name = $data['address_name'];
         $this->lat = $data['lat'];
         $this->lng = $data['lng'];
+        $this->organization_id = $data['organization_id'];
 
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array {
+        return (array) $this;
     }
 }

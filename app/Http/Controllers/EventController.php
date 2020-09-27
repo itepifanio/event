@@ -41,14 +41,8 @@ class EventController extends Controller
             'organization_id' => $organization->id,
         ]);
 
-        // dd($data);
-        // First, we create the DTO. We need it to use the service.
         $createEventDto = new CreateEventDto($data);
 
-        // dd($createEventDto instanceof DtoInterface);
-
-        // Now we have the DTO. We also know that he is valid.
-        // Let's make our service, and execute it.
         $createEventService = CreateEventService::make($createEventDto);
 
         $success = $createEventService->execute();

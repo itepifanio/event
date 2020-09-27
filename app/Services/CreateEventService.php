@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Services\Dto\CreateEventDto;
 use App\Services\Dto\DtoInterface;
-use InvalidArgumentException;
 use App\Models\Event;
+use InvalidArgumentException;
 
 class CreateEventService implements ServiceInterface
 {
@@ -28,18 +28,20 @@ class CreateEventService implements ServiceInterface
      */
     public function execute(): bool
     {
-        $event = Event::create($this->createEventDto);
+        try {
+            $event = Event::create($this->createEventDto->toArray());
 
-        $event->address()->create([
-            'name' => $this->createEventDto->address_name,
-            'lat' => $this->createEventDto->lat,
-            'lng' => $this->createEventDto->lng,
-        ]);
+            $event->address()->create([
+                'name' => $this->createEventDto->address_name,
+                'lat' => $this->createEventDto->lat,
+                'lng' => $this->createEventDto->lng,
+            ]);
 
-        // All is done. We create the user.
+            return true;
 
-        // Everything good. We return the result.
-        return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     /**
@@ -48,14 +50,10 @@ class CreateEventService implements ServiceInterface
      */
     public static function make(DtoInterface $dto): ServiceInterface
     {
-        // We check if this is a CreateEventDTO
         if (!$dto instanceof CreateEventDto) {
             throw new InvalidArgumentException('CreateEventService needs to receive a CreateEventDto.');
         }
 
-
-        // All good. We create the instance, and tell the IDE the type of our DTO.
-        /* @var CreateEventDto $dto */
         return new CreateEventService($dto);
     }
 }
