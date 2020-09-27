@@ -8,8 +8,10 @@ use App\Models\Event;
 use App\Models\Organization;
 use App\Services\Dto\CreateEventDto;
 use App\Services\Dto\EditEventDto;
+use App\Services\Dto\DeleteEventDto;
 use App\Services\CreateEventService;
 use App\Services\EditEventService;
+use App\Services\DeleteEventService;
 
 class EventController extends Controller
 {
