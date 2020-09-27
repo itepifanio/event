@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Http\Requests\OrganizationRequest;
 use App\Models\Organization;
 use App\Models\User;
+use App\Services\Dto\EditOrganizationDto;
+use App\Services\EditOrganizationService;
 
 class OrganizationController extends Controller
 {
@@ -15,7 +18,7 @@ class OrganizationController extends Controller
                             ->join('organizations', 'users.id', '=', 'organizations.user_id')
                             ->select('users.*', 'organizations.*')
                             ->get();
-        
+
         return view('organizations.index', [
             'organizations' => $organizations_info
         ]);
@@ -24,17 +27,6 @@ class OrganizationController extends Controller
     public function create()
     {
         return view('organizations.create');
-    }
-
-    public function store(OrganizationRequest $request)
-    {
-        $input = $request->validated();
-
-        Organization::create($input);
-
-        return redirect()->route('organizations.index', [
-            'organizations' => Organization::all()
-        ])->with('success', 'Organization created with success.');
     }
 
     public function show($id)
@@ -49,33 +41,47 @@ class OrganizationController extends Controller
     public function edit($id)
     {
         $organization = Organization::find($id);
+
         return view('organizations.edit', [
             'organization' => $organization,
             'userOrganization' => User::find($organization->user_id)
         ]);
     }
 
-    public function update(OrganizationRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $organization = Organization::find($id);
-        $user_organization = User::find($organization->user_id);
-        
+        $data = array_merge(
+            $request->all(), [
+            'id' => $id,
+        ]);
 
-        $input = $request->validated(); // A VALIDAÇÃO DEVE SER ALTERADA, UM NOVO TIPO REQUEST DEVE SER CRIADO
-        $organization->update($input);
-        $user_organization->update($input);
+        $editOrganizationDto = new EditOrganizationDto($data);
 
-        return redirect()->route('organizations.index', [
-            'organizations' => Organization::all()
-        ])->with('success', 'Organization updated with success.');
+        $editOrganizationService = EditOrganizationService::make($editOrganizationDto);
+
+        $hasSuccess = $editOrganizationService->execute();
+
+        if($hasSuccess) {
+            return redirect()->route('organizations.index', [
+                'organizations' => Organization::all()
+            ])->with('success', 'Organization updated with success.');
+        }
+
+        return redirect()->back()->with('erro', 'Failed to update organization.');
     }
 
     public function destroy($id)
     {
-        Organization::find($id)->delete();
+        $deleteOrganizationDto = new DeleteOrganizationDto([ 'id' => $id ]);
 
-        return redirect()->route('organizations.index', [
-            'organizations' => Organizarion::all()
-        ])->with('success', 'Organization deleted with success.');
+        $deleteOrganizationService = DeleteOrganizationService::make($deleteOrganizationDto);
+
+        $hasSuccess = $deleteOrganizationService->execute();
+
+        if($hasSuccess) {
+            return redirect()->route('organizations.index', [
+                'organizations' => Organizarion::all()
+            ])->with('success', 'Organization deleted with success.');
+        }
     }
 }

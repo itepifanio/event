@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Geolocalization;
-use App\Http\Requests\EventRequest;
+use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Organization;
+use App\Services\Dto\CreateEventDto;
+use App\Services\Dto\EditEventDto;
+use App\Services\Dto\DeleteEventDto;
+use App\Services\CreateEventService;
+use App\Services\EditEventService;
+use App\Services\DeleteEventService;
 
 class EventController extends Controller
 {
@@ -18,7 +24,7 @@ class EventController extends Controller
     }
 
     public function index(Organization $organization)
-    {   
+    {
         return view('events.index', [
             'events' => Event::ofOrganization($organization->id)->get(),
             'organization' => $organization,
@@ -32,25 +38,27 @@ class EventController extends Controller
         ]);
     }
 
-    public function store(EventRequest $request, Organization $organization)
+    public function store(Request $request, Organization $organization)
     {
-        $event = Event::create(
-            array_merge(
-                $request->all(), [
-                'organization_id' => $organization->id,
-            ])
-        );
-
-        $event->address()->create([
-            'name' => $request->get('address_name'),
-            'lat' => $request->get('lat'),
-            'lng' => $request->get('lng'),
+        $data = array_merge(
+            $request->all(), [
+            'organization_id' => $organization->id,
         ]);
 
-        return redirect()->route('organizations.events.index', [
-            'events' => Event::ofOrganization($organization->id)->get(),
-            'organization' => $organization,
-        ])->with('success', 'Event created with success.');
+        $createEventDto = new CreateEventDto($data);
+
+        $createEventService = CreateEventService::make($createEventDto);
+
+        $hasSuccess = $createEventService->execute();
+
+        if($hasSuccess) {
+            return redirect()->route('organizations.events.index', [
+                'events' => Event::ofOrganization($organization->id)->get(),
+                'organization' => $organization,
+            ])->with('success', 'Event created with success.');
+        }
+
+        return redirect()->back()->with('erro', 'Failed to create event.');
     }
 
     public function show(Organization $organization, $id)
@@ -69,34 +77,45 @@ class EventController extends Controller
         ]);
     }
 
-    public function update(EventRequest $request, Organization $organization, $id)
+    public function update(Request $request, Organization $organization, $id)
     {
-        Event::find($id)->update(
-            array_merge(
-                $request->all(),
-                ['organization_id' => $organization->id]
-            )
-        );
-
-        Event::find($id)->address()->update([
-            'name' => $request->get('address_name'),
-            'lat' => $request->get('lat'),
-            'lng' => $request->get('lng'),
+        $data = array_merge(
+            $request->all(), [
+            'id' => $id,
+            'organization_id' => $organization->id,
         ]);
 
-        return redirect()->route('organizations.events.index', [
-            'events' => Event::ofOrganization($organization->id)->get(),
-            'organization' => $organization
-        ])->with('success', 'Event updated with success.');
+        $editEventDto = new EditEventDto($data);
+
+        $editEventService = EditEventService::make($editEventDto);
+
+        $hasSuccess = $editEventService->execute();
+
+        if($hasSuccess) {
+            return redirect()->route('organizations.events.index', [
+                'events' => Event::ofOrganization($organization->id)->get(),
+                'organization' => $organization,
+            ])->with('success', 'Event updated with success.');
+        }
+
+        return redirect()->back()->with('erro', 'Failed to update event.');
     }
 
     public function destroy(Organization $organization, $id)
     {
-        Event::find($id)->delete();
+        $deleteEventDto = new DeleteEventDto([ 'id' => $id ]);
 
-        return redirect()->route('organizations.events.index', [
-            'events' => Event::ofOrganization($organization->id)->get(),
-            'organization' => $organization,
-        ])->with('success', 'Event deleted with success.');
+        $deleteEventService = DeleteEventService::make($deleteEventDto);
+
+        $hasSuccess = $deleteEventService->execute();
+
+        if($hasSuccess) {
+            return redirect()->route('organizations.events.index', [
+                'events' => Event::ofOrganization($organization->id)->get(),
+                'organization' => $organization,
+            ])->with('success', 'Event deleted with success.');
+        }
+
+        return redirect()->back()->with('erro', 'Failed to delete event.');
     }
 }
