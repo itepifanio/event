@@ -4,8 +4,8 @@
         data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-        <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+        <li class="nav-item">
+            <a href="/home" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
                     Dashboard
@@ -13,7 +13,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('events.list') }}" class="nav-link">
+            <a href="{{ route('events.list') }}" class="nav-link {{ request()->routeIs('events.*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-calendar"></i>
                 <p>
                     Event
@@ -21,7 +21,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('organizations.index') }}" class="nav-link">
+            <a href="{{ route('organizations.index') }}" class="nav-link {{ request()->routeIs('organizations.*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-building"></i>
                 <p>
                     Organization
