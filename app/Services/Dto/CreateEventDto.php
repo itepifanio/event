@@ -14,9 +14,6 @@ class CreateEventDto extends AbstractDto implements DtoInterface
     public $lng;
     public $organization_id;
 
-    /**
-     * @return array
-     */
     protected function configureValidatorRules(): array
     {
         return [
@@ -32,10 +29,6 @@ class CreateEventDto extends AbstractDto implements DtoInterface
         ];
     }
 
-    /**
-     * @param array $data
-     * @return bool
-     */
     protected function map(array $data): bool
     {
         $this->name = $data['name'];

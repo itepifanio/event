@@ -9,23 +9,13 @@ use InvalidArgumentException;
 
 class EditEventService implements ServiceInterface
 {
-    /**
-     * @var EditEventDto
-     */
-    private $editEventDto;
+    private EditEventDto $editEventDto;
 
-    /**
-     * EditEventService constructor.
-     * @param EditEventDto $editEventDto
-     */
     public function __construct(EditEventDto $editEventDto)
     {
         $this->editEventDto = $editEventDto;
     }
 
-    /**
-     * @return bool
-     */
     public function execute(): bool
     {
         $event = Event::find($this->editEventDto->id);
@@ -47,10 +37,6 @@ class EditEventService implements ServiceInterface
         return true;
     }
 
-    /**
-     * @param DtoInterface $dto
-     * @return ServiceInterface
-     */
     public static function make(DtoInterface $dto): ServiceInterface
     {
         if (!$dto instanceof EditEventDto) {
