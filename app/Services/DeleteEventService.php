@@ -9,15 +9,8 @@ use InvalidArgumentException;
 
 class DeleteEventService implements ServiceInterface
 {
-    /**
-     * @var DeleteEventDto
-     */
-    private $deleteEventDto;
+    private DeleteEventDto $deleteEventDto;
 
-    /**
-     * DeleteEventService constructor.
-     * @param DeleteEventDto $deleteEventDto
-     */
     public function __construct(DeleteEventDto $deleteEventDto)
     {
         $this->deleteEventDto = $deleteEventDto;

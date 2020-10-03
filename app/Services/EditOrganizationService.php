@@ -10,23 +10,13 @@ use InvalidArgumentException;
 
 class EditOrganizationService implements ServiceInterface
 {
-    /**
-     * @var EditOrganizationDto
-     */
-    private $editOrganizationDto;
+    private EditOrganizationDto $editOrganizationDto;
 
-    /**
-     * EditOrganizationService constructor.
-     * @param EditOrganizationDto $editOrganizationDto
-     */
     public function __construct(EditOrganizationDto $editOrganizationDto)
     {
         $this->editOrganizationDto = $editOrganizationDto;
     }
 
-    /**
-     * @return bool
-     */
     public function execute(): bool
     {
         $organization = Organization::find($this->editOrganizationDto->id);
@@ -46,10 +36,6 @@ class EditOrganizationService implements ServiceInterface
         return true;
     }
 
-    /**
-     * @param DtoInterface $dto
-     * @return ServiceInterface
-     */
     public static function make(DtoInterface $dto): ServiceInterface
     {
         if (!$dto instanceof EditOrganizationDto) {
