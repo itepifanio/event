@@ -27,9 +27,16 @@ class CreateSubscriptionService implements ServiceInterface
      * @return bool
      */
     public function execute(): bool
-    {
+    {    
+        if(Subscription::where([
+            ['user_id', $this->createSubscriptionDto->user_id], 
+            ['event_id', $this->createSubscriptionDto->event_id ]
+            ])->exists())
+        {
+            return false;
+        }
+       
         $subscription = Subscription::create($this->createSubscriptionDto->toArray());
-
         return true;
     }
 
