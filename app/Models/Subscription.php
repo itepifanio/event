@@ -4,17 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
-class Organization extends Model
+class Subscription extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'description', 'foundation_date'];
+    protected $fillable = [
+        'user_id', 'event_id', 
+    ];
 
-    public function users(){
-        return $this->belongsToMany(User::class, 'user_organizations');
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
-    public function events(){
+    public function events()
+    {
         return $this->hasMany(Event::class);
     }
     public function scopeOfEvent($query, $id)

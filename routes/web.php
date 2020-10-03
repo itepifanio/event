@@ -22,6 +22,7 @@ Route::post('organizations', 'OrganizationController@store')->name('organization
 Route::middleware(['auth'])->group(function(){
     
     Route::resource('organizations', 'OrganizationController')->except(['store']);
+    
 
     Route::get('events', 'EventController@list')->name('events.list');
     Route::group(['prefix' => 'organizations/{organization}'], function(){
@@ -29,6 +30,13 @@ Route::middleware(['auth'])->group(function(){
             'as' => 'organizations',
         ]);
     });
+
+    Route::group(['prefix' => 'events/{event}'], function(){
+        Route::resource('subscription', 'SubscriptionsController', [
+            'as' => 'events',
+        ]);
+    });
+
 });
 
 Auth::routes();

@@ -31,7 +31,11 @@
                                         </span>
                                 </div>
                             </p>
-                            <a href="#" class="btn-card">Subscribe</a>
+                            <!-- <a href="{{ route('events.subscription.store', $event->id) }}" class="btn-card">Subscribe</a> -->
+                            <form action= "{{ route('events.subscription.store', $event->id) }}" method="POST">
+                                @csrf
+                                <button type='submit' class="btn-card"> Subscribe </button>
+                            </form>
                         </div>
                     </div>
                 </div>
