@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Services\Dto\RegisterDto;
 use App\Services\Dto\DtoInterface;
@@ -26,11 +27,18 @@ class RegisterService implements ServiceInterface
             'password' => Hash::make($this->registerDto->password),
         ]);
 
+        // think a way to put this logic on a new service
         if(isset($this->registerDto->is_organization)){
             Organization::create([
                 'user_id' => $user->id,
                 'description' => $this->registerDto->description,
                 'foundation_date' => $this->registerDto->foundation_date
+            ]);
+
+            $user->organizations()->sync([
+                $user->id => [
+                    'role' => User::ROLES_OWNER,
+                ]
             ]);
         }
 

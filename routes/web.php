@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::post('organizations', [OrganizationController::class, 'store'])->name('organizations.store');
+Route::post('organizations', [OrganizationController::class, 'store'])->name('organizations.store');
 
 Route::middleware(['auth'])->group(function(){
     Route::resource('organizations', OrganizationController::class)->except(['store']);

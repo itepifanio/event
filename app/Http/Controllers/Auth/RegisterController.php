@@ -56,13 +56,7 @@ class RegisterController extends Controller
         return Validator::make($data, []);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
+    protected function create(array $data) : User
     {
         $registerDto = new RegisterDto($data);
 
@@ -71,6 +65,5 @@ class RegisterController extends Controller
         $registerService->execute();
 
         return User::where('email', $registerDto->email)->first();
-
     }
 }
