@@ -1,24 +1,21 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Src;
 
 use Src\PrototypeInterface;
 
-class Input implements PrototypeInterface
+class Input extends Tag implements PrototypeInterface
 {
-    public ?string $id;
-    public ?string $name;
     public ?string $type;
     public ?string $placeholder;
 
-    public function __construct(?Input $input=null)
+    public function __construct(string $id, string $name, string $type, string $placeholder)
     {
-        if($input) {
-            $this->id = $input->id;
-            $this->name = $input->name;
-            $this->type = $input->type;
-            $this->placeholder = $input->placeholder;
-        }
+        $this->type = $type;
+        $this->placeholder = $placeholder;
+        parent::__construct($id, $name);
     }
 
     public function render(): string
@@ -28,30 +25,25 @@ class Input implements PrototypeInterface
         return "<input$properties/>";
     }
 
-    public function getProperties(?string $properties=null): string {
+    public function getProperties(?string $properties = null): string
+    {
         $properties = '';
 
-        if(isset($this->id)){
-            $properties .= " id=\"$this->id\"";
-        }
+        $properties = parent::getProperties($properties);
 
-        if(isset($this->name)){
-            $properties .= " name=\"$this->name\"";
-        }
-
-        if(isset($this->type)){
+        if (isset($this->type)) {
             $properties .= " type=\"$this->type\"";
         }
 
-        if(isset($this->placeholder)){
+        if (isset($this->placeholder)) {
             $properties .= " placeholder=\"$this->placeholder\"";
         }
 
         return $properties;
     }
 
-    public function clone(): PrototypeInterface
+    public function __clone()
     {
-        return new Input($this);
+        $this->placeholder = 'Copy of ' . ($this->placeholder ?? '');
     }
 }

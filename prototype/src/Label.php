@@ -1,34 +1,28 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Src;
 
 use Src\PrototypeInterface;
 
-class Label implements PrototypeInterface
+class Label extends Tag implements PrototypeInterface
 {
-    public ?string $id;
-    public ?string $text;
-
-    public function __construct(?Label $label=null)
+    public function __construct(string $id, string $text)
     {
-        if($label) {
-            $this->id = $label->id;
-            $this->text = $label->text;
-        }
+        $this->text = $text;
+        parent::__construct($id, null);
     }
 
     public function render(): string
     {
-        $properties = '';
+        $properties = parent::getProperties();
 
-        if(isset($this->id)){
-            $properties .= " id=\"$this->id\"";
-        }
         return "<label$properties>{$this->text}</label>";
     }
 
-    public function clone(): PrototypeInterface
+    public function __clone()
     {
-        return new Label($this);
+        $this->text = 'Copy of ' . ($this->text ?? '');
     }
 }

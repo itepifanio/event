@@ -5,6 +5,4 @@ namespace Src;
 interface PrototypeInterface
 {
     public function render(): string;
-
-    public function clone(): PrototypeInterface;
 }

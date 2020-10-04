@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Src;
 
@@ -8,19 +10,17 @@ class Form extends Tag implements PrototypeInterface
 {
     private array $elements;
 
-    public function __construct(?Form $form=null)
+    public function __construct(?string $id = null, ?string $name = null)
     {
-        if($form){
-            Tag::__construct($form->id, $form->name);
-        }
+        parent::__construct($id, $name);
     }
 
-    public function render() : string
+    public function render(): string
     {
-        $properties = Tag::getProperties();
+        $properties = parent::getProperties();
         $form = "<form$properties>";
 
-        foreach($this->elements as $element){
+        foreach ($this->elements as $element) {
             $form .= $element->render();
         }
 
@@ -29,14 +29,15 @@ class Form extends Tag implements PrototypeInterface
         return $form;
     }
 
-    public function addElement(PrototypeInterface $element) : void
+    public function addElement(PrototypeInterface $element): void
     {
         $this->elements[] = $element;
     }
 
-
-    public function clone(): PrototypeInterface
+    public function __clone()
     {
-        return new Form(this);
+        foreach ($this->elements as $index => $element) {
+            $this->elements[$index] = clone $element;
+        }
     }
 }

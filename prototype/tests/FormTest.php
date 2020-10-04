@@ -12,16 +12,9 @@ class FormTest extends TestCase
     /** @test */
     public function it_can_clone_form_with_fields()
     {
-        $label = new Label();
-        $label->id = 'label_nome';
-        $label->text = 'Nome';
+        $label = new Label('label_nome', 'Nome');
 
-        $input = new Input();
-        $input->id = 'input_nome';
-        $input->type = 'text';
-        $input->name = 'nome';
-        $input->placeholder = 'Digite seu nome';
-
+        $input = new Input('input_nome', 'nome', 'text', 'Digite seu nome');
 
         $form1 = new Form();
         $form1->addElement($label);
@@ -33,16 +26,23 @@ class FormTest extends TestCase
         );
 
         // Testando o clone dos elementos em um novo form
-        $label_clone = $label->clone();
-        $input_clone = $input->clone();
+        $labelClone = clone $label;
+        $inputClone = clone $input;
 
         $form2 = new Form();
-        $form2->addElement($label_clone);
-        $form2->addElement($input_clone);
+        $form2->addElement($labelClone);
+        $form2->addElement($inputClone);
 
         $this->assertSame(
-            '<form><label id="label_nome">Nome</label><input id="input_nome" name="nome" type="text" placeholder="Digite seu nome"/></form>',
+            '<form><label id="label_nome">Copy of Nome</label><input id="input_nome" name="nome" type="text" placeholder="Copy of Digite seu nome"/></form>',
             $form2->render()
+        );
+
+        // Testando o clone do form
+        $form3 = clone $form1;
+        $this->assertSame(
+            '<form><label id="label_nome">Copy of Nome</label><input id="input_nome" name="nome" type="text" placeholder="Copy of Digite seu nome"/></form>',
+            $form3->render()
         );
     }
 }
