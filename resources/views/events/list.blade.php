@@ -34,7 +34,7 @@
                             <!-- <a href="{{ route('events.subscription.store', $event->id) }}" class="btn-card">Subscribe</a> -->
                             <form action= "{{ route('events.subscription.store', $event->id) }}" method="POST">
                                 @csrf
-                                <button type='submit' class="btn-card"> Subscribe </button>
+                                <button type='submit' class="btn-card" onclick="return confirm('You will be subscribed to this event.');"> Subscribe </button>
                             </form>
                         </div>
                     </div>

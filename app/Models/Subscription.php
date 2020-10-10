@@ -26,4 +26,8 @@ class Subscription extends Model
     {
         return $query->whereEventId($id);
     }
+    public function scopeOfUser($query, $id)
+    {
+        return $query->whereUserId($id);
+    }
 }

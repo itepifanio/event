@@ -7,7 +7,9 @@ use App\Models\Event;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Services\Dto\CreateSubscriptionDto;
+use App\Services\Dto\DeleteSubscriptionDto;
 use App\Services\CreateSubscriptionService;
+use App\Services\DeleteSubscriptionService;
 use Illuminate\Support\Facades\Auth;
 
 class SubscriptionsController extends Controller
@@ -56,6 +58,18 @@ class SubscriptionsController extends Controller
     public function update($id)
     {}
 
-    public function destroy($id)
-    {}
+    public function destroy(Event $event, $id)
+    {
+        $deleteSubscriptionDto = new DeleteSubscriptionDto([ 'id' => $id ]);
+
+        $deleteSubscriptionService = DeleteSubscriptionService::make($deleteSubscriptionDto);
+
+        $hasSuccess = $deleteSubscriptionService->execute();
+
+        if($hasSuccess) {
+            return redirect()->route('home')->with('success', 'Unsubscribed with success.');
+        }
+
+        return redirect()->back()->with('erro', 'Failed to unsubscribe.');
+    }
 }
