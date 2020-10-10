@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 
@@ -19,9 +20,8 @@ Route::middleware(['auth'])->group(function(){
             'as' => 'organizations',
         ]);
     });
-
     Route::group(['prefix' => 'events/{event}'], function(){
-        Route::resource('subscription', 'SubscriptionsController', [
+        Route::resource('subscription', SubscriptionsController::class, [
             'as' => 'events',
         ]);
     });
