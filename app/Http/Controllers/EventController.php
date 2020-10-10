@@ -58,7 +58,7 @@ class EventController extends Controller
             ])->with('success', 'Event created with success.');
         }
 
-        return redirect()->back()->with('erro', 'Failed to create event.');
+        return redirect()->back()->with('error', 'Failed to create event.');
     }
 
     public function show(Organization $organization, $id)
@@ -98,7 +98,7 @@ class EventController extends Controller
             ])->with('success', 'Event updated with success.');
         }
 
-        return redirect()->back()->with('erro', 'Failed to update event.');
+        return redirect()->back()->with('error', 'Failed to update event.');
     }
 
     public function destroy(Organization $organization, $id)
@@ -116,6 +116,6 @@ class EventController extends Controller
             ])->with('success', 'Event deleted with success.');
         }
 
-        return redirect()->back()->with('erro', 'Failed to delete event.');
+        return redirect()->back()->with('error', 'Failed to delete event.');
     }
 }

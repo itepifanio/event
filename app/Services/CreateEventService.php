@@ -9,23 +9,13 @@ use InvalidArgumentException;
 
 class CreateEventService implements ServiceInterface
 {
-    /**
-     * @var CreateEventDto
-     */
-    private $createEventDto;
+    private CreateEventDto $createEventDto;
 
-    /**
-     * CreateEventService constructor.
-     * @param CreateEventDto $createEventDto
-     */
     public function __construct(CreateEventDto $createEventDto)
     {
         $this->createEventDto = $createEventDto;
     }
 
-    /**
-     * @return bool
-     */
     public function execute(): bool
     {
         $event = Event::create($this->createEventDto->toArray());
@@ -39,10 +29,6 @@ class CreateEventService implements ServiceInterface
         return true;
     }
 
-    /**
-     * @param DtoInterface $dto
-     * @return ServiceInterface
-     */
     public static function make(DtoInterface $dto): ServiceInterface
     {
         if (!$dto instanceof CreateEventDto) {

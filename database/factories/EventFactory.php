@@ -1,18 +1,22 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Model;
-use Faker\Generator as Faker;
+use App\Models\Event;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(\App\Event::class, function (Faker $faker) {
-    return [
+class EventFactory extends Factory
+{
+    protected $model = Event::class;
 
-        'name' => $faker->word,
-        'description' => $faker->text(200),
-        'start_date' => $faker->date(),
-        'end_date' => $faker->date(),
-        'image' => $faker->imageUrl(),
-
-    ];
-});
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->word,
+            'description' => $this->faker->text(200),
+            'start_date' => $this->faker->date(),
+            'end_date' => $this->faker->date(),
+            'image' => $this->faker->imageUrl(),
+        ];
+    }
+}

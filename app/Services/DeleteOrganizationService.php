@@ -9,23 +9,13 @@ use InvalidArgumentException;
 
 class DeleteOrganizationService implements ServiceInterface
 {
-    /**
-     * @var DeleteOrganizationDto
-     */
-    private $deleteOrganizationDto;
+    private DeleteOrganizationDto $deleteOrganizationDto;
 
-    /**
-     * DeleteOrganizationService constructor.
-     * @param DeleteOrganizationDto $deleteOrganizationDto
-     */
     public function __construct(DeleteOrganizationDto $deleteOrganizationDto)
     {
         $this->deleteOrganizationDto = $deleteOrganizationDto;
     }
 
-    /**
-     * @return bool
-     */
     public function execute(): bool
     {
         Organization::find($this->deleteOrganizationDto->id)->delete();
@@ -33,10 +23,6 @@ class DeleteOrganizationService implements ServiceInterface
         return true;
     }
 
-    /**
-     * @param DtoInterface $dto
-     * @return ServiceInterface
-     */
     public static function make(DtoInterface $dto): ServiceInterface
     {
         if (!$dto instanceof DeleteOrganizationDto) {

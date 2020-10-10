@@ -11,23 +11,13 @@ use InvalidArgumentException;
 
 class RegisterService implements ServiceInterface
 {
-    /**
-     * @var RegisterDto
-     */
-    private $registerDto;
+    private RegisterDto $registerDto;
 
-    /**
-     * RegisterService constructor.
-     * @param RegisterDto $registerDto
-     */
     public function __construct(RegisterDto $registerDto)
     {
         $this->registerDto = $registerDto;
     }
 
-    /**
-     * @return bool
-     */
     public function execute(): bool
     {
         $user = User::create([
@@ -47,10 +37,6 @@ class RegisterService implements ServiceInterface
         return true;
     }
 
-    /**
-     * @param DtoInterface $dto
-     * @return ServiceInterface
-     */
     public static function make(DtoInterface $dto): ServiceInterface
     {
         if (!$dto instanceof RegisterDto) {

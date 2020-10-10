@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use App\Http\Requests\OrganizationRequest;
 use App\Models\Organization;
 use App\Models\User;
+use App\Services\DeleteOrganizationService;
+use App\Services\Dto\DeleteOrganizationDto;
 use App\Services\Dto\EditOrganizationDto;
 use App\Services\EditOrganizationService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrganizationController extends Controller
 {
     public function index()
     {
-        $organizations_info  = DB::table('users')
-                            ->join('organizations', 'users.id', '=', 'organizations.user_id')
-                            ->select('users.*', 'organizations.*')
-                            ->get();
+        $organizations_info = DB::table('users')
+            ->join('organizations', 'users.id', '=', 'organizations.user_id')
+            ->select('users.*', 'organizations.*')
+            ->get();
 
         return view('organizations.index', [
             'organizations' => $organizations_info
@@ -61,7 +62,7 @@ class OrganizationController extends Controller
 
         $hasSuccess = $editOrganizationService->execute();
 
-        if($hasSuccess) {
+        if ($hasSuccess) {
             return redirect()->route('organizations.index', [
                 'organizations' => Organization::all()
             ])->with('success', 'Organization updated with success.');
@@ -72,15 +73,15 @@ class OrganizationController extends Controller
 
     public function destroy($id)
     {
-        $deleteOrganizationDto = new DeleteOrganizationDto([ 'id' => $id ]);
+        $deleteOrganizationDto = new DeleteOrganizationDto(['id' => $id]);
 
         $deleteOrganizationService = DeleteOrganizationService::make($deleteOrganizationDto);
 
         $hasSuccess = $deleteOrganizationService->execute();
 
-        if($hasSuccess) {
+        if ($hasSuccess) {
             return redirect()->route('organizations.index', [
-                'organizations' => Organizarion::all()
+                'organizations' => Organization::all()
             ])->with('success', 'Organization deleted with success.');
         }
     }
