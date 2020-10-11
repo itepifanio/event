@@ -13,7 +13,8 @@ class Organization extends Model
     protected $fillable = ['name', 'user_id', 'description', 'foundation_date'];
 
     public function users(){
-        return $this->belongsToMany(User::class, 'user_organizations');
+        return $this->belongsToMany(User::class, 'user_organizations')
+            ->withPivot('role');
     }
 
     public function events(){

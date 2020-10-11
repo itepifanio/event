@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Models\Role;
-use Illuminate\Support\Facades\Hash;
-use App\Services\Dto\RegisterDto;
-use App\Services\Dto\DtoInterface;
-use App\Models\User;
 use App\Models\Organization;
+use App\Models\Role;
+use App\Models\User;
+use App\Services\Dto\DtoInterface;
+use App\Services\Dto\RegisterDto;
+use Illuminate\Support\Facades\Hash;
 use InvalidArgumentException;
 
 class RegisterService implements ServiceInterface
@@ -28,15 +28,16 @@ class RegisterService implements ServiceInterface
         ]);
 
         // think a way to put this logic on a new service
-        if(isset($this->registerDto->is_organization)){
-            Organization::create([
+        if (isset($this->registerDto->is_organization)) {
+            $organization = Organization::create([
                 'user_id' => $user->id,
                 'description' => $this->registerDto->description,
-                'foundation_date' => $this->registerDto->foundation_date
+                'foundation_date' => $this->registerDto->foundation_date,
+                'name' => $this->registerDto->organizationName,
             ]);
 
             $user->organizations()->sync([
-                $user->id => [
+                $organization->id => [
                     'role' => User::ROLES_OWNER,
                 ]
             ]);

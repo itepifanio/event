@@ -13,6 +13,11 @@ class User extends Authenticatable
     const ROLES_OWNER  = 'owner';
     const ROLES_ADMIN  = 'admin';
     const ROLES_COMMON = 'common';
+    const ROLES = [
+        self::ROLES_OWNER,
+        self::ROLES_ADMIN,
+        self::ROLES_COMMON,
+    ];
 
     protected $fillable = [
         'name', 'email', 'password',
@@ -28,16 +33,12 @@ class User extends Authenticatable
 
     public function organizations()
     {
-        return $this->belongsToMany(Organization::class, 'user_organizations');
+        return $this->belongsToMany(Organization::class, 'user_organizations')
+                ->withPivot('role');
     }
 
     public function address()
     {
         return $this->morphOne(Address::class, 'addressable');
-    }
-
-    public function organization()
-    {
-        //TODO::pegar a organização atual do usuário
     }
 }

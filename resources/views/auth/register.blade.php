@@ -60,7 +60,21 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-                        <div class="organization_section" id="organization_section" name="organization_section" >
+                        <div class="organization_section" id="organization_section" name="organization_section">
+                            <div class="form-group row">
+                                <label for="foundation_date" class="col-md-4 col-form-label text-md-right">{{ __('Organization Name') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text"
+                                           class="form-control @error('organization_name') is-invalid @enderror"
+                                           id="organization_name" value="{{ old('organization_name') }}" name="organization_name">
+                                    @error('foundation_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
                                 <div class="col-md-6">

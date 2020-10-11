@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RhController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +19,9 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('events', EventController::class, [
             'as' => 'organizations',
         ]);
+        Route::resource('rh', RhController::class, [
+            'as' => 'organizations',
+        ])->only(['index', 'edit', 'update'])->middleware('hasRole:admin,owner');
     });
 });
 
