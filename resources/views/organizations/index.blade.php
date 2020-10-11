@@ -11,11 +11,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Organizations</h3>
-                        
+
                     </div>
                     <div class="card-body">
 
-                        @if(count($organizations) > 0)   
+                        @if(count($organizations) > 0)
                             <table id="datatable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
@@ -34,6 +34,8 @@
                                                class="btn btn-xs btn-warning">Edit</a>
                                             <a href="{{ route('organizations.events.index', $organization->id) }}"
                                                class="btn btn-xs btn-default">Manage events</a>
+                                            <a href="{{ route('organizations.rh.index', $organization->id) }}"
+                                               class="btn btn-xs btn-default">Manage RH</a>
                                             <!-- <form action="{{ route('organizations.destroy', $organization->id) }}"
                                                   method="post"
                                                   style="display: inline">

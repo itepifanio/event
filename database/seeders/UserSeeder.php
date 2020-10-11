@@ -27,5 +27,7 @@ class UserSeeder extends Seeder
                 'role' => User::ROLES_OWNER,
             ]
         ]);
+
+        User::factory()->role('admin', $organization->id)->create();
     }
 }

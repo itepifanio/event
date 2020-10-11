@@ -30,8 +30,32 @@ class RhControllerTest extends TestCase
             ->assertStatus(302);
     }
 
+    /** @test */
     public function it_can_edit_user()
     {
+        $form = [
+            'role' => User::ROLES_COMMON,
+            'name' => 'Mr Potato',
+            'email' => 'random@gmail.com',
+        ];
 
+        $user = User::factory()->role('admin')->create();
+        $organization = $user->organizations()->first();
+
+        $this->actingAs($user);
+
+        $this->put(route('organizations.rh.update', [$organization->id, $user->id]), $form)
+            ->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'name' => $form['name'],
+            'email' => $form['email'],
+        ]);
+
+        $this->assertDatabaseHas('user_organizations', [
+            'user_id' => $user->id,
+            'role' => $form['role'],
+        ]);
     }
 }
