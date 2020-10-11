@@ -46,8 +46,6 @@ class EventController extends Controller
 
         $createEventService = new CreateEventService($data);
 
-        $createEventService->validator();
-
         $hasSuccess = $createEventService->execute();
 
         if ($hasSuccess) {
@@ -85,8 +83,6 @@ class EventController extends Controller
 
         $editEventService = new EditEventService($data);
 
-        $editEventService->validator();
-
         $hasSuccess = $editEventService->execute();
 
         if ($hasSuccess) {
@@ -102,8 +98,6 @@ class EventController extends Controller
     public function destroy(Organization $organization, $id)
     {
         $deleteEventService = new DeleteEventService(['id' => $id]);
-
-        $deleteEventService->validator();
 
         $hasSuccess = $deleteEventService->execute();
 

@@ -11,6 +11,8 @@ class DeleteEventService extends ValidateData implements ServiceInterface
     public function __construct(array $data)
     {
         $this->data = $data;
+
+        $this->validator();
     }
 
     public function configureValidatorRules(): array

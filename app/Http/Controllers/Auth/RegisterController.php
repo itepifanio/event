@@ -67,8 +67,6 @@ class RegisterController extends Controller
     {
         $registerService = new RegisterService($data);
 
-        $registerService->validator();
-
         $registerService->execute();
 
         return User::where('email', $data['email'])->first();

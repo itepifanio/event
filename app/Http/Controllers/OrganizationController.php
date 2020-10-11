@@ -58,8 +58,6 @@ class OrganizationController extends Controller
 
         $editOrganizationService = new EditOrganizationService($data);
 
-        $editOrganizationService->validator();
-
         $hasSuccess = $editOrganizationService->execute();
 
         if ($hasSuccess) {
@@ -74,8 +72,6 @@ class OrganizationController extends Controller
     public function destroy($id)
     {
         $deleteOrganizationService = new DeleteOrganizationService(['id' => $id]);
-
-        $deleteOrganizationService->validator();
 
         $hasSuccess = $deleteOrganizationService->execute();
 
