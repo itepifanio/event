@@ -6,16 +6,15 @@ use App\Facades\Geolocalization;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Organization;
-use App\Services\Dto\CreateEventDto;
-use App\Services\Dto\EditEventDto;
-use App\Services\Dto\DeleteEventDto;
+use InvalidArgumentException;
 use App\Services\CreateEventService;
 use App\Services\EditEventService;
 use App\Services\DeleteEventService;
 
 class EventController extends Controller
 {
-    public function list(){
+    public function list()
+    {
         $geo = Geolocalization::current()->location;
 
         return view('events.list', [
@@ -41,17 +40,17 @@ class EventController extends Controller
     public function store(Request $request, Organization $organization)
     {
         $data = array_merge(
-            $request->all(), [
-            'organization_id' => $organization->id,
-        ]);
+            $request->all(),
+            ['organization_id' => $organization->id]
+        );
 
-        $createEventDto = new CreateEventDto($data);
+        $createEventService = new CreateEventService($data);
 
-        $createEventService = CreateEventService::make($createEventDto);
+        $createEventService->validator();
 
         $hasSuccess = $createEventService->execute();
 
-        if($hasSuccess) {
+        if ($hasSuccess) {
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,
@@ -80,18 +79,17 @@ class EventController extends Controller
     public function update(Request $request, Organization $organization, $id)
     {
         $data = array_merge(
-            $request->all(), [
-            'id' => $id,
-            'organization_id' => $organization->id,
-        ]);
+            $request->all(),
+            ['id' => $id, 'organization_id' => $organization->id]
+        );
 
-        $editEventDto = new EditEventDto($data);
+        $editEventService = new EditEventService($data);
 
-        $editEventService = EditEventService::make($editEventDto);
+        $editEventService->validator();
 
         $hasSuccess = $editEventService->execute();
 
-        if($hasSuccess) {
+        if ($hasSuccess) {
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,
@@ -103,13 +101,13 @@ class EventController extends Controller
 
     public function destroy(Organization $organization, $id)
     {
-        $deleteEventDto = new DeleteEventDto([ 'id' => $id ]);
+        $deleteEventService = new DeleteEventService(['id' => $id]);
 
-        $deleteEventService = DeleteEventService::make($deleteEventDto);
+        $deleteEventService->validator();
 
         $hasSuccess = $deleteEventService->execute();
 
-        if($hasSuccess) {
+        if ($hasSuccess) {
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,

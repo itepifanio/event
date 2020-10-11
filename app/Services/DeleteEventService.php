@@ -2,40 +2,26 @@
 
 namespace App\Services;
 
-use App\Services\Dto\DeleteEventDto;
-use App\Services\Dto\DtoInterface;
 use App\Models\Event;
-use InvalidArgumentException;
 
-class DeleteEventService implements ServiceInterface
+class DeleteEventService extends ValidateData implements ServiceInterface
 {
-    private DeleteEventDto $deleteEventDto;
+    protected array $data;
 
-    public function __construct(DeleteEventDto $deleteEventDto)
+    public function __construct(array $data)
     {
-        $this->deleteEventDto = $deleteEventDto;
+        $this->data = $data;
     }
 
-    /**
-     * @return bool
-     */
+    public function configureValidatorRules(): array
+    {
+        return ['id' => 'required'];
+    }
+
     public function execute(): bool
     {
-        Event::find($this->deleteEventDto->id)->delete();
+        Event::find($this->data['id'])->delete();
 
         return true;
-    }
-
-    /**
-     * @param DtoInterface $dto
-     * @return ServiceInterface
-     */
-    public static function make(DtoInterface $dto): ServiceInterface
-    {
-        if (!$dto instanceof DeleteEventDto) {
-            throw new InvalidArgumentException('DeleteEventService needs to receive a DeleteEventDto.');
-        }
-
-        return new DeleteEventService($dto);
     }
 }

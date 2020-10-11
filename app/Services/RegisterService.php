@@ -3,46 +3,47 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Hash;
-use App\Services\Dto\RegisterDto;
-use App\Services\Dto\DtoInterface;
 use App\Models\User;
 use App\Models\Organization;
-use InvalidArgumentException;
 
-class RegisterService implements ServiceInterface
+class RegisterService extends ValidateData implements ServiceInterface
 {
-    private RegisterDto $registerDto;
+    protected array $data;
 
-    public function __construct(RegisterDto $registerDto)
+    public function __construct(array $data)
     {
-        $this->registerDto = $registerDto;
+        $this->data = $data;
+    }
+
+
+    protected function configureValidatorRules(): array
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'is_organization' => 'string',
+            'description' => 'sometimes|required|max:150|string',
+            'foundation_date' => 'sometimes|required|date',
+        ];
     }
 
     public function execute(): bool
     {
         $user = User::create([
-            'name' => $this->registerDto->name,
-            'email' => $this->registerDto->email,
-            'password' => Hash::make($this->registerDto->password),
+            'name' => $this->data['name'],
+            'email' => $this->data['email'],
+            'password' => Hash::make($this->data['password']),
         ]);
 
-        if(isset($this->registerDto->is_organization)){
+        if (isset($this->data['is_organization'])) {
             Organization::create([
                 'user_id' => $user->id,
-                'description' => $this->registerDto->description,
-                'foundation_date' => $this->registerDto->foundation_date
+                'description' => $this->data['description'],
+                'foundation_date' => $this->data['foundation_date']
             ]);
         }
 
         return true;
-    }
-
-    public static function make(DtoInterface $dto): ServiceInterface
-    {
-        if (!$dto instanceof RegisterDto) {
-            throw new InvalidArgumentException('RegisterService needs to receive a RegisterDto.');
-        }
-
-        return new RegisterService($dto);
     }
 }
