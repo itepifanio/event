@@ -2,39 +2,44 @@
 
 namespace App\Services;
 
-use App\Services\Dto\CreateEventDto;
-use App\Services\Dto\DtoInterface;
 use App\Models\Event;
-use InvalidArgumentException;
 
-class CreateEventService implements ServiceInterface
+class CreateEventService extends ValidateData implements ServiceInterface
 {
-    private CreateEventDto $createEventDto;
+    protected array $data;
 
-    public function __construct(CreateEventDto $createEventDto)
+    public function __construct(array $data)
     {
-        $this->createEventDto = $createEventDto;
+        $this->data = $data;
+
+        $this->validator();
+    }
+
+    public function configureValidatorRules(): array
+    {
+        return [
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'address' => 'required|string',
+            'address_name' => 'required|string',
+            'lat' => 'required',
+            'lng' => 'required',
+            'organization_id' => 'required',
+        ];
     }
 
     public function execute(): bool
     {
-        $event = Event::create($this->createEventDto->toArray());
+        $event = Event::create($this->data);
 
         $event->address()->create([
-            'name' => $this->createEventDto->address_name,
-            'lat' => $this->createEventDto->lat,
-            'lng' => $this->createEventDto->lng,
+            'name' => $this->data['address_name'],
+            'lat' => $this->data['lat'],
+            'lng' => $this->data['lng'],
         ]);
 
         return true;
-    }
-
-    public static function make(DtoInterface $dto): ServiceInterface
-    {
-        if (!$dto instanceof CreateEventDto) {
-            throw new InvalidArgumentException('CreateEventService needs to receive a CreateEventDto.');
-        }
-
-        return new CreateEventService($dto);
     }
 }
