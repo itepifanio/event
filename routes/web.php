@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
@@ -12,6 +13,9 @@ Route::get('/', function () {
 //Route::post('organizations', [OrganizationController::class, 'store'])->name('organizations.store');
 
 Route::middleware(['auth'])->group(function(){
+    Route::get('profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::resource('organizations', OrganizationController::class)->except(['store']);
     Route::get('events', [EventController::class, 'list'])->name('events.list');
     Route::group(['prefix' => 'organizations/{organization}'], function(){

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Models\User;
 use App\Services\DeleteOrganizationService;
-use App\Services\Dto\DeleteOrganizationDto;
-use App\Services\Dto\EditOrganizationDto;
 use App\Services\EditOrganizationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
