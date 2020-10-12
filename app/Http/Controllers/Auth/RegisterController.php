@@ -3,16 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Models\Organization;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use InvalidArgumentException;
-
-use App\Services\Dto\RegisterDto;
+use App\Providers\RouteServiceProvider;
 use App\Services\RegisterService;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -57,13 +52,7 @@ class RegisterController extends Controller
         return Validator::make($data, []);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
+    protected function create(array $data) : User
     {
         $registerService = new RegisterService($data);
 

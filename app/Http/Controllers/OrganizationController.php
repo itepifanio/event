@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Models\User;
 use App\Services\DeleteOrganizationService;
-use App\Services\Dto\DeleteOrganizationDto;
-use App\Services\Dto\EditOrganizationDto;
 use App\Services\EditOrganizationService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,13 +14,12 @@ class OrganizationController extends Controller
 {
     public function index()
     {
-        $organizations_info = DB::table('users')
-            ->join('organizations', 'users.id', '=', 'organizations.user_id')
-            ->select('users.*', 'organizations.*')
-            ->get();
+        $organizations = Organization::whereHas('users', function (Builder $query){
+            $query->where('users.id', auth()->id());
+        })->get();
 
         return view('organizations.index', [
-            'organizations' => $organizations_info
+            'organizations' => $organizations,
         ]);
     }
 

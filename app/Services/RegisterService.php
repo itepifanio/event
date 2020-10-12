@@ -38,11 +38,19 @@ class RegisterService extends ValidateData implements ServiceInterface
             'password' => Hash::make($this->data['password']),
         ]);
 
+        // think a way to put this logic on a new service
         if (isset($this->data['is_organization'])) {
-            Organization::create([
+            $organization = Organization::create([
                 'user_id' => $user->id,
                 'description' => $this->data['description'],
-                'foundation_date' => $this->data['foundation_date']
+                'foundation_date' => $this->data['foundation_date'],
+                'name' => $this->data['organization_name'],
+            ]);
+
+            $user->organizations()->sync([
+                $organization->id => [
+                    'role' => User::ROLES_OWNER,
+                ]
             ]);
         }
 
