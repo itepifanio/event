@@ -18,7 +18,6 @@ class EventController extends Controller
         $geo = Geolocalization::current()->location;
 
         return view('events.list', [
-            // 'events' => Event::closestTo($geo->lat, $geo->lng)->get()
             'events' => Event::closestTo($geo->lat, $geo->lng)->with('subscriptions')->get()
         ]);
     }

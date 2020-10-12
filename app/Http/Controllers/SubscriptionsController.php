@@ -27,8 +27,6 @@ class SubscriptionsController extends Controller
         ]);
     }
 
-    public function create(){}  // não tem create. Lembrar de remover a rota
-
     public function store(Request $request, Event $event)
     {   
         $data = array_merge(
@@ -46,15 +44,6 @@ class SubscriptionsController extends Controller
         }
         return redirect()->back()->with('erro', 'Failed to subscribe user.');
     }
-
-    public function show($id)
-    {}
-
-    public function edit($id)
-    {}
-
-    public function update($id)
-    {}
 
     public function destroy(Event $event, $id)
     {

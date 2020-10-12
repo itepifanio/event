@@ -23,7 +23,7 @@ Route::middleware(['auth'])->group(function(){
     Route::group(['prefix' => 'events/{event}'], function(){
         Route::resource('subscription', SubscriptionsController::class, [
             'as' => 'events',
-        ]);
+        ])->except(['create', 'edit', 'update', 'show']);
     });
 
 });
