@@ -33,14 +33,13 @@ class MailSubscription extends Mailable
      */
     public function build()
     {
-        return $this->from('event@event.com', 'Mailtrap')
-            ->subject("Subscription at Events")
+        return $this->from('event@event.com', 'Event Up Guys')
+            ->subject("Subscription at Event")
             ->markdown('mails.subscription')
             ->with([
                 'name' => $this->user->name,
                 'event'=> $this->event,
-                'link' => 'https://mailtrap.io/inboxes'
+                'link' => route('organizations.events.show', [$this->event->organization_id, $this->event->id]) 
             ]);
-        // return $this->view('view.name');
     }
 }
