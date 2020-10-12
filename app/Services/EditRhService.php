@@ -3,43 +3,45 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Services\Dto\DtoInterface;
-use App\Services\Dto\editRhDto;
-use InvalidArgumentException;
+use Illuminate\Validation\Rule;
 
-class EditRhService implements ServiceInterface
+class EditRhService extends ValidateData implements ServiceInterface
 {
-    private EditRhDto $editRhDto;
+    protected array $data;
 
-    public function __construct(EditRhDto $editRhDto)
+    public function __construct(array $data)
     {
-        $this->editRhDto = $editRhDto;
+        $this->data = $data;
+
+        $this->validator();
     }
 
     public function execute(): bool
     {
-        $user = User::find($this->editRhDto->userId);
+        $user = User::find($this->data['user_id']);
 
         $user->update([
-            'name'  => $this->editRhDto->name,
-            'email' => $this->editRhDto->email,
+            'name'  => $this->data['name'],
+            'email' => $this->data['email'],
         ]);
 
         $user->organizations()->sync([
-            $this->editRhDto->organizationId => [
-                'role' => $this->editRhDto->role,
+            $this->data['organization_id'] => [
+                'role' => $this->data['role'],
             ]
         ]);
 
         return true;
     }
 
-    public static function make(DtoInterface $dto): ServiceInterface
+    protected function configureValidatorRules(): array
     {
-        if (!$dto instanceof editRhDto) {
-            throw new InvalidArgumentException('EditRhService needs to receive a editRhDto.');
-        }
-
-        return new EditRhService($dto);
+        return [
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'role' => ['required', 'string', Rule::in(User::ROLES)],
+            'organization_id' => ['required', 'exists:organizations,id'],
+            'user_id' => ['required', 'exists:users,id'],
+        ];
     }
 }

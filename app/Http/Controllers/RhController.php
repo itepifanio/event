@@ -36,9 +36,7 @@ class RhController extends Controller
             'organization_id' => $organization->id,
         ]);
 
-        $editRhDto = new EditRhDto($data);
-
-        EditRhService::make($editRhDto)->execute();
+        (new EditRhService($data))->execute();
 
         return redirect()->route('organizations.rh.index', $organization->id)
             ->with('success', 'User updated with success.');

@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Services\Dto;
+namespace App\Services;
 
 use Illuminate\Support\Facades\Validator;
 use InvalidArgumentException;
 
-abstract class AbstractDto
+abstract class ValidateData
 {
-    public function __construct(array $data)
+    public function validator()
     {
         $validator = Validator::make(
-            $data,
+            $this->data,
             $this->configureValidatorRules()
         );
 
@@ -19,17 +19,7 @@ abstract class AbstractDto
                 'Error: ' . $validator->errors()->first()
             );
         }
-
-        if (!$this->map($data)) {
-            throw new InvalidArgumentException('The mapping failed');
-        }
     }
 
     abstract protected function configureValidatorRules(): array;
-
-    abstract protected function map(array $data): bool;
-
-    public function toArray(): array {
-        return (array) $this;
-    }
 }

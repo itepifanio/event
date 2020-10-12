@@ -52,13 +52,11 @@ class OrganizationController extends Controller
     public function update(Request $request, $id)
     {
         $data = array_merge(
-            $request->all(), [
-            'id' => $id,
-        ]);
+            $request->all(),
+            ['id' => $id]
+        );
 
-        $editOrganizationDto = new EditOrganizationDto($data);
-
-        $editOrganizationService = EditOrganizationService::make($editOrganizationDto);
+        $editOrganizationService = new EditOrganizationService($data);
 
         $hasSuccess = $editOrganizationService->execute();
 
@@ -73,9 +71,7 @@ class OrganizationController extends Controller
 
     public function destroy($id)
     {
-        $deleteOrganizationDto = new DeleteOrganizationDto(['id' => $id]);
-
-        $deleteOrganizationService = DeleteOrganizationService::make($deleteOrganizationDto);
+        $deleteOrganizationService = new DeleteOrganizationService(['id' => $id]);
 
         $hasSuccess = $deleteOrganizationService->execute();
 

@@ -2,46 +2,49 @@
 
 namespace App\Services;
 
-use App\Services\Dto\EditOrganizationDto;
-use App\Services\Dto\DtoInterface;
 use App\Models\Organization;
 use App\Models\User;
-use InvalidArgumentException;
 
-class EditOrganizationService implements ServiceInterface
+class EditOrganizationService extends ValidateData implements ServiceInterface
 {
-    private EditOrganizationDto $editOrganizationDto;
+    protected array $data;
 
-    public function __construct(EditOrganizationDto $editOrganizationDto)
+    public function __construct(array $data)
     {
-        $this->editOrganizationDto = $editOrganizationDto;
+        $this->data = $data;
+
+        $this->validator();
+    }
+
+    protected function configureValidatorRules(): array
+    {
+        return [
+            'id' => 'required',
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'description' => 'required|max:150|string',
+            'foundation_date' => 'required|date',
+        ];
     }
 
     public function execute(): bool
     {
-        $organization = Organization::find($this->editOrganizationDto->id);
-        if(!$organization) {
+        $organization = Organization::find($this->data['id']);
+
+        if (!$organization) {
             return false;
         }
 
-        $updated = $organization->update($this->editOrganizationDto->toArray());
+        $organization->update($this->data);
 
         $user_organization = User::find($organization->user_id);
-        if(!$user_organization) {
+
+        if (!$user_organization) {
             return false;
         }
 
-        $user_organization->update($this->editOrganizationDto->toArray());
+        $user_organization->update($this->data);
 
         return true;
-    }
-
-    public static function make(DtoInterface $dto): ServiceInterface
-    {
-        if (!$dto instanceof EditOrganizationDto) {
-            throw new InvalidArgumentException('EditOrganizationService needs to receive a EditOrganizationDto.');
-        }
-
-        return new EditOrganizationService($dto);
     }
 }
