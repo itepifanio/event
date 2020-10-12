@@ -29,7 +29,7 @@ class EditOrganizationService extends ValidateData implements ServiceInterface
 
     public function execute(): bool
     {
-        $organization = Organization::find($this->editOrganizationDto->id);
+        $organization = Organization::find($this->data['id']);
 
         if (!$organization) {
             return false;

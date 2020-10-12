@@ -15,44 +15,30 @@
                     </div>
                     <div class="card-body">
 
-                        @if(count($organizations) > 0)
+                        @if(count($users) > 0)
                             <table id="datatable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th class="col-md-8">Name</th>
+                                    <th class="col-md-6">Name</th>
+                                    <th class="col-md-2">Role</th>
                                     <th class="col-md-4">Options</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($organizations as $organization)
+                                @foreach($users as $user)
                                     <tr>
-                                        <td>{{ $organization->name }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ ucfirst($user->pivot->role) }}</td>
                                         <td>
-                                            {{--<a href="{{ route('organizations.show', $organization->id) }}"--}}
-                                               {{--class="btn btn-xs btn-primary">Show</a>--}}
-                                            <a href="{{ route('organizations.edit', $organization->id) }}"
+                                            <a href="{{ route('organizations.rh.edit', [$organization->id, $user->id]) }}"
                                                class="btn btn-xs btn-warning">Edit</a>
-                                            <a href="{{ route('organizations.events.index', $organization->id) }}"
-                                               class="btn btn-xs btn-default">Manage events</a>
-                                            <a href="{{ route('organizations.rh.index', $organization->id) }}"
-                                               class="btn btn-xs btn-default">Manage RH</a>
-                                            <!-- <form action="{{ route('organizations.destroy', $organization->id) }}"
-                                                  method="post"
-                                                  style="display: inline">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-xs btn-danger    " type="submit"
-                                                        onclick="return confirm('Do you want delete this organization');">
-                                                    Delete
-                                                </button>
-                                            </form> -->
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                         @else
-                            Any organization created. Create one and start to manage events.
+                            Any users. You're all alone, but you don't need to be: invite some people!
                         @endif
                     </div>
                 </div>

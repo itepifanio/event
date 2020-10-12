@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Organization;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\RateLimiter;
@@ -26,6 +28,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        $this->makeBinds();
+
         $this->routes(function () {
             Route::middleware('web')
                 ->namespace($this->namespace)
@@ -42,6 +46,17 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60);
+        });
+    }
+
+    private function makeBinds()
+    {
+        Route::bind('organization', function ($value) {
+            return Organization::where('id', $value)->first() ?? abort(404);
+        });
+
+        Route::bind('user', function ($value) {
+            return User::where('id', $value)->first() ?? abort(404);
         });
     }
 }
