@@ -43,6 +43,7 @@
                         </div>
                         <div class="card-footer">
                             <a href="{{ route('organizations.events.index', $organization->id) }}" class="btn btn-default">Back to list</a>
+                            <a href="{{ route('events.subscription.index', $event->id) }}" class="btn btn-default">Show participants</a>
                         </div>
                     </div>
                 </div>

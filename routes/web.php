@@ -4,6 +4,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\RhController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,12 @@ Route::middleware(['auth'])->group(function () {
             ->middleware('hasRole:admin,owner')
             ->parameters(['rh' => 'user']);
     });
+    Route::group(['prefix' => 'events/{event}'], function(){
+        Route::resource('subscription', SubscriptionsController::class, [
+            'as' => 'events',
+        ])->except(['create', 'edit', 'update', 'show']);
+    });
+
 });
 
 Auth::routes();

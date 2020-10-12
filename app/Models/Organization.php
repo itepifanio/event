@@ -20,4 +20,8 @@ class Organization extends Model
     public function events(){
         return $this->hasMany(Event::class);
     }
+    public function scopeOfEvent($query, $id)
+    {
+        return $query->whereEventId($id);
+    }
 }

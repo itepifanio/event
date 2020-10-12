@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\Subscription;
+use App\Models\Event;
+
+
 class HomeController extends Controller
 {
     /**
@@ -21,6 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $subscriptions = Subscription::ofUser(Auth::id())->get();
+        $subscribed_events_id = $subscriptions->pluck('event_id')->toArray();
+        $subscribed_events = Event::with('subscriptions')->whereIn('id', $subscribed_events_id)->get();
+    
+        return view('home', [
+            'events' => $subscribed_events
+        ]);
     }
 }
