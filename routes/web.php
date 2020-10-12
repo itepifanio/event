@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\RhController;
@@ -13,8 +14,12 @@ Route::get('/', function () {
 Route::post('organizations', [OrganizationController::class, 'store'])->name('organizations.store');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::resource('organizations', OrganizationController::class)->except(['store']);
     Route::get('events', [EventController::class, 'list'])->name('events.list');
+
     Route::group(['prefix' => 'organizations/{organization}'], function () {
         Route::resource('events', EventController::class, [
             'as' => 'organizations',
