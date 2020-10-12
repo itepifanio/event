@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Subscription;
 use App\Models\User;
-use App\Services\Dto\CreateSubscriptionDto;
-use App\Services\Dto\DeleteSubscriptionDto;
 use App\Services\CreateSubscriptionService;
 use App\Services\DeleteSubscriptionService;
 use Illuminate\Support\Facades\Auth;
@@ -39,12 +37,9 @@ class SubscriptionsController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        $createSubscriptionDto = new CreateSubscriptionDto($data);
-
-        $createSubscriptionService = CreateSubscriptionService::make($createSubscriptionDto);
-
+        $createSubscriptionService = new CreateEventService($data);
         $hasSuccess = $createSubscriptionService->execute();
-
+        
         if($hasSuccess) {
             Mail::to(Auth::user()->email)->send(new MailSubscription(Auth::user(), $event)); 
             return redirect()->back()->with('success', 'User subscribed with success.');
@@ -63,10 +58,7 @@ class SubscriptionsController extends Controller
 
     public function destroy(Event $event, $id)
     {
-        $deleteSubscriptionDto = new DeleteSubscriptionDto([ 'id' => $id ]);
-
-        $deleteSubscriptionService = DeleteSubscriptionService::make($deleteSubscriptionDto);
-
+        $deleteSubscriptionService = new DeleteSubscriptionService(['id' => $id]);
         $hasSuccess = $deleteSubscriptionService->execute();
 
         if($hasSuccess) {

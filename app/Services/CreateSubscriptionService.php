@@ -2,54 +2,30 @@
 
 namespace App\Services;
 
-use App\Services\Dto\CreateSubscriptionDto;
-use App\Services\Dto\DtoInterface;
 use App\Models\Subscription;
-use InvalidArgumentException;
 
-class CreateSubscriptionService implements ServiceInterface
+class CreateSubscriptionService extends ValidateData implements ServiceInterface
 {
-    /**
-     * @var CreateSubscriptionDto
-     */
-    private $createSubscriptionDto;
+    protected array $data;
 
-    /**
-     * CreateEventService constructor.
-     * @param CreateSubscriptionDto $createSubscriptionDto
-     */
-    public function __construct(CreateSubscriptionDto $createSubscriptionDto)
+    public function __construct(array $data)
     {
-        $this->createSubscriptionDto = $createSubscriptionDto;
+        $this->data = $data;
+
+        $this->validator();
+    }
+    public function configureValidatorRules(): array
+    {
+        return [
+            'user_id' => 'required',
+            'event_id' => 'required',
+        ];
     }
 
-    /**
-     * @return bool
-     */
     public function execute(): bool
-    {    
-        if(Subscription::where([
-            ['user_id', $this->createSubscriptionDto->user_id], 
-            ['event_id', $this->createSubscriptionDto->event_id ]
-            ])->exists())
-        {
-            return false;
-        }
-       
-        $subscription = Subscription::create($this->createSubscriptionDto->toArray());
-        return true;
-    }
-
-    /**
-     * @param DtoInterface $dto
-     * @return ServiceInterface
-     */
-    public static function make(DtoInterface $dto): ServiceInterface
     {
-        if (!$dto instanceof CreateSubscriptionDto) {
-            throw new InvalidArgumentException('CreateSubscriptionService needs to receive a CreateSubscriptionDto.');
-        }
+        $subscription = Subscription::create($this->data);
 
-        return new CreateSubscriptionService($dto);
+        return true;
     }
 }

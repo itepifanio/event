@@ -2,47 +2,28 @@
 
 namespace App\Services;
 
-use App\Services\Dto\DeleteSubscriptionDto;
-use App\Services\Dto\DtoInterface;
 use App\Models\Subscription;
-use InvalidArgumentException;
 
-class DeleteSubscriptionService implements ServiceInterface
+class DeleteSubscriptionService extends ValidateData implements ServiceInterface
 {
-    /**
-     * @var DeleteSubscriptionDto
-     */
-    private $deleteSubscriptionDto;
+    protected array $data;
 
-    /**
-     * DeleteSubscriptionService constructor.
-     * @param DeleteSubscriptionDto $deleteSubscriptionDto
-     */
-    public function __construct(DeleteSubscriptionDto $deleteSubscriptionDto)
+    public function __construct(array $data)
     {
-        $this->deleteSubscriptionDto = $deleteSubscriptionDto;
+        $this->data = $data;
+
+        $this->validator();
     }
 
-    /**
-     * @return bool
-     */
+    public function configureValidatorRules(): array
+    {
+        return ['id' => 'required'];
+    }
+
     public function execute(): bool
     {
-        Subscription::find($this->deleteSubscriptionDto->id)->delete();
+        Subscription::find($this->data['id'])->delete();
 
         return true;
-    }
-
-    /**
-     * @param DtoInterface $dto
-     * @return ServiceInterface
-     */
-    public static function make(DtoInterface $dto): ServiceInterface
-    {
-        if (!$dto instanceof DeleteSubscriptionDto) {
-            throw new InvalidArgumentException('DeleteSubscriptionService needs to receive a DeleteSubscriptionDto.');
-        }
-
-        return new DeleteSubscriptionService($dto);
     }
 }

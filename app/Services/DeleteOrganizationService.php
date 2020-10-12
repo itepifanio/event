@@ -2,33 +2,28 @@
 
 namespace App\Services;
 
-use App\Services\Dto\DeleteOrganizationDto;
-use App\Services\Dto\DtoInterface;
 use App\Models\Organization;
-use InvalidArgumentException;
 
-class DeleteOrganizationService implements ServiceInterface
+class DeleteOrganizationService extends ValidateData implements ServiceInterface
 {
-    private DeleteOrganizationDto $deleteOrganizationDto;
+    protected array $data;
 
-    public function __construct(DeleteOrganizationDto $deleteOrganizationDto)
+    public function __construct(array $data)
     {
-        $this->deleteOrganizationDto = $deleteOrganizationDto;
+        $this->data = $data;
+
+        $this->validator();
+    }
+
+    public function configureValidatorRules(): array
+    {
+        return ['id' => 'required'];
     }
 
     public function execute(): bool
     {
-        Organization::find($this->deleteOrganizationDto->id)->delete();
+        Organization::find($this->data['id'])->delete();
 
         return true;
-    }
-
-    public static function make(DtoInterface $dto): ServiceInterface
-    {
-        if (!$dto instanceof DeleteOrganizationDto) {
-            throw new InvalidArgumentException('DeleteOrganizationService needs to receive a DeleteOrganizationDto.');
-        }
-
-        return new DeleteOrganizationService($dto);
     }
 }
