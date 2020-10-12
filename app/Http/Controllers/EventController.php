@@ -6,7 +6,6 @@ use App\Facades\Geolocalization;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Organization;
-use InvalidArgumentException;
 use App\Services\CreateEventService;
 use App\Services\EditEventService;
 use App\Services\DeleteEventService;
