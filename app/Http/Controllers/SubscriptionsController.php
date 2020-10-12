@@ -37,7 +37,7 @@ class SubscriptionsController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        $createSubscriptionService = new CreateEventService($data);
+        $createSubscriptionService = new CreateSubscriptionService($data);
         $hasSuccess = $createSubscriptionService->execute();
         
         if($hasSuccess) {
