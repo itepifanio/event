@@ -22,13 +22,9 @@ class ProfileController extends Controller
             ['id' => $id]
         );
 
-        try {
-            $editProfileService = new EditProfileService($data);
+        $editProfileService = new EditProfileService($data);
 
-            $hasSuccess = $editProfileService->execute();
-        } catch (\InvalidArgumentException $th) {
-            return redirect()->back()->with('error', 'The old password is invalid!');
-        }
+        $hasSuccess = $editProfileService->execute();
 
         if ($hasSuccess) {
             return redirect()->back()->with('success', 'Profile updated with success.');

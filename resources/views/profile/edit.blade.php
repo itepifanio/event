@@ -68,8 +68,8 @@
                                     <input type="password"
                                            class="form-control {{ $errors->has('old-password') ? 'is-invalid' : '' }}" id="old-password"
                                            placeholder="Old password" name="old-password">
-                                    @if($errors->has('password'))
-                                        <div class="invalid-feedback">{{ $errors->get('password')[0] }}</div>
+                                    @if($errors->has('old-password'))
+                                        <div class="invalid-feedback">{{ $errors->get('old-password')[0] }}</div>
                                     @endif
                                 </div>
                                 <div class="form-group">

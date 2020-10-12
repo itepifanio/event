@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Hash;
-use InvalidArgumentException;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
 class EditProfileService extends ValidateData implements ServiceInterface
@@ -40,9 +40,13 @@ class EditProfileService extends ValidateData implements ServiceInterface
             if(Hash::check($this->data['old-password'], $user->password)){
                 $this->data['password'] = Hash::make($this->data['password']);
             }else {
-                throw new InvalidArgumentException(
-                    'Error: The old password is invalid!'
-                );
+                $validator = Validator::make($this->data, ['old-password' => 'required']);
+
+                $validator->after(function ($validator) {
+                    $validator->errors()->add('old-password', 'The old password is invalid!');
+                });
+
+                $validator->validate();
             }
         }
 
