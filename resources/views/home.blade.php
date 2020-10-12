@@ -31,7 +31,7 @@
                                         </span>
                                 </div>
                             </p>
-                            <form action= "{{ route('events.subscription.destroy', [$event->id, $event->subscriptions[0]->id]) }}" method="POST">
+                            <form action= "{{ route('events.subscription.destroy', [$event->id, $event->subscriptions->where('user_id', '=', auth()->user()->id)[0]->id ]) }}" method="POST">    
                                 @method('DELETE')
                                 @csrf
                                 <button type='submit' class="btn-card" onclick="return confirm('You will be unsubscribed to this event.');"> Unsubscribe </button>

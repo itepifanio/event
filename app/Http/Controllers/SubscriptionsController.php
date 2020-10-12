@@ -62,9 +62,8 @@ class SubscriptionsController extends Controller
         $hasSuccess = $deleteSubscriptionService->execute();
 
         if($hasSuccess) {
-            return redirect()->route('home')->with('success', 'Unsubscribed with success.');
+            return redirect()->back()->with('success', 'Unsubscribed with success.');
         }
-
         return redirect()->back()->with('erro', 'Failed to unsubscribe.');
     }
 }
