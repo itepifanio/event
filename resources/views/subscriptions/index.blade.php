@@ -30,7 +30,7 @@
                                 </tbody>
                             </table>
                         @else
-                            Any event created.
+                            Any user subscribed.
                         @endif
                     </div>
                     <div class="card-footer">
