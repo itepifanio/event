@@ -28,18 +28,18 @@ class OrganizationController extends Controller
         return view('organizations.create');
     }
 
-    public function show($id)
-    {
-        $organization = Organization::find($id);
+    public function show(Organization $organization)
+    {   
+        // $organization = Organization::find($id);
         return view('organizations.show', [
             'organization' => $organization,
             'userOrganization' => User::find($organization->user_id)
         ]);
     }
 
-    public function edit($id)
+    public function edit(Organization $organization)
     {
-        $organization = Organization::find($id);
+        // $organization = Organization::find($id);
 
         return view('organizations.edit', [
             'organization' => $organization,
@@ -47,11 +47,11 @@ class OrganizationController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Organization $organization)
     {
         $data = array_merge(
             $request->all(),
-            ['id' => $id]
+            ['id' => $organization->id]
         );
 
         $editOrganizationService = new EditOrganizationService($data);
@@ -67,9 +67,9 @@ class OrganizationController extends Controller
         return redirect()->back()->with('erro', 'Failed to update organization.');
     }
 
-    public function destroy($id)
+    public function destroy(Organization $organization)
     {
-        $deleteOrganizationService = new DeleteOrganizationService(['id' => $id]);
+        $deleteOrganizationService = new DeleteOrganizationService(['id' => $organization->id]);
 
         $hasSuccess = $deleteOrganizationService->execute();
 
