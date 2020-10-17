@@ -100,4 +100,9 @@ a.btn-card {
     text-decoration: none;
     color: #fff;
 }
+.desc-box{
+    min-height: 50px;
+    max-height: 50px;
+    overflow: hidden;
+}
 /* End card section */
