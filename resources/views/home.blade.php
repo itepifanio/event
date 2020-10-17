@@ -20,7 +20,7 @@
                             <p>
                                 <div class="icon">
                                     <span class="lni-map-marker" style="color: #747373">
-                                        {{ $event->address_name }}
+                                        {{ $event->address->name }}
                                     </span>
                                 </div>
                             </p>
