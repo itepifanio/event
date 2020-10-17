@@ -38,8 +38,7 @@
                                     <button type='submit' class="btn-card" onclick="return confirm('You will be unsubscribed to this event.');"> Unsubscribe </button>
                                 </form>
                             @else   
-                                @if(App\Models\Organization::all()->contains('user_id', Auth::user()->id))
-                                @else
+                                @if(App\Models\Organization::find($event->organization_id)->user_id !==  Auth::user()->id)
                                 <form action= "{{ route('events.subscription.store', $event->id) }}" method="POST">
                                     @csrf
                                     <button type='submit' class="btn-card" onclick="return confirm('You will be subscribed to this event.');"> Subscribe </button>
