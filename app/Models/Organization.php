@@ -22,6 +22,6 @@ class Organization extends Model
     }
     public function scopeOfEvent($query, $id)
     {
-        return $query->whereEventId($id);
+        return $query->where('id', Event::find($id)->organization_id);
     }
 }
