@@ -15,12 +15,12 @@
                             <span><h4>{{ round($event->distance, 2) }} km</h4></span>
                         </div>
                         <div class="card-desc">
-                            <h3>{{ $event->event_name }}</h3>
-                            <p>{{ $event->description }}</p>
+                            <h3>{{ $event->name }}</h3>
+                            <div class="desc-box"><p>{{ $event->description }}</p></div>
                             <p>
                                 <div class="icon">
                                     <span class="lni-map-marker" style="color: #747373">
-                                        {{ $event->address_name }}
+                                        {{ $event->address->name }}
                                     </span>
                                 </div>
                             </p>
