@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Facades\Geolocalization;
-use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Organization;
-use App\Services\CreateEventService;
-use App\Services\EditEventService;
-use App\Services\DeleteEventService;
+use App\Services\EventService;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class EventController extends Controller
 {
+    private EventService $service;
+
+    public function __construct()
+    {
+        $this->service = new EventService();
+    }
+
     public function list()
     {
         $geo = Geolocalization::current()->location;
@@ -38,23 +44,18 @@ class EventController extends Controller
 
     public function store(Request $request, Organization $organization)
     {
-        $data = array_merge(
-            $request->all(),
-            ['organization_id' => $organization->id]
-        );
+        try {
+            $this->service->save($organization, $request->all());
 
-        $createEventService = new CreateEventService($data);
-
-        $hasSuccess = $createEventService->execute();
-
-        if ($hasSuccess) {
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,
             ])->with('success', 'Event created with success.');
+        } catch (ValidationException $e){
+            return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to create event.');
         }
-
-        return redirect()->back()->with('error', 'Failed to create event.');
     }
 
     public function show(Organization $organization, $id)
@@ -73,40 +74,33 @@ class EventController extends Controller
         ]);
     }
 
-    public function update(Request $request, Organization $organization, $id)
+    public function update(Request $request, Organization $organization, Event $event)
     {
-        $data = array_merge(
-            $request->all(),
-            ['id' => $id, 'organization_id' => $organization->id]
-        );
+        try {
+            $this->service->update($event, $request->all());
 
-        $editEventService = new EditEventService($data);
-
-        $hasSuccess = $editEventService->execute();
-
-        if ($hasSuccess) {
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,
             ])->with('success', 'Event updated with success.');
+        } catch (ValidationException $e){
+            return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update event.');
         }
-
-        return redirect()->back()->with('error', 'Failed to update event.');
     }
 
-    public function destroy(Organization $organization, $id)
+    public function destroy(Organization $organization, Event $event)
     {
-        $deleteEventService = new DeleteEventService(['id' => $id]);
+        try {
+            $this->service->delete($event);
 
-        $hasSuccess = $deleteEventService->execute();
-
-        if ($hasSuccess) {
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,
             ])->with('success', 'Event deleted with success.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete event.');
         }
-
-        return redirect()->back()->with('error', 'Failed to delete event.');
     }
 }

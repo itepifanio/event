@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organization;
 use Illuminate\Http\Request;
-use App\Services\EditProfileService;
+use App\Services\ProfileService;
 use App\Models\User;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
+    private ProfileService $service;
+
+    public function __construct()
+    {
+        $this->service = new  ProfileService();
+    }
+
     public function edit($id)
     {
         return view('profile.edit', [
@@ -15,21 +24,16 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $data = array_merge(
-            $request->all(),
-            ['id' => $id]
-        );
+        try {
+            $this->service->update($user, $request->all());
 
-        $editProfileService = new EditProfileService($data);
-
-        $hasSuccess = $editProfileService->execute();
-
-        if ($hasSuccess) {
             return redirect()->back()->with('success', 'Profile updated with success.');
+        } catch (ValidationException $e){
+            return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update profile.');
         }
-
-        return redirect()->back()->with('error', 'Failed to update profile.');
     }
 }

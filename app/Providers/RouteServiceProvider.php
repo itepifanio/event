@@ -58,5 +58,9 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('user', function ($value) {
             return User::where('id', $value)->first() ?? abort(404);
         });
+
+        Route::bind('event', function ($value) {
+            return User::where('id', $value)->first() ?? abort(404);
+        });
     }
 }

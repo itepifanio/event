@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Organization;
 use App\Models\User;
-use App\Services\DeleteOrganizationService;
-use App\Services\EditOrganizationService;
+use App\Services\OrganizationService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class OrganizationController extends Controller
 {
+    private OrganizationService $service;
+
+    public function __construct()
+    {
+        $this->service = new OrganizationService();
+    }
+
     public function index()
     {
         $organizations = Organization::whereHas('users', function (Builder $query){
@@ -28,55 +34,47 @@ class OrganizationController extends Controller
         return view('organizations.create');
     }
 
-    public function show($id)
+    public function show(Organization $organization)
     {
-        $organization = Organization::find($id);
         return view('organizations.show', [
             'organization' => $organization,
             'userOrganization' => User::find($organization->user_id)
         ]);
     }
 
-    public function edit($id)
+    public function edit(Organization $organization)
     {
-        $organization = Organization::find($id);
-
         return view('organizations.edit', [
             'organization' => $organization,
             'userOrganization' => User::find($organization->user_id)
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Organization $organization)
     {
-        $data = array_merge(
-            $request->all(),
-            ['id' => $id]
-        );
+        try {
+            $this->service->update($organization, $request->all());
 
-        $editOrganizationService = new EditOrganizationService($data);
-
-        $hasSuccess = $editOrganizationService->execute();
-
-        if ($hasSuccess) {
             return redirect()->route('organizations.index', [
                 'organizations' => Organization::all()
             ])->with('success', 'Organization updated with success.');
+        } catch (ValidationException $e){
+            return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('erro', 'Failed to update organization.');
         }
-
-        return redirect()->back()->with('erro', 'Failed to update organization.');
     }
 
-    public function destroy($id)
+    public function destroy(Organization $organization)
     {
-        $deleteOrganizationService = new DeleteOrganizationService(['id' => $id]);
+        try {
+            $this->service->delete($organization);
 
-        $hasSuccess = $deleteOrganizationService->execute();
-
-        if ($hasSuccess) {
             return redirect()->route('organizations.index', [
                 'organizations' => Organization::all()
             ])->with('success', 'Organization deleted with success.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete organization.');
         }
     }
 }
