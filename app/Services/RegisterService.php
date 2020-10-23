@@ -32,7 +32,7 @@ class RegisterService
 
         if (isset($data['is_organization'])) {
             $organization = $this->organizationRepository
-                ->save($user, Arr::only($data, ['description', 'foundation_date', 'name']));
+                ->save($user, Arr::only($data, ['description', 'foundation_date', 'name', 'organization_name']));
 
             $this->userRepository->attachOrganization($user, $organization, User::ROLES_OWNER);
         }

@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Event;
 use App\Models\Organization;
 use App\Models\User;
 
@@ -11,7 +10,7 @@ class OrganizationRepository
     public function save(?User $user, array $data) : Organization
     {
         return Organization::create([
-            'user_id' => $user,
+            'user_id' => $user->id,
             'description' => $data['description'],
             'foundation_date' => $data['foundation_date'],
             'name' => $data['organization_name'],

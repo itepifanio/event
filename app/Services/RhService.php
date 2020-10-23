@@ -37,8 +37,6 @@ class RhService
             'name' => 'required|string',
             'email' => 'required|email',
             'role' => ['required', 'string', Rule::in(User::ROLES)],
-            'organization_id' => ['required', 'exists:organizations,id'],
-            'user_id' => ['required', 'exists:users,id'],
         ];
     }
 }

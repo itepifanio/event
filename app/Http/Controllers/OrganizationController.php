@@ -61,7 +61,7 @@ class OrganizationController extends Controller
         } catch (ValidationException $e){
             return redirect()->back()->withErrors($e->validator->getMessageBag());
         } catch (\Exception $e) {
-            return redirect()->back()->with('erro', 'Failed to update organization.');
+            return redirect()->back()->with('error', 'Failed to update organization.');
         }
     }
 

@@ -21,7 +21,7 @@ class UserRepository
 
     public function update(User $user, array $data) : User
     {
-        return tap($user)->update(Arr::except($data, 'id');
+        return tap($user)->update(Arr::except($data, 'id'));
     }
 
     public function attachOrganization(User $user, Organization $organization, string $role)

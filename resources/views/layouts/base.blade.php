@@ -147,10 +147,10 @@
             <!-- Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    {{Auth::user()->name}} <i class="fa fa-angle-down ml-2"></i>
+                    {{ Auth::user()->name }} <i class="fa fa-angle-down ml-2"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="{{ route('profile.edit', ['id' => Auth::user()->id]) }}" class="dropdown-item">
+                    <a href="{{ route('profile.edit', Auth::user()->id) }}" class="dropdown-item">
                         <i class="fas fa-user-cog mr-2"></i> Editar Perfil
                     </a>
                     <div class="dropdown-divider"></div>

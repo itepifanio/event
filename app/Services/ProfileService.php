@@ -42,6 +42,7 @@ class ProfileService
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'old-password' => 'sometimes|string',
             'password' => 'sometimes|string|min:8|confirmed',
+            'password_confirmation' => 'sometimes|string|min:8|same:password',
         ];
     }
 }
