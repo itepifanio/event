@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserEventsTable extends Migration
+class CreateSubscriptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateUserEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_events', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('event_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')
@@ -36,6 +37,6 @@ class CreateUserEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_events');
+        Schema::dropIfExists('subscriptions');
     }
 }

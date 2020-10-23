@@ -16,7 +16,7 @@
                         </div>
                         <div class="card-desc">
                             <h3>{{ $event->event_name }}</h3>
-                            <p>{{ $event->description }}</p>
+                            <div class="desc-box"><p>{{ $event->description }}</p></div>
                             <p>
                                 <div class="icon">
                                     <span class="lni-map-marker" style="color: #747373">
@@ -31,7 +31,22 @@
                                         </span>
                                 </div>
                             </p>
-                            <a href="#" class="btn-card">Subscribe</a>
+                            @if($event->subscriptions->contains('user_id', auth()->user()->id))         
+                                <form action= "{{ route('events.subscription.destroy', [$event->id, $event->subscriptions->where('user_id', '=', auth()->user()->id)[0]->id ]) }}" method="POST">    
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type='submit' class="btn-card" onclick="return confirm('You will be unsubscribed to this event.');"> Unsubscribe </button>
+                                </form>
+                            @else   
+                                @if(App\Models\Organization::find($event->organization_id)->user_id !==  Auth::user()->id)
+                                <form action= "{{ route('events.subscription.store', $event->id) }}" method="POST">
+                                    @csrf
+                                    <button type='submit' class="btn-card" onclick="return confirm('You will be subscribed to this event.');"> Subscribe </button>
+                                </form>
+                                @endif
+                            @endif
+                            <!-- <a href="{{ route('events.subscription.store', $event->id) }}" class="btn-card">Subscribe</a> -->
+                            
                         </div>
                     </div>
                 </div>

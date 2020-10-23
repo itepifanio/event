@@ -25,7 +25,10 @@ class Event extends Model
     {
         return $this->belongsTo(Organization::class);
     }
-
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
     public function address()
     {
         return $this->morphOne(Address::class, 'addressable');
