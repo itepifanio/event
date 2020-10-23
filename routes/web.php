@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('events', [EventController::class, 'list'])->name('events.list');
 
     Route::group(['prefix' => 'organizations/{organization}'], function () {
-        Route::resource('event', EventController::class, [
+        Route::resource('events', EventController::class, [
             'as' => 'organizations',
         ]);
         Route::resource('rh', RhController::class, [

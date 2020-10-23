@@ -35,9 +35,7 @@ class OrganizationService
     private function rules() : array
     {
         return [
-            'id' => 'required',
             'name' => 'required|string',
-            'email' => 'required|email',
             'description' => 'required|max:150|string',
             'foundation_date' => 'required|date',
         ];

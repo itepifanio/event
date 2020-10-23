@@ -27,7 +27,6 @@ class OrganizationControllerTest extends TestCase
         $form = [
             'name' => 'test',
             'description' => 'a good description',
-            'email' => 'mycoolorganization@event.com',
         ];
 
         $this->put(

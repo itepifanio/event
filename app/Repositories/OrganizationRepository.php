@@ -21,10 +21,6 @@ class OrganizationRepository
     {
         $organization->update($data);
 
-        $user_organization = User::find($organization->user_id);
-
-        $user_organization->update($data);
-
         return $organization;
     }
 
