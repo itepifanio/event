@@ -30,17 +30,6 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Email</label>
-                                    <input type="email"
-                                           class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
-                                           placeholder="Name" name="email" value="{{ $userOrganization->email }}">
-                                    @if($errors->has('email'))
-                                        <div class="invalid-feedback">{{ $errors->get('email')[0] }}</div>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group">
                                         <label for="description">Description</label>
                                         <textarea type="text"
                                                   class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"

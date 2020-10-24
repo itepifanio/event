@@ -31,7 +31,7 @@
                                         </span>
                                 </div>
                             </p>
-                            <form action= "{{ route('events.subscription.destroy', [$event->id, $event->subscriptions->where('user_id', '=', auth()->user()->id)[0]->id ]) }}" method="POST">    
+                            <form action= "{{ route('events.subscription.destroy', [$event->id, $event->subscriptions->where('user_id', '=', auth()->user()->id)[0]->id ]) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <button type='submit' class="btn-card" onclick="return confirm('You will be unsubscribed to this event.');"> Unsubscribe </button>
@@ -43,24 +43,3 @@
         </div>
     </div>
 @endsection
-{{--@section('content')--}}
-{{--<div class="container">--}}
-    {{--<div class="row justify-content-center">--}}
-        {{--<div class="col-md-8">--}}
-            {{--<div class="card">--}}
-                {{--<div class="card-header">Dashboard</div>--}}
-
-                {{--<div class="card-body">--}}
-                    {{--@if (session('status'))--}}
-                        {{--<div class="alert alert-success" role="alert">--}}
-                            {{--{{ session('status') }}--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
-
-                    {{--You are logged in!--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
-{{--@endsection--}}

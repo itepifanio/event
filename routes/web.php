@@ -15,8 +15,7 @@ Route::get('/', function () {
 Route::post('organizations', [OrganizationController::class, 'store'])->name('organizations.store');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('profile/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::resource('profile', ProfileController::class)->only('edit', 'update');
 
     Route::resource('organizations', OrganizationController::class)->except(['store']);
     Route::get('events', [EventController::class, 'list'])->name('events.list');

@@ -49,15 +49,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, []);
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'is_organization' => 'string',
+            'description' => 'sometimes|required|max:150|string',
+            'foundation_date' => 'sometimes|required|date',
+        ]);
     }
 
     protected function create(array $data) : User
     {
-        $registerService = new RegisterService($data);
-
-        $registerService->execute();
-
-        return User::where('email', $data['email'])->first();
+        return (new RegisterService())->save($data);
     }
 }

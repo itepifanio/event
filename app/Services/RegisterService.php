@@ -2,23 +2,45 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\Organization;
+use App\Repositories\OrganizationRepository;
+use App\Repositories\UserRepository;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
-class RegisterService extends ValidateData implements ServiceInterface
+class RegisterService
 {
-    protected array $data;
+    private UserRepository $userRepository;
+    private OrganizationRepository $organizationRepository;
 
-    public function __construct(array $data)
+    public function __construct()
     {
-        $this->data = $data;
-
-        $this->validator();
+        $this->userRepository = new UserRepository();
+        $this->organizationRepository = new OrganizationRepository();
     }
 
+    public function save(array $data): User
+    {
+        $validator = Validator::make($data, $this->rules());
 
-    protected function configureValidatorRules(): array
+        if($validator->fails()){
+            throw ValidationException::withMessages($validator->errors()->toArray());
+        }
+
+        $user = $this->userRepository->save(Arr::only($data, ['name', 'email', 'password']));
+
+        if (isset($data['is_organization'])) {
+            $organization = $this->organizationRepository
+                ->save($user, Arr::only($data, ['description', 'foundation_date', 'name', 'organization_name']));
+
+            $this->userRepository->attachOrganization($user, $organization, User::ROLES_OWNER);
+        }
+
+        return $user;
+    }
+
+    private function rules(): array
     {
         return [
             'name' => 'required|string|max:255',
@@ -28,32 +50,5 @@ class RegisterService extends ValidateData implements ServiceInterface
             'description' => 'sometimes|required|max:150|string',
             'foundation_date' => 'sometimes|required|date',
         ];
-    }
-
-    public function execute(): bool
-    {
-        $user = User::create([
-            'name' => $this->data['name'],
-            'email' => $this->data['email'],
-            'password' => Hash::make($this->data['password']),
-        ]);
-
-        // think a way to put this logic on a new service
-        if (isset($this->data['is_organization'])) {
-            $organization = Organization::create([
-                'user_id' => $user->id,
-                'description' => $this->data['description'],
-                'foundation_date' => $this->data['foundation_date'],
-                'name' => $this->data['organization_name'],
-            ]);
-
-            $user->organizations()->sync([
-                $organization->id => [
-                    'role' => User::ROLES_OWNER,
-                ]
-            ]);
-        }
-
-        return true;
     }
 }

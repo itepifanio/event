@@ -147,10 +147,10 @@
             <!-- Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    {{Auth::user()->name}} <i class="fa fa-angle-down ml-2"></i>
+                    {{ Auth::user()->name }} <i class="fa fa-angle-down ml-2"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="{{ route('profile.edit', ['id' => Auth::user()->id]) }}" class="dropdown-item">
+                    <a href="{{ route('profile.edit', Auth::user()->id) }}" class="dropdown-item">
                         <i class="fas fa-user-cog mr-2"></i> Editar Perfil
                     </a>
                     <div class="dropdown-divider"></div>
@@ -222,30 +222,8 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- ChartJS -->
-<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
-<!-- Sparkline -->
-<script src="{{ asset('plugins/sparklines/sparkline.js') }}"></script>
-<!-- JQVMap -->
-<script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-<script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-<!-- daterangepicker -->
-<script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
-<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-<!-- Summernote -->
-<script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
-<!-- overlayScrollbars -->
-<script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('dist/js/demo.js') }}"></script>
 
 @stack('scripts')
 

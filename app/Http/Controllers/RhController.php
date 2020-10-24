@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Organization;
 use App\Models\User;
-use App\Services\Dto\EditEventDto;
-use App\Services\Dto\EditRhDto;
-use App\Services\EditEventService;
-use App\Services\EditRhService;
+use App\Services\RhService;
+use Illuminate\Validation\ValidationException;
 
 class RhController extends Controller
 {
+    private RhService $service;
+
+    public function __construct()
+    {
+        $this->service = new RhService();
+    }
+
     public function index(Organization $organization)
     {
         $users = $organization->users()->where('users.id', '!=', auth()->id())->get();
@@ -30,15 +35,15 @@ class RhController extends Controller
 
     public function update(Organization $organization, User $user)
     {
-        $data = array_merge(
-            request()->all(), [
-            'user_id' => $user->id,
-            'organization_id' => $organization->id,
-        ]);
+        try {
+            $this->service->update($organization, $user, request()->all());
 
-        (new EditRhService($data))->execute();
-
-        return redirect()->route('organizations.rh.index', $organization->id)
-            ->with('success', 'User updated with success.');
+            return redirect()->route('organizations.rh.index', $organization->id)
+                ->with('success', 'User updated with success.');
+        } catch (ValidationException $e){
+            return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update user.');
+        }
     }
 }

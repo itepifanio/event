@@ -17,6 +17,10 @@ class Organization extends Model
             ->withPivot('role');
     }
 
+    public function owner(){
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
     public function events(){
         return $this->hasMany(Event::class);
     }
