@@ -60,7 +60,7 @@ class EventController extends Controller
     public function show(Organization $organization, $id)
     {
         return view('events.show', [
-            'event' => Event::find($id),
+            'event' => Event::find($id)->first(),
             'organization' => $organization,
         ]);
     }
@@ -68,7 +68,7 @@ class EventController extends Controller
     public function edit(Organization $organization, $id)
     {
         return view('events.edit', [
-            'event' => Event::find($id),
+            'event' => Event::find($id)->first(),
             'organization' => $organization,
         ]);
     }

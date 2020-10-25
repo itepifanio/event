@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\Mail;
 class SubscriptionsController extends Controller
 {
     public function index(Event $event)
-    {   
+    {
         $subscriptions = Subscription::ofEvent($event->id)->get();
         $subscribed_users_id = $subscriptions->pluck('user_id')->toArray();
         $subscribed_users = User::whereIn('id', $subscribed_users_id)->get();
-        
+        $event = $event->first();
+
         return view('subscriptions.index', [
             'subscriptions' => $subscribed_users,
             'organization' => $event->organization,
@@ -28,7 +29,7 @@ class SubscriptionsController extends Controller
     }
 
     public function store(Request $request, Event $event)
-    {   
+    {
         $data = array_merge(
             $request->all(), [
             'event_id' => $event->id,
@@ -37,9 +38,9 @@ class SubscriptionsController extends Controller
 
         $createSubscriptionService = new CreateSubscriptionService($data);
         $hasSuccess = $createSubscriptionService->execute();
-        
+
         if($hasSuccess) {
-            Mail::to(Auth::user()->email)->send(new MailSubscription(Auth::user(), $event)); 
+            Mail::to(Auth::user()->email)->send(new MailSubscription(Auth::user(), $event));
             return redirect()->back()->with('success', 'User subscribed with success.');
         }
         return redirect()->back()->with('erro', 'Failed to subscribe user.');
