@@ -19,7 +19,6 @@ class SubscriptionsController extends Controller
         $subscriptions = Subscription::ofEvent($event->id)->get();
         $subscribed_users_id = $subscriptions->pluck('user_id')->toArray();
         $subscribed_users = User::whereIn('id', $subscribed_users_id)->get();
-        $event = $event->first();
 
         return view('subscriptions.index', [
             'subscriptions' => $subscribed_users,

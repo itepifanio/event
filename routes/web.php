@@ -16,7 +16,6 @@ Route::post('organizations', [OrganizationController::class, 'store'])->name('or
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('profile', ProfileController::class)->only('edit', 'update');
-
     Route::resource('organizations', OrganizationController::class)->except(['store']);
     Route::get('events', [EventController::class, 'list'])->name('events.list');
 
@@ -30,12 +29,12 @@ Route::middleware(['auth'])->group(function () {
             ->middleware('hasRole:admin,owner')
             ->parameters(['rh' => 'user']);
     });
+
     Route::group(['prefix' => 'events/{event}'], function(){
         Route::resource('subscription', SubscriptionsController::class, [
             'as' => 'events',
         ])->except(['create', 'edit', 'update', 'show']);
     });
-
 });
 
 Auth::routes();

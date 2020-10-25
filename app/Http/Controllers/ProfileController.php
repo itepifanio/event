@@ -17,10 +17,10 @@ class ProfileController extends Controller
         $this->service = new  ProfileService();
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
         return view('profile.edit', [
-            'user' => User::find($id)->first(),
+            'user' => $user,
         ]);
     }
 
