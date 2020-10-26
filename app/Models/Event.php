@@ -35,6 +35,11 @@ class Event extends Model
         return $this->morphOne(Address::class, 'addressable');
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
     public function getDateAttribute()
     {
         $start_date = Carbon::parse($this->start_date)->format('m/d/Y');

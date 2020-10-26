@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Attendance;
 use App\Models\Event;
 use App\Models\Organization;
 use App\Models\User;
@@ -56,5 +57,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('event', Event::class);
         Route::model('organization', Organization::class);
         Route::model('profile', User::class);
+        Route::model('attendance', Attendance::class);
     }
 }
