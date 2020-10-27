@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Exceptions\UserNotSubscribed;
 use App\Models\Attendance;
 use App\Models\Event;
 use App\Models\Organization;
@@ -24,7 +25,8 @@ class AttendanceControllerTest extends TestCase
 
         $this->event = Event::factory()->create();
         $this->organization = $this->event->organization;
-        $this->user = User::factory()->role(User::ROLES_COMMON)->create();
+        $this->user = User::factory()->role(User::ROLES_COMMON)
+            ->subscribedTo($this->event->id)->create();
     }
 
     /** @test */
@@ -122,13 +124,25 @@ class AttendanceControllerTest extends TestCase
         ]);
     }
 
+    /** @test */
     public function it_validates_if_the_user_is_subscribed_on_the_event()
     {
-        //TODO::waiting for subscription tests, factories and stuff
-    }
+        $this->actingAs($this->organization->owner);
+        $user = User::factory()->role(User::ROLES_COMMON)->create();
 
-    public function it_validates_if_the_event_belongs_to_organization()
-    {
-        //TODO::creates custom exception
+        $form = [
+            [
+                'user_id' => $user->id,
+                'percentage' => 60,
+            ]
+        ];
+
+        $this->put(
+            route(
+                'organizations.events.attendances.update',
+                [$this->event->organization->id, $this->event->id]
+            ),
+            $form
+        )->assertSessionHas(['error' => 'A user that\'s not subscribed was inserted on the form']);
     }
 }

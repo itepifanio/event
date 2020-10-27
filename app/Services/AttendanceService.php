@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Exceptions\UserNotSubscribed;
 use App\Models\Attendance;
 use App\Models\Event;
 use App\Repositories\AttendanceRepository;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -24,7 +26,10 @@ class AttendanceService
         if ($validator->fails()) {
             throw ValidationException::withMessages($validator->errors()->toArray());
         }
-        // TODO::Create custom validation user not subscribed on event
+
+        if (! $this->areUsersInEvent($event, $data)){
+            throw new UserNotSubscribed;
+        }
 
         // adds 'event_id' to the array
         $data = collect($data)->map(function ($item) use ($event) {
@@ -42,5 +47,10 @@ class AttendanceService
             '*.percentage' => ['required', 'integer', 'between:0,100'],
             '*.user_id' => ['required', 'exists:users,id'],
         ];
+    }
+
+    private function areUsersInEvent(Event $event, array $data) : bool
+    {
+        return $event->users()->pluck('users.id')->all() === Arr::pluck($data, 'user_id');
     }
 }

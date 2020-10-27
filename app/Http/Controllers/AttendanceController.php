@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\UserNotSubscribed;
 use App\Models\Event;
 use App\Models\Organization;
 use App\Services\AttendanceService;
@@ -44,6 +45,8 @@ class AttendanceController extends Controller
                 ->with('success', 'Attendance updated with success.');
         } catch (ValidationException $e){
             return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (UserNotSubscribed $e){
+            return redirect()->back()->with('error', $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to update attendance.');
         }

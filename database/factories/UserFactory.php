@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Organization;
+use App\Models\Subscription;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -48,6 +49,18 @@ class UserFactory extends Factory
                     'role' => $role,
                 ]
             ]);
+        });
+    }
+
+    public function subscribedTo(int $eventId)
+    {
+        return $this->afterCreating(function (User $user) use ($eventId) {
+            Subscription::factory()->create([
+               'user_id' => $user->id,
+               'event_id' => $eventId,
+            ]);
+
+            return $user;
         });
     }
 }
