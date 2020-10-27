@@ -18,7 +18,7 @@ class CreatesAttendancesTable extends Migration
                 ->on('users');
             $table->foreign('event_id')
                 ->references('id')
-                ->on('users');
+                ->on('events');
             $table->unique(['user_id', 'event_id']);
 
             $table->timestamps();

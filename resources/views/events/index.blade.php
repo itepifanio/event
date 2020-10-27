@@ -36,6 +36,8 @@
                                                class="btn btn-xs btn-primary">Show</a>
                                             <a href="{{ route('organizations.events.edit', [$organization->id, $event->id]) }}"
                                                class="btn btn-xs btn-warning">Edit</a>
+                                            <a href="{{ route('organizations.events.attendances.edit', [$organization->id, $event->id]) }}"
+                                               class="btn btn-xs btn-success">Manage Attendance</a>
                                             <form action="{{ route('organizations.events.destroy', [$organization->id, $event->id]) }}" method="post"
                                                   style="display: inline">
                                                 @method('DELETE')

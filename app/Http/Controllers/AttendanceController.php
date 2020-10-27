@@ -23,16 +23,24 @@ class AttendanceController extends Controller
 
     public function edit(Organization $organization, Event $event)
     {
-        return view('events.attendances.edit', compact('organization', 'event'));
+        $users = $event->users()->with([
+            'attendances' => fn($q) => $q->where('event_id', $event->id)
+        ])->get();
+
+        return view('events.attendances.edit', [
+            'event' => $event,
+            'organization' => $organization,
+            'users' => $users,
+        ]);
     }
 
     public function update(Organization $organization, Event $event)
     {
         try {
-            $this->service->createOrUpdate($event, request()->all());
+            $this->service->createOrUpdate($event, request()->except('_method', '_token'));
 
             return redirect()
-                ->route('organizations.events.attendance.index', [$organization->id, $event->id])
+                ->route('organizations.events.attendances.edit', [$organization->id, $event->id])
                 ->with('success', 'Attendance updated with success.');
         } catch (ValidationException $e){
             return redirect()->back()->withErrors($e->validator->getMessageBag());

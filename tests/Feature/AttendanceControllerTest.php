@@ -95,7 +95,7 @@ class AttendanceControllerTest extends TestCase
         )->assertSessionHasErrors('0.percentage');
     }
 
-    // This test don't pass because sqlite dont handle upsert transaction
+    /** @test */
     public function it_can_store_attendance()
     {
         $this->actingAs($this->organization->owner);

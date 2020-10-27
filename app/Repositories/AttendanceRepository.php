@@ -6,12 +6,18 @@ use App\Models\Attendance;
 
 class AttendanceRepository
 {
-    public function createOrUpdate(array $data): Attendance
+    public function createOrUpdate(array $data): bool
     {
-        return  Attendance::upsert(
-            ['user_id' => 1, 'event_id' => 1, 'percentage' => 60],
-            ['user_id', 'event_id'],
-            ['percentage']
-        );
+        try {
+            Attendance::upsert(
+                $data,
+                ['user_id', 'event_id'],
+                ['percentage']
+            );
+
+            return true;
+        } catch (\Exception $e){
+            return false;
+        }
     }
 }

@@ -17,7 +17,7 @@ class AttendanceService
         $this->repository = new AttendanceRepository();
     }
 
-    public function createOrUpdate(Event $event, array $data): Attendance
+    public function createOrUpdate(Event $event, array $data) : bool
     {
         $validator = Validator::make($data, $this->rules());
 
@@ -26,7 +26,7 @@ class AttendanceService
         }
         // TODO::Create custom validation user not subscribed on event
 
-        // add 'event_id' to the array
+        // adds 'event_id' to the array
         $data = collect($data)->map(function ($item) use ($event) {
             $item['event_id'] = $event->id;
 

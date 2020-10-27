@@ -86,4 +86,9 @@ class Event extends Model
     {
         return Carbon::parse($value)->format('Y-m-d');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'subscriptions');
+    }
 }
