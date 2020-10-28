@@ -6,14 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Subscription;
 use App\Models\User;
-use App\Services\CreateSubscriptionService;
-use App\Services\DeleteSubscriptionService;
+use App\Services\SubscriptionService;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\MailSubscription;
 use Illuminate\Support\Facades\Mail;
 
 class SubscriptionsController extends Controller
 {
+    private SubscriptionService $service;
+
+    public function __construct()
+    {
+        $this->service = new SubscriptionService();
+    }
     public function index(Event $event)
     {
         $subscriptions = Subscription::ofEvent($event->id)->get();
@@ -29,30 +34,33 @@ class SubscriptionsController extends Controller
 
     public function store(Request $request, Event $event)
     {
-        $data = array_merge(
-            $request->all(), [
-            'event_id' => $event->id,
-            'user_id' => Auth::id(),
-        ]);
+        try {
+            $data = array_merge(
+                $request->all(), [
+                'event_id' => $event->id,
+                'user_id' => Auth::id(),
+            ]);
+            $this->service->save($data);
 
-        $createSubscriptionService = new CreateSubscriptionService($data);
-        $hasSuccess = $createSubscriptionService->execute();
-
-        if($hasSuccess) {
             Mail::to(Auth::user()->email)->send(new MailSubscription(Auth::user(), $event));
             return redirect()->back()->with('success', 'User subscribed with success.');
+            
+        } catch (ValidationException $e){
+            return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to subscribe user.');
         }
-        return redirect()->back()->with('erro', 'Failed to subscribe user.');
     }
 
     public function destroy(Event $event, $id)
     {
-        $deleteSubscriptionService = new DeleteSubscriptionService(['id' => $id]);
-        $hasSuccess = $deleteSubscriptionService->execute();
-
-        if($hasSuccess) {
+        $subscription = Subscription::find($id)->first();
+        
+        try {
+            $this->service->delete($subscription);
             return redirect()->back()->with('success', 'Unsubscribed with success.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to unsubscribe.');
         }
-        return redirect()->back()->with('erro', 'Failed to unsubscribe.');
     }
 }
