@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Models\User;
 use App\Services\RhService;
+
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class RhController extends Controller
@@ -24,6 +26,13 @@ class RhController extends Controller
             'users' => $users,
             'organization' => $organization,
         ]);
+    }
+    public function store(Request $request, Organization $organization)
+    {
+        $users = $request->input('users');
+        foreach($users as $user){
+            dd($user);
+        }
     }
     public function invite(Organization $organization, $id)
     {

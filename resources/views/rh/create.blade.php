@@ -17,8 +17,8 @@
                     </div>
                     <div class="card-body">
                         
-                        <form action="{{ route('organizations.rh.store', [$organization->id, 1]) }}" method="post"
-                                style="display: inline">
+                        <form id="invite_users" action="{{ route('organizations.rh.store', [$organization->id]) }}" method="post"
+                                style="display: inline" onsubmit="addChoosenUsers()">
                             @csrf
 
                             <div class="form-group row">
@@ -51,7 +51,6 @@
                                 </div>
                             </div>
                             
-                            
                             <button type="submit" class="btn btn-primary">
                                 Invite
                             </button>
@@ -73,14 +72,25 @@
         function chooseUser(user){
             if(!choosenUsers[user.id]) {
                 choosenUsers[user.id] = user;
-                document.getElementById('users-container').innerHTML += `<a id="user_${user.id}" class="tag" onclick="removeUser(this.id, ${user.id})">${user.email}<a>`;
+                document.getElementById('users-container').innerHTML += `<a id="user_${user.id}" class="tag" onclick="removeUser(this.id, ${user.id})">${user.email}</a>`;
             }
         }
         function removeUser(tagid, userid){
             choosenUsers.splice(userid, userid);
             document.getElementById(tagid).remove();
         }
-        
+        function addChoosenUsers(){
+            choosenUsers.forEach(function(user){
+                
+                let input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = "users[]";
+                    input.value = user.id;
+
+                let form = document.getElementById("invite_users");
+                form.appendChild(input);    
+            });
+        }
         function filterFunction() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("user");
