@@ -3,6 +3,7 @@
 @push('stylesheets')
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tag.css') }}">
     
 @endpush
 
@@ -44,9 +45,13 @@
                                     </div> 
                                 </div>
                             </div>
-                            <div id="users-container">
-
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div id="users-container"></div>
+                                </div>
                             </div>
+                            
+                            
                             <button type="submit" class="btn btn-primary">
                                 Invite
                             </button>
@@ -68,7 +73,7 @@
         function chooseUser(user){
             if(!choosenUsers[user.id]) {
                 choosenUsers[user.id] = user;
-                document.getElementById('users-container').innerHTML += `<a id="user_${user.id}" onclick="removeUser(this.id, ${user.id})">${user.email}<a>`;
+                document.getElementById('users-container').innerHTML += `<a id="user_${user.id}" class="tag" onclick="removeUser(this.id, ${user.id})">${user.email}<a>`;
             }
         }
         function removeUser(tagid, userid){
