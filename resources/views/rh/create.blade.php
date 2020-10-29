@@ -35,16 +35,18 @@
                                 <label for="user" class="col-md-4 col-form-label text-md-right">{{ __('User') }}</label>
                                 <div class="col-md-6">
                                     <div class="dropdown">
-                                        <input onfocus="toggleDropdown()" onfocusout="toggleDropdown()" type="text" id="user" onkeyup="filterFunction()">
+                                        <input onfocus="toggleDropdown()"  type="text" id="user" onkeyup="filterFunction()">
                                         <div id="usersDropdown" class="dropdown-content">
                                             @foreach($users as $user)
-                                                <a>{{$user->name}}</a>
+                                                <a onclick="chooseUser({{$user}})">{{$user->name}}</a>
                                             @endforeach
                                         </div>
                                     </div> 
                                 </div>
                             </div>
+                            <div id="users-container">
 
+                            </div>
                             <button type="submit" class="btn btn-primary">
                                 Invite
                             </button>
@@ -59,10 +61,21 @@
 
 @push('scripts')
     <script>
-       
+        var choosenUsers = [];
         function toggleDropdown() {
             document.getElementById("usersDropdown").classList.toggle("show");
         }
+        function chooseUser(user){
+            if(!choosenUsers[user.id]) {
+                choosenUsers[user.id] = user;
+                document.getElementById('users-container').innerHTML += `<a id="user_${user.id}" onclick="removeUser(this.id, ${user.id})">${user.email}<a>`;
+            }
+        }
+        function removeUser(tagid, userid){
+            choosenUsers.splice(userid, userid);
+            document.getElementById(tagid).remove();
+        }
+        
         function filterFunction() {
             var input, filter, ul, li, a, i;
             input = document.getElementById("user");
