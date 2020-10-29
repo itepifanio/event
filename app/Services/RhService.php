@@ -28,7 +28,7 @@ class RhService
         }
 
         $this->userRepository->update($user, Arr::only($data, ['name', 'email']));
-        $this->userRepository->attachOrganization($user, $organization, $data['role']);
+        $this->userRepository->attachOrganization($user, $organization, $data['status'] ,$data['role']);
     }
 
     protected function rules(): array

@@ -24,11 +24,12 @@ class UserRepository
         return tap($user)->update(Arr::except($data, 'id'));
     }
 
-    public function attachOrganization(User $user, Organization $organization, string $role)
+    public function attachOrganization(User $user, Organization $organization, string $status, string $role)
     {
         $user->organizations()->sync([
             $organization->id => [
                 'role' => $role,
+                'status'=> $status
             ]
         ]);
     }

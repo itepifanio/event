@@ -25,7 +25,20 @@ class RhController extends Controller
             'organization' => $organization,
         ]);
     }
-
+    public function invite(Organization $organization, $id)
+    {
+        return view('rh.invite', [
+            'user' => User::find($id)->first(),
+            'organization' => $organization,
+        ]);
+    }
+    public function create(Organization $organization)
+    {
+        return view('rh.create', [
+            'users' => User::all(),
+            'organization' => $organization,
+        ]);
+    }
     public function edit(Organization $organization, User $user)
     {
         $user = $user->load(['organizations' => fn($q) => $q->where('organizations.id', $organization->id)]);

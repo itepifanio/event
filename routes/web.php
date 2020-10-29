@@ -8,6 +8,7 @@ use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\RhController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,10 +25,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('events', EventController::class, [
             'as' => 'organizations',
         ]);
-
         Route::resource('rh', RhController::class, [
             'as' => 'organizations',
-        ])->only(['index', 'edit', 'update'])
+        ])->only(['index', 'edit', 'update','store','create'])
             ->middleware('hasRole:admin,owner')
             ->parameters(['rh' => 'user']);
 

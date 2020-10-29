@@ -11,7 +11,10 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Organizations</h3>
-
+                        <a href="{{ route('organizations.rh.create', $organization->id) }}"
+                           class="btn btn-sm btn-primary float-right">
+                            Invite
+                        </a>
                     </div>
                     <div class="card-body">
 
