@@ -30,7 +30,29 @@ class RhService
         $this->userRepository->update($user, Arr::only($data, ['name', 'email']));
         $this->userRepository->attachOrganization($user, $organization, $data['status'] ,$data['role']);
     }
+    public function save(Organization $organization, array $lotdata): void
+    {
+        // ver uma forma melhor de fazer isso 
+        $users = $lotdata['users'];
+        
+        foreach($users as $userid){
+            
+            $user = User::find($userid);
 
+            
+            $data = array_merge(Arr::only($lotdata, ['role']), $user->toArray());
+            
+            $validator = Validator::make($data, $this->rules());
+            
+            if($validator->fails()){
+                throw ValidationException::withMessages($validator->errors()->toArray());
+            }
+            
+    
+            $this->userRepository->attachOrganization($user, $organization, 'pending', $data['role']);
+            
+        }
+    }
     protected function rules(): array
     {
         return [

@@ -70,25 +70,28 @@
             document.getElementById("usersDropdown").classList.toggle("show");
         }
         function chooseUser(user){
+            console.log(user);
+            console.log(choosenUsers);
             if(!choosenUsers[user.id]) {
                 choosenUsers[user.id] = user;
                 document.getElementById('users-container').innerHTML += `<a id="user_${user.id}" class="tag" onclick="removeUser(this.id, ${user.id})">${user.email}</a>`;
             }
         }
         function removeUser(tagid, userid){
-            choosenUsers.splice(userid, userid);
+            choosenUsers[userid] = null;
             document.getElementById(tagid).remove();
         }
         function addChoosenUsers(){
             choosenUsers.forEach(function(user){
-                
-                let input = document.createElement("input");
+                if(user){
+                    let input = document.createElement("input");
                     input.type = "hidden";
                     input.name = "users[]";
                     input.value = user.id;
 
-                let form = document.getElementById("invite_users");
-                form.appendChild(input);    
+                    let form = document.getElementById("invite_users");
+                    form.appendChild(input);
+                }
             });
         }
         function filterFunction() {

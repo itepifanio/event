@@ -24,6 +24,7 @@
                                 <tr>
                                     <th class="col-md-6">Name</th>
                                     <th class="col-md-2">Role</th>
+                                    <th class="col-md-2">Status</th>
                                     <th class="col-md-4">Options</th>
                                 </tr>
                                 </thead>
@@ -32,6 +33,7 @@
                                     <tr>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ ucfirst($user->pivot->role) }}</td>
+                                        <td>{{ ucfirst($user->pivot->status) }}</td>
                                         <td>
                                             <a href="{{ route('organizations.rh.edit', [$organization->id, $user->id]) }}"
                                                class="btn btn-xs btn-warning">Edit</a>

@@ -21,7 +21,6 @@ class RhController extends Controller
     public function index(Organization $organization)
     {
         $users = $organization->users()->where('users.id', '!=', auth()->id())->get();
-
         return view('rh.index', [
             'users' => $users,
             'organization' => $organization,
@@ -29,9 +28,19 @@ class RhController extends Controller
     }
     public function store(Request $request, Organization $organization)
     {
-        $users = $request->input('users');
-        foreach($users as $user){
-            dd($user);
+        
+        try {
+            $this->service->save($organization, $request->all());
+
+            $users = $organization->users()->where('users.id', '!=', auth()->id())->get();
+            return redirect()->route('organizations.rh.index', [
+                'users' => $users,
+                'organization' => $organization,
+            ])->with('success', 'Users invited with success.');
+        } catch (ValidationException $e){
+            return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to Invite user.');
         }
     }
     public function invite(Organization $organization, $id)
