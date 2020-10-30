@@ -24,11 +24,16 @@
                             <div class="form-group row">
                                 <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
                                 <div class="col-md-6">
-                                    <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role" autofocus>
+                                    <select class="custom-select"  autocomplete="off" name="role">
+                                        @foreach(\App\Models\User::ROLES as $role)
+                                            @if($role != 'owner')
+                                                <option value="{{ $role }}">{{ $role }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+
                                     @error('role')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="invalid-feedback" style="display: unset">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>

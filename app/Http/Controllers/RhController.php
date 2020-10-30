@@ -27,16 +27,15 @@ class RhController extends Controller
         ]);
     }
     public function store(Request $request, Organization $organization)
-    {
-        
+    {   
         try {
             $this->service->save($organization, $request->all());
 
-            $users = $organization->users()->where('users.id', '!=', auth()->id())->get();
             return redirect()->route('organizations.rh.index', [
-                'users' => $users,
+                'users' => $organization->users()->where('users.id', '!=', auth()->id())->get(),
                 'organization' => $organization,
             ])->with('success', 'Users invited with success.');
+
         } catch (ValidationException $e){
             return redirect()->back()->withErrors($e->validator->getMessageBag());
         } catch (\Exception $e) {
