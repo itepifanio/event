@@ -15,15 +15,14 @@
                     <div class="card-header">
                         <h3 class="card-title">Invite Users</h3>
                     </div>
-                    <div class="card-body">
-                        
-                        <form id="invite_users" action="{{ route('organizations.rh.store', [$organization->id]) }}" method="post"
+                    
+                    <form id="invite_users" action="{{ route('organizations.rh.store', [$organization->id]) }}" method="post"
                                 style="display: inline" onsubmit="addChoosenUsers()">
                             @csrf
-
+                        <div class="card-body">
                             <div class="form-group row">
-                                <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
-                                <div class="col-md-6">
+                                <label for="role" class="col-md-1 col-form-label text-md-right">{{ __('Role') }}</label>
+                                <div class="col-md-11">
                                     <select class="custom-select"  autocomplete="off" name="role">
                                         @foreach(\App\Models\User::ROLES as $role)
                                             @if($role != 'owner')
@@ -38,10 +37,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="user" class="col-md-4 col-form-label text-md-right">{{ __('User') }}</label>
-                                <div class="col-md-6">
+                                <label for="user" class="col-md-1 col-form-label text-md-right">{{ __('User') }}</label>
+                                <div class="col-md-11">
                                     <div class="dropdown">
-                                        <input onfocus="toggleDropdown()"  type="text" id="user" onkeyup="filterFunction()">
+                                        <input onfocus="toggleDropdown()" class="form-control" type="text" id="user" onkeyup="filterFunction()">
                                         <div id="usersDropdown" class="dropdown-content">
                                             @foreach($users as $user)
                                                 <a onclick="chooseUser({{$user}})">{{$user->name}}</a>
@@ -51,17 +50,18 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div id="users-container"></div>
                                 </div>
                             </div>
-                            
-                            <button type="submit" class="btn btn-primary">
-                                Invite
-                            </button>
-                        </form>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary"> Invite </button>
+                            <a href="{{ route('organizations.rh.index', $organization->id) }}" class="btn btn-default">Cancel</a>
+                        </div>
                         
-                    </div>
+                    </form>
+                        
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
             console.log(choosenUsers);
             if(!choosenUsers[user.id]) {
                 choosenUsers[user.id] = user;
-                document.getElementById('users-container').innerHTML += `<a id="user_${user.id}" class="tag" onclick="removeUser(this.id, ${user.id})">${user.email}</a>`;
+                document.getElementById('users-container').innerHTML += `<a id="user_${user.id}" class="tag" onclick="removeUser(this.id, ${user.id})">${user.email} <i class="fa fa-minus-circle"></i></a>`;
             }
         }
         function removeUser(tagid, userid){
