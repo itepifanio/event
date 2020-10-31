@@ -50,7 +50,7 @@
                                     </div> 
                                 </div>
                             </div>
-                            <input type="hidden" name="status" value="pending"/>
+                            <input type="hidden" name="status" value="{{\App\Models\User::STATUS_PENDING}}"/>
                             
                             <div class="form-group row">
                                 <div class="col-md-12">
