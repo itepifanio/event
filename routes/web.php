@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\SubscriptionsController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\RhController;
 use App\Http\Controllers\CertificateController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,6 @@ Route::post('organizations', [OrganizationController::class, 'store'])->name('or
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('profile', ProfileController::class)->only('edit', 'update');
-
     Route::resource('organizations', OrganizationController::class)->except(['store']);
     Route::get('events', [EventController::class, 'list'])->name('events.list');
 
@@ -25,12 +25,20 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('events', EventController::class, [
             'as' => 'organizations',
         ]);
+
         Route::resource('rh', RhController::class, [
             'as' => 'organizations',
         ])->only(['index', 'edit', 'update'])
             ->middleware('hasRole:admin,owner')
             ->parameters(['rh' => 'user']);
+
+        Route::group(['prefix' => 'events/{event}'], function (){
+            Route::get('attendances', [AttendanceController::class, 'index'])->name('organizations.events.attendances.index');
+            Route::put('attendances', [AttendanceController::class, 'update'])->name('organizations.events.attendances.update');
+            Route::get('attendances/edit', [AttendanceController::class, 'edit'])->name('organizations.events.attendances.edit');
+        });
     });
+
     Route::group(['prefix' => 'events/{event}'], function(){
         Route::resource('subscription', SubscriptionsController::class, [
             'as' => 'events',

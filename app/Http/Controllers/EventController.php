@@ -57,18 +57,18 @@ class EventController extends Controller
         }
     }
 
-    public function show(Organization $organization, $id)
+    public function show(Organization $organization, Event $event)
     {
         return view('events.show', [
-            'event' => Event::find($id),
+            'event' => $event,
             'organization' => $organization,
         ]);
     }
 
-    public function edit(Organization $organization, $id)
+    public function edit(Organization $organization, Event $event)
     {
         return view('events.edit', [
-            'event' => Event::find($id),
+            'event' => $event,
             'organization' => $organization,
         ]);
     }

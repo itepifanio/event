@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Attendance;
+use App\Models\Event;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -51,20 +53,10 @@ class RouteServiceProvider extends ServiceProvider
 
     private function makeBinds()
     {
-        Route::bind('organization', function ($value) {
-            return Organization::where('id', $value)->first() ?? abort(404);
-        });
-
-        Route::bind('user', function ($value) {
-            return User::where('id', $value)->first() ?? abort(404);
-        });
-
-        Route::bind('profile', function ($value) {
-            return User::where('id', $value)->first() ?? abort(404);
-        });
-
-        Route::bind('event', function ($value) {
-            return User::where('id', $value)->first() ?? abort(404);
-        });
+        Route::model('user', User::class);
+        Route::model('event', Event::class);
+        Route::model('organization', Organization::class);
+        Route::model('profile', User::class);
+        Route::model('attendance', Attendance::class);
     }
 }

@@ -46,4 +46,11 @@ class ProfileControllerTest extends TestCase
             'name' => $form['name'],
         ]);
     }
+
+    /** @test */
+    public function it_can_show_edit_page()
+    {
+        $this->get(route('profile.edit', $this->user->id))
+            ->assertSessionHasNoErrors();
+    }
 }

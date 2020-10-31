@@ -30,7 +30,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Edit Profile</h3>
                         </div>
-                        <form role="form" method="POST" action="{{ route('profile.update', ['id' => $user->id]) }}"
+                        <form role="form" method="POST" action="{{ route('profile.update', $user) }}"
                               class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
                             @method('PUT')
                             @csrf

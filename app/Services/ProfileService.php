@@ -37,7 +37,6 @@ class ProfileService
     private function rules(int $id): array
     {
         return [
-            'id' => 'required',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'old-password' => 'sometimes|string',

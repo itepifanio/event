@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasFactory;
 
     protected $fillable = [
         'name', 'description', 'start_date', 'end_date',
@@ -32,6 +33,11 @@ class Event extends Model
     public function address()
     {
         return $this->morphOne(Address::class, 'addressable');
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
     }
 
     public function getDateAttribute()
@@ -79,5 +85,10 @@ class Event extends Model
     public function getEndDateAttribute($value)
     {
         return Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'subscriptions');
     }
 }

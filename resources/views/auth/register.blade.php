@@ -81,6 +81,7 @@
                                     <textarea type="text"
                                               class="form-control @error('description') is-invalid @enderror"
                                               id="description" name="description"
+                                              maxlength="150"
                                               autocomplete="description">{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
@@ -112,10 +113,10 @@
                                 </button>
                             </div>
                             <div class="col">
-                                <div class="input-group-text">
+                                <label class="input-group-text">
                                     <input class= "mr-1" type="checkbox"  id='is_organization' class="form-control" {{ (bool) old('is_organization') ? 'checked' : '' }} name="is_organization" aria-label="Checkbox for following text input" onChange="isOrganization()">
                                     Register as organization
-                                </div>
+                                </label>
                             </div>
 
                         </div>
