@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.invitation')
 
 @push('stylesheets')
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
@@ -12,6 +12,8 @@
             @endforeach
             
             <div class="row">
+
+                @if(isset($user) && isset($organization))
                 <div class="col-md-8 offset-md-2">
                     <div class="card">
                         <div class="card-header">
@@ -46,6 +48,17 @@
                         </form>
                     </div>
                 </div>
+                @else
+
+                    <div class="col-md-6 offset-md-3">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                {{$message}}
+                            <div>
+                        </div>
+                    </div>
+                    
+                @endif
             </div>
         </div>
     </section>

@@ -62,14 +62,18 @@ class RhController extends Controller
         
         $confirmation = Confirmation::where('token', $token)->first();
         if(!$confirmation){
-            dd('This invitation does not exist!');
-            return;
+            return view('rh.show', [
+                'token' => $token,
+                'message' => "Invitation not found.",
+            ]);
         }
 
         $user_organization = DB::table('user_organizations')->where('id', $confirmation->user_organization_id)->first();
         if($user_organization->status !== User::STATUS_PENDING){
-            dd('Invitation Already confirmed!');
-            return;
+            return view('rh.show', [
+                'token' => $token,
+                'message' => "This invitation was already confirmed.",
+            ]);
         }
         
         return view('rh.show', [
