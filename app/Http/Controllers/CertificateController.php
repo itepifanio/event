@@ -9,9 +9,10 @@ use PDF;
 
 class CertificateController extends Controller
 {
-    public function show(User $user, Event $event)
+    public function show(Event $event, User $user)
     {
         $organization = Organization::find($event->organization_id);
+
         // $pdf = PDF::loadView('certificates.show', [
         //     'event' => $event,
         //     'organization' => $organization,

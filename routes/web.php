@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
         ])->except(['create', 'edit', 'update', 'show']);
     });
 
-    Route::get('certificate', [CertificateController::class, 'show'])->name('certificate.show');
+    Route::get('events/{event}/user/{user}/certificate', [CertificateController::class, 'show'])->name('certificate.show');
 });
 
 Auth::routes();

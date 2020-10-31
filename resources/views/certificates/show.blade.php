@@ -18,12 +18,12 @@
             </header>
             <section class="content">
                 <p>Certificamos que </p>
-                <h2>FULANO DE TAL SOARES</h2>
-                <p>participou do evento <b>PADRÕES DE PROJETOS</b> realizado de <b>20/10/2020</b> até <b>20/10/2020</b> às <b>20h00</b>.</p>
+                <h2>{{$user->name}}</h2>
+                <p>participou do evento <b>{{$event->name}}</b> realizado de <b>{{\Carbon\Carbon::parse($event->start_date)->format('d/m/Y')}}</b> até <b>{{\Carbon\Carbon::parse($event->end_date)->format('d/m/Y')}}</b>.</p>
             </section>
             <footer class="footer">
                 <p>Realização: </p>
-                <b>Minha Grande Organização</b>
+                <b>{{$organization->name}}</b>
             </footer>
         </div>
     </main>
