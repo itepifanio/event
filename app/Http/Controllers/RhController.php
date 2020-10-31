@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Models\User;
 use App\Services\RhService;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class RhController extends Controller
@@ -42,17 +42,12 @@ class RhController extends Controller
             return redirect()->back()->with('error', 'Failed to Invite user.');
         }
     }
-    public function invite(Organization $organization, $id)
-    {
-        return view('rh.invite', [
-            'user' => User::find($id)->first(),
-            'organization' => $organization,
-        ]);
-    }
+    
     public function create(Organization $organization)
     {
         return view('rh.create', [
-            'users' => User::all()->diff($organization->users()->get()),
+            // 'users' => User::all()->diff($organization->users()->get()),
+            'users' => User::all(),
             'organization' => $organization,
         ]);
     }
@@ -63,6 +58,12 @@ class RhController extends Controller
         return view('rh.edit', compact('organization', 'user'));
     }
 
+    public function confirm (Organization $organization, User $user){
+        return view('rh.confirm', [
+            'user' => $user,
+            'organization' => $organization,
+        ]);
+    }    
     public function update(Organization $organization, User $user)
     {
         try {

@@ -8,7 +8,10 @@ use App\Repositories\UserRepository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Mail\MailInvite;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 class RhService
 {
@@ -48,8 +51,9 @@ class RhService
                 throw ValidationException::withMessages($validator->errors()->toArray());
             }
             
-    
-            $this->userRepository->attachOrganization($user, $organization, 'pending', $data['role']);
+            // $this->userRepository->attachOrganization($user, $organization, 'pending', $data['role']);
+           
+            Mail::to($user->email)->send(new MailInvite($user, $organization));
             
         }
     }
