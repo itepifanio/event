@@ -22,7 +22,7 @@
                             <table id="datatable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th class="col-md-6">Name</th>
+                                    <th class="col-md-4">Name</th>
                                     <th class="col-md-2">Role</th>
                                     <th class="col-md-2">Status</th>
                                     <th class="col-md-4">Options</th>
@@ -37,35 +37,30 @@
                                         <td>
                                             <a href="{{ route('organizations.rh.edit', [$organization->id, $user->id]) }}"
                                                class="btn btn-xs btn-warning">Edit</a>
-                                            @if( $user->pivot->status === \App\Models\User::STATUS_ACTIVE)
-                                                <form method="POST" action="{{ route('organizations.rh.update', [$organization->id, $user->id]) }}">
+                                            @if( $user->pivot->status !== \App\Models\User::STATUS_PENDING)
+                                                <form method="POST" action="{{ route('organizations.rh.update', [$organization->id, $user->id]) }}" style="display: inline">
                                                     @method('PUT')
                                                     @csrf
                                                     <input type="hidden" name="name" value="{{$user->name}}"/>
                                                     <input type="hidden" name="email" value="{{$user->email}}"/>
                                                     <input type="hidden" name="role" value="{{$user->pivot->role}}"/>
-                                                    <input type="hidden" name="status" value="{{\App\Models\User::STATUS_DISABLED}}"/>
 
-                                                    <button class="btn btn-xs btn-danger" type="submit"
-                                                        onclick="return confirm('Do you want disable this user?');">
-                                                        Disable
-                                                    </button>
-                                                </form>
-                                            @endif
+                                                    @if( $user->pivot->status === \App\Models\User::STATUS_ACTIVE)
+                                                        <input type="hidden" name="status" value="{{\App\Models\User::STATUS_DISABLED}}"/>
+                                                        <button class="btn btn-xs btn-danger" type="submit"
+                                                            onclick="return confirm('Do you want disable this user?');">
+                                                            Disable
+                                                        </button>
+                                                    @endif
 
-                                            @if( $user->pivot->status === \App\Models\User::STATUS_DISABLED)
-                                                <form method="POST" action="{{ route('organizations.rh.update', [$organization->id, $user->id]) }}">
-                                                    @method('PUT')
-                                                    @csrf
-                                                    <input type="hidden" name="name" value="{{$user->name}}"/>
-                                                    <input type="hidden" name="email" value="{{$user->email}}"/>
-                                                    <input type="hidden" name="role" value="{{$user->pivot->role}}"/>
-                                                    <input type="hidden" name="status" value="{{\App\Models\User::STATUS_ACTIVE}}"/>
+                                                    @if( $user->pivot->status === \App\Models\User::STATUS_DISABLED)
+                                                        <input type="hidden" name="status" value="{{\App\Models\User::STATUS_ACTIVE}}"/>
+                                                        <button class="btn btn-xs btn-success" type="submit"
+                                                            onclick="return confirm('Do you want enable this user?');">
+                                                            Enable
+                                                        </button>
+                                                    @endif
 
-                                                    <button class="btn btn-xs btn-success" type="submit"
-                                                        onclick="return confirm('Do you want enable this user?');">
-                                                        Enable
-                                                    </button>
                                                 </form>
                                             @endif
                                         </td>

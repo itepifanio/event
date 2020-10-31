@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
             'as' => 'organizations',
         ])->only(['index', 'edit', 'update','store','create', 'show'])
             ->middleware('hasRole:admin,owner')
+            ->middleware('hasStatus:active')
             ->parameters(['rh' => 'user']);
         
         Route::post('/rh/{user}/confirm', [RhController::class, 'confirm'])->name('organizations.rh.confirm');
