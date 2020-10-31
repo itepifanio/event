@@ -46,7 +46,8 @@ class RhController extends Controller
     public function create(Organization $organization)
     {
         return view('rh.create', [
-            'users' => User::all()->diff($organization->users()->get()),
+            // 'users' => User::all()->diff($organization->users()->get()),
+            'users' => User::all(),
             'organization' => $organization,
         ]);
     }

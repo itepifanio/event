@@ -36,6 +36,7 @@ class RhControllerTest extends TestCase
         $form = [
             'role' => User::ROLES_COMMON,
             'name' => 'Mr Potato',
+            'status' => User::STATUS_PENDING,
             'email' => 'random@gmail.com',
         ];
 
@@ -56,6 +57,7 @@ class RhControllerTest extends TestCase
         $this->assertDatabaseHas('user_organizations', [
             'user_id' => $user->id,
             'role' => $form['role'],
+            'status'=> $form['status'],
         ]);
     }
 }

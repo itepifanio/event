@@ -45,9 +45,9 @@ class RhService
                 $user_organizations = DB::table('user_organizations')->where('user_id', $user->id)->where('organization_id', $organization->id)->first();
                 
                 if(isset($data['confirmInvitation'])){
-                    $user_organizations->status = 'active';
+                    $user_organizations->status = User::STATUS_ACTIVE;
                 }else{
-                    $user_organizations->status = 'refused';
+                    $user_organizations->status = User::STATUS_REFUSED;
                 }
                 $user_data  =  array_merge((array) $user_organizations, ['email'=> $user->email, 'name'=> $user->name]);
                 $this->update($organization, $user, $user_data);
