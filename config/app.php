@@ -179,6 +179,7 @@ return [
          * Custom app service provider...
          */
         App\Providers\GeolocalizationProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -231,6 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Geolocalization' => App\Facades\Geolocalization::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
