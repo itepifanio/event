@@ -46,15 +46,13 @@ class RhController extends Controller
     public function create(Organization $organization)
     {
         return view('rh.create', [
-            // 'users' => User::all()->diff($organization->users()->get()),
-            'users' => User::all(),
+            'users' => User::all()->diff($organization->users()->get()),
             'organization' => $organization,
         ]);
     }
     public function edit(Organization $organization, User $user)
     {
         $user = $user->load(['organizations' => fn($q) => $q->where('organizations.id', $organization->id)]);
-
         return view('rh.edit', compact('organization', 'user'));
     }
     public function show (Organization $organization, User $user){

@@ -45,7 +45,7 @@ class RhService
                 $user_organizations = DB::table('user_organizations')->where('user_id', $user->id)->where('organization_id', $organization->id)->first();
                 
                 if(isset($data['confirmInvitation'])){
-                    $user_organizations->status = 'accepted';
+                    $user_organizations->status = 'active';
                 }else{
                     $user_organizations->status = 'refused';
                 }
