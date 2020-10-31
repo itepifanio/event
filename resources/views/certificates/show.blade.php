@@ -6,14 +6,13 @@
 
     <title>EventUp - Event and Conference</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ public_path().'/storage/certificate.css' }}">
 </head>
 <body>
     <main class="container">
         <div class="border">
             <header class="header">
-                <img src="{{ asset('event-home/img/logo.png') }}" alt="EventUP">
+                <img src="{{ public_path().'/storage/logo.png' }}" alt="EventUP">
                 <h1>CERTIFICADO DE PARTICIPAÇÃO</h1>
             </header>
             <section class="content">
