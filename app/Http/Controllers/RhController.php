@@ -56,6 +56,7 @@ class RhController extends Controller
         $user = $user->load(['organizations' => fn($q) => $q->where('organizations.id', $organization->id)]);
         return view('rh.edit', compact('organization', 'user'));
     }
+    
     public function show (Organization $organization, User $user){
         return view('rh.show', [
             'user' => $user,

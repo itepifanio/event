@@ -39,7 +39,7 @@ class MailInvite extends Mailable
             ->with([
                 'name' => $this->user->name,
                 'organization'=> $this->organization,
-                'link' => route('organizations.rh.show', [$this->organization, $this->user]) 
+                'link' => route('organizations.rh.confirm', [$this->organization, $this->user]) 
             ]);
     }
 }
