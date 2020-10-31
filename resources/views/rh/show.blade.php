@@ -17,7 +17,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Confirm Invitation</h3>
                         </div>
-                        <form role="form" method="POST" action="{{ route('organizations.rh.confirm', [$organization->id, $user->id]) }}" class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
+                        <form role="form" method="POST" action="{{ route('invitation.confirm', [$token]) }}" class="{{ $errors->count() > 0 ? 'needs-validation' : '' }}">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">

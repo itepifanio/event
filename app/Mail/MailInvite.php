@@ -15,15 +15,17 @@ class MailInvite extends Mailable
 
     private User $user;
     private Event $event;
+    private $token;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, Organization $organization)
+    public function __construct(User $user, Organization $organization, $token)
     {
         $this->user = $user;
         $this->organization = $organization;
+        $this->token = $token;
     }
 
     /**
@@ -39,7 +41,7 @@ class MailInvite extends Mailable
             ->with([
                 'name' => $this->user->name,
                 'organization'=> $this->organization,
-                'link' => route('organizations.rh.confirm', [$this->organization, $this->user]) 
+                'link' => route('invitation.confirm', ['token'=>$this->token]) 
             ]);
     }
 }

@@ -32,8 +32,6 @@ Route::middleware(['auth'])->group(function () {
             ->middleware('hasStatus:active')
             ->parameters(['rh' => 'user']);
         
-        Route::get('/rh/{user}/confirm', [RhController::class, 'show'])->name('organizations.rh.confirm');
-        Route::post('/rh/{user}/confirm', [RhController::class, 'confirm'])->name('organizations.rh.confirm');
             
         Route::group(['prefix' => 'events/{event}'], function (){
             Route::get('attendances', [AttendanceController::class, 'index'])->name('organizations.events.attendances.index');
@@ -52,3 +50,5 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('invitation/{token}', [RhController::class, 'show'])->name('invitation.confirm');
+Route::post('invitation/{token}', [RhController::class, 'confirm'])->name('invitation.confirm');
