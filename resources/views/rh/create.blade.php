@@ -36,6 +36,7 @@
                                     @enderror
                                 </div>
                             </div>
+                                       
                             <div class="form-group row">
                                 <label for="user" class="col-md-1 col-form-label text-md-right">{{ __('User') }}</label>
                                 <div class="col-md-11">
@@ -49,6 +50,8 @@
                                     </div> 
                                 </div>
                             </div>
+                            <input type="hidden" name="status" value="pending"/>
+                            
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <div id="users-container"></div>

@@ -27,11 +27,11 @@ Route::middleware(['auth'])->group(function () {
         ]);
         Route::resource('rh', RhController::class, [
             'as' => 'organizations',
-        ])->only(['index', 'edit', 'update','store','create'])
+        ])->only(['index', 'edit', 'update','store','create', 'show'])
             ->middleware('hasRole:admin,owner')
             ->parameters(['rh' => 'user']);
         
-        Route::get('/rh/{user}/confirm', [RhController::class, 'confirm'])->name('organizations.rh.confirm');
+        Route::post('/rh/{user}/confirm', [RhController::class, 'confirm'])->name('organizations.rh.confirm');
             
         Route::group(['prefix' => 'events/{event}'], function (){
             Route::get('attendances', [AttendanceController::class, 'index'])->name('organizations.events.attendances.index');

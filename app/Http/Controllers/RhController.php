@@ -57,12 +57,23 @@ class RhController extends Controller
 
         return view('rh.edit', compact('organization', 'user'));
     }
-
-    public function confirm (Organization $organization, User $user){
-        return view('rh.confirm', [
+    public function show (Organization $organization, User $user){
+        return view('rh.show', [
             'user' => $user,
             'organization' => $organization,
         ]);
+    }
+    public function confirm (Organization $organization, User $user){
+        
+        try {
+            $this->service->confirmInvitation($organization, $user, request()->all());
+            return redirect()->route('organizations.rh.index', $organization->id)
+                ->with('success', 'Invitation Confirmed with success.');
+        } catch (ValidationException $e){
+            return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to confirm invitation.');
+        }
     }    
     public function update(Organization $organization, User $user)
     {

@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use App\Mail\MailInvite;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class RhService
@@ -32,10 +33,39 @@ class RhService
 
         $this->userRepository->update($user, Arr::only($data, ['name', 'email']));
         $this->userRepository->attachOrganization($user, $organization, $data['status'] ,$data['role']);
+        
+    }
+    public function confirmInvitation(Organization $organization, User $user, array $data):void{
+
+        if(isset($data['password_confirmation'])) {
+            
+            if(Hash::check($data['password_confirmation'], $user->password)){
+
+                
+                $user_organizations = DB::table('user_organizations')->where('user_id', $user->id)->where('organization_id', $organization->id)->first();
+                
+                if(isset($data['confirmInvitation'])){
+                    $user_organizations->status = 'accepted';
+                }else{
+                    $user_organizations->status = 'refused';
+                }
+                $user_data  =  array_merge((array) $user_organizations, ['email'=> $user->email, 'name'=> $user->name]);
+                $this->update($organization, $user, $user_data);
+                
+            }else {
+                $validator = Validator::make($data, ['password_confirmation' => 'required']);
+
+                $validator->after(function ($validator) {
+                    $validator->errors()->add('password_confirmation', 'The password does not match');
+                });
+
+                throw ValidationException::withMessages($validator->errors()->toArray());
+            }
+        }
+                
     }
     public function save(Organization $organization, array $lotdata): void
     {
-        // ver uma forma melhor de fazer isso 
         $users = $lotdata['users'];
         
         foreach($users as $userid){
@@ -43,7 +73,7 @@ class RhService
             $user = User::find($userid);
 
             
-            $data = array_merge(Arr::only($lotdata, ['role']), $user->toArray());
+            $data = array_merge(Arr::only($lotdata, ['role', 'status']), $user->toArray());
             
             $validator = Validator::make($data, $this->rules());
             
@@ -51,7 +81,7 @@ class RhService
                 throw ValidationException::withMessages($validator->errors()->toArray());
             }
             
-            // $this->userRepository->attachOrganization($user, $organization, 'pending', $data['role']);
+            $this->userRepository->attachOrganization($user, $organization, $data['status'], $data['role']);
            
             Mail::to($user->email)->send(new MailInvite($user, $organization));
             
@@ -62,6 +92,7 @@ class RhService
         return [
             'name' => 'required|string',
             'email' => 'required|email',
+            'status' => 'required|string',
             'role' => ['required', 'string', Rule::in(User::ROLES)],
         ];
     }
