@@ -103,6 +103,14 @@ a.btn-card {
 .btn-card-success {
     background-color: #f012be;
 }
+.multiple-buttons{
+    display: flex;
+    justify-content: center;
+}
+.multiple-buttons .btn-card{
+    margin: 5px 0 5px 0;
+    min-width: 80%;
+}
 .desc-box{
     min-height: 50px;
     max-height: 50px;
