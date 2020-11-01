@@ -51,6 +51,7 @@ class AttendanceService
 
     private function areUsersInEvent(Event $event, array $data) : bool
     {
-        return $event->users()->pluck('users.id')->all() === Arr::pluck($data, 'user_id');
+        $event_subscriptions = $event->subscriptions()->pluck('user_id')->all();
+        return array_map('strval', $event_subscriptions) === Arr::pluck($data, 'user_id');
     }
 }
