@@ -7,6 +7,7 @@ use App\Models\Organization;
 use App\Models\User;
 use App\Models\Invite;
 use App\Services\RhService;
+use App\Exceptions\InvitationAlreadyConfirmed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -41,6 +42,8 @@ class RhController extends Controller
 
         } catch (ValidationException $e){
             return redirect()->back()->withErrors($e->validator->getMessageBag());
+        } catch (InvitationAlreadtConfirmed $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to Invite user.');
         }
@@ -61,33 +64,21 @@ class RhController extends Controller
     }
     
     public function invite (Invite $invitation){
-        try{
-            $user_organization = DB::table('user_organizations')->where('id', $invitation->user_organization_id)->first();
-            if($user_organization->status !== User::STATUS_PENDING){
-                throw new Exception('This invitation was already confirmed');
-            }
-            return view('rh.invite', [
-                'invitation' => $invitation,
-                'user' => User::find($user_organization->user_id),
-                'organization' => Organization::find($user_organization->organization_id),
-            ]);
-        }catch (\Exception $e) {
-            return redirect()->route('home')->with('error', 'This invitation was already confirmed');
-        }        
+        $user_organization = DB::table('user_organizations')->where('id', $invitation->user_organization_id)->first();
+        
+        return view('rh.invite', [
+            'invitation' => $invitation,
+            'user' => User::find($user_organization->user_id),
+            'organization' => Organization::find($user_organization->organization_id),
+        ]);     
     }
 
     public function confirm (Invite $invitation){  
         try {
-            $user_organization = DB::table('user_organizations')->where('id', $invitation->user_organization_id)->first();
-            if($user_organization->status !== User::STATUS_PENDING){
-                throw new Exception('This invitation was already confirmed');
-            }
-
-            $organization = Organization::find($user_organization->organization_id);
-            $user = User::find($user_organization->user_id);
-        
-            $this->service->confirmInvitation($organization, $user, request()->all());
+            $this->service->confirmInvitation($invitation, request()->all());
             return redirect()->route('home');
+        } catch (InvitationAlreadyConfirmed $e) {
+            return redirect()->route('home')->with('error', $e->getMessage());
         } catch (ValidationException $e){
             return redirect()->route('home');
         } catch (\Exception $e) {

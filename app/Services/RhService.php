@@ -2,11 +2,14 @@
 
 namespace App\Services;
 
+use Exception;
 use App\Models\Organization;
 use App\Models\User;
+use App\Models\Invite;
 use App\Mail\MailInvite;
 use App\Repositories\UserRepository;
 use App\Repositories\InvitationRepository;
+use App\Exceptions\InvitationAlreadyConfirmed;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Mail;
@@ -39,21 +42,29 @@ class RhService
         $this->userRepository->attachOrganization($user, $organization, $data['status'] ,$data['role']);   
     }
 
-    public function confirmInvitation(Organization $organization, User $user, array $data):void
-    {
+    public function confirmInvitation(Invite $invitation, array $data):void
+    {   
+        $user_organization = DB::table('user_organizations')->where('id', $invitation->user_organization_id)->first();
+        
+        if($user_organization->status !== User::STATUS_PENDING){
+            throw new InvitationAlreadyConfirmed;
+        }
+
+        $organization = Organization::find($user_organization->organization_id);
+        
+        $user = User::find($user_organization->user_id);
+
         if(isset($data['password_confirmation'])) {
             
             if(Hash::check($data['password_confirmation'], $user->password)){
-
-                $user_organizations = DB::table('user_organizations')->where('user_id', $user->id)->where('organization_id', $organization->id)->first();
                 
                 if(isset($data['confirmInvitation'])){
-                    $user_organizations->status = User::STATUS_ACTIVE;
+                    $user_organization->status = User::STATUS_ACTIVE;
                 }else{
-                    $user_organizations->status = User::STATUS_REFUSED;
+                    $user_organization->status = User::STATUS_REFUSED;
                 }
 
-                $user_data  =  array_merge((array) $user_organizations, ['email'=> $user->email, 'name'=> $user->name]);
+                $user_data  =  array_merge((array) $user_organization, ['email'=> $user->email, 'name'=> $user->name]);
                 
                 $this->update($organization, $user, $user_data);
                 
