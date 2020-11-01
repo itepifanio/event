@@ -29,14 +29,6 @@ class HomeController extends Controller
         $subscribed_events_id = $subscriptions->pluck('event_id')->toArray();
         $subscribed_events = Event::with('subscriptions', 'attendances', 'address')->whereIn('id', $subscribed_events_id)->get();
 
-        foreach ($subscribed_events as $event) {
-            foreach($event->attendances as $attendance){
-                if($attendance->user_id === Auth::user()->id && $attendance->percentage >= 75){
-                    $event['hasCertificate'] = true;
-                }
-            }
-        }
-
         return view('home', [
             'events' => $subscribed_events
         ]);
