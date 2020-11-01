@@ -27,7 +27,8 @@ class HomeController extends Controller
     {
         $subscriptions = Subscription::ofUser(Auth::id())->get();
         $subscribed_events_id = $subscriptions->pluck('event_id')->toArray();
-        $subscribed_events = Event::with('subscriptions', 'address')->whereIn('id', $subscribed_events_id)->get();
+        $subscribed_events = Event::with('subscriptions', 'attendances', 'address')->whereIn('id', $subscribed_events_id)->get();
+
         return view('home', [
             'events' => $subscribed_events
         ]);

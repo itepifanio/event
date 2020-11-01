@@ -100,6 +100,9 @@ a.btn-card {
     text-decoration: none;
     color: #fff;
 }
+.btn-card-success {
+    background-color: #f012be;
+}
 .desc-box{
     min-height: 50px;
     max-height: 50px;

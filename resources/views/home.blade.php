@@ -36,6 +36,9 @@
                                 @csrf
                                 <button type='submit' class="btn-card" onclick="return confirm('You will be unsubscribed to this event.');"> Unsubscribe </button>
                             </form>
+                            @if($event->hasCertificate(Auth::user()->id))
+                                <a href="{{ route('certificate.show', [$event->id, Auth::user()->id]) }}" class="btn-card btn-card-success">Download Certificate</a>
+                            @endif
                         </div>
                     </div>
                 </div>

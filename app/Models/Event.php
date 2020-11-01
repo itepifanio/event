@@ -47,6 +47,17 @@ class Event extends Model
         return "{$start_date} - {$end_date}";
     }
 
+    public function hasCertificate($user_id)
+    {
+        foreach($this->attendances as $attendance){
+            if($attendance->user_id === $user_id && $attendance->percentage >= 75){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function scopeOfOrganization($query, $id)
     {
         return $query->whereOrganizationId($id);
