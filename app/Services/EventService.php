@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\EventDoesntBelongOrganization;
 use App\Models\Event;
 use App\Models\Organization;
 use App\Repositories\EventRepository;
@@ -28,7 +29,7 @@ class EventService
         return $this->eventRepository->save($organization, $data);
     }
 
-    public function update(Event $event, array $data) : Event
+    public function update(Organization $organization, Event $event, array $data) : Event
     {
         $validator = Validator::make($data, $this->rules());
 
@@ -36,11 +37,21 @@ class EventService
             throw ValidationException::withMessages($validator->errors()->toArray());
         }
 
+        if($event->organization->id != $organization->id)
+        {
+            throw new EventDoesntBelongOrganization;
+        }
+
         return $this->eventRepository->update($event, $data);
     }
 
-    public function delete(Event $event) : void
+    public function delete(Organization $organization, Event $event) : void
     {
+        if($event->organization->id !== $organization->id)
+        {
+            throw new EventDoesntBelongOrganization;
+        }
+
         $this->eventRepository->delete($event);
     }
 

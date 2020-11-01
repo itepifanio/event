@@ -85,7 +85,39 @@ class EventControllerTest extends TestCase
     {
         $this->actingAs($this->organization->owner);
 
-        $this->put(route('organizations.events.index', [$this->organization->id, $this->event->id]))
+        $this->get(route('organizations.events.index', [$this->organization->id, $this->event->id]))
             ->assertSessionHasNoErrors();
+    }
+
+    /** @test */
+    public function it_throws_exception_on_update_if_the_event_doesnt_belongs_to_organization()
+    {
+        $this->actingAs($this->organization->owner);
+        $event = Event::factory()->create();
+        $form = [
+            'name' => 'Cool event name',
+            'description' => 'Cool kids, cheap drinks',
+            'start_date' => '2020-10-09 20:00:00',
+            'end_date' => '2020-10-10 05:30:00',
+            'address_name' => 'My home',
+            'lat' => -44,
+            'lng' => 88,
+        ];
+
+        $this->put(
+            route('organizations.events.update', [$this->organization->id, $event->id]),
+            $form
+        )->assertSessionHas(['error' => 'Event doesn\'t belong organization']);
+    }
+
+    /** @test */
+    public function it_throws_exception_on_delete_if_the_event_doesnt_belongs_to_organization()
+    {
+        $this->actingAs($this->organization->owner);
+        $event = Event::factory()->create();
+
+        $this->delete(
+            route('organizations.events.destroy', [$this->organization->id, $event->id]),
+        )->assertSessionHas(['error' => 'Event doesn\'t belong organization']);
     }
 }
