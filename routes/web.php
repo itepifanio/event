@@ -27,9 +27,8 @@ Route::middleware(['auth'])->group(function () {
         ]);
         Route::resource('rh', RhController::class, [
             'as' => 'organizations',
-        ])->only(['index', 'edit', 'update','store','create'])
-            ->middleware('hasRole:admin,owner')
-            ->middleware('hasStatus:active')
+        ])->except(['destroy','show'])
+            ->middleware(['hasRole:admin,owner', 'hasStatus:active'])
             ->parameters(['rh' => 'user']);
         
             
@@ -50,5 +49,5 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('invitation/{token}', [RhController::class, 'show'])->name('invitation.confirm');
-Route::post('invitation/{token}', [RhController::class, 'confirm'])->name('invitation.confirm');
+Route::get('invitation/{confirmation:token}', [RhController::class, 'show'])->name('invitation.confirm');
+Route::post('invitation/{confirmation:token}', [RhController::class, 'confirm'])->name('invitation.confirm');

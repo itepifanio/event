@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use App\Models\User;
 use App\Models\Organization;
+use App\Models\Confirmation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -15,17 +16,17 @@ class MailInvite extends Mailable
 
     private User $user;
     private Event $event;
-    private $token;
+    private Confirmation $confirmation;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, Organization $organization, $token)
+    public function __construct(User $user, Organization $organization, Confirmation $confirmation)
     {
         $this->user = $user;
         $this->organization = $organization;
-        $this->token = $token;
+        $this->confirmation = $confirmation;
     }
 
     /**
@@ -41,7 +42,7 @@ class MailInvite extends Mailable
             ->with([
                 'name' => $this->user->name,
                 'organization'=> $this->organization,
-                'link' => route('invitation.confirm', ['token'=>$this->token]) 
+                'link' => route('invitation.confirm', [$this->confirmation->token]) 
             ]);
     }
 }

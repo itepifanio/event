@@ -78,8 +78,6 @@
             document.getElementById("usersDropdown").classList.toggle("show");
         }
         function chooseUser(user){
-            console.log(user);
-            console.log(choosenUsers);
             if(!choosenUsers[user.id]) {
                 choosenUsers[user.id] = user;
                 document.getElementById('users-container').innerHTML += `<a id="user_${user.id}" class="tag" onclick="removeUser(this.id, ${user.id})">${user.email} <i class="fa fa-minus-circle"></i></a>`;

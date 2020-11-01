@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\Confirmation;
@@ -52,52 +53,39 @@ class RhController extends Controller
             'organization' => $organization,
         ]);
     }
+
     public function edit(Organization $organization, User $user)
     {
         $user = $user->load(['organizations' => fn($q) => $q->where('organizations.id', $organization->id)]);
         return view('rh.edit', compact('organization', 'user'));
     }
     
-    public function show ($token){
-        
-        $confirmation = Confirmation::where('token', $token)->first();
-        if(!$confirmation){
+    public function show (Confirmation $confirmation){
+        try{
+            $user_organization = DB::table('user_organizations')->where('id', $confirmation->user_organization_id)->first();
+            if($user_organization->status !== User::STATUS_PENDING){
+                throw new Exception('This invitation was already confirmed');
+            }
             return view('rh.show', [
-                'token' => $token,
-                'message' => "Invitation not found.",
+                'confirmation' => $confirmation,
+                'user' => User::find($user_organization->user_id),
+                'organization' => Organization::find($user_organization->organization_id),
             ]);
-        }
-
-        $user_organization = DB::table('user_organizations')->where('id', $confirmation->user_organization_id)->first();
-        if($user_organization->status !== User::STATUS_PENDING){
-            return view('rh.show', [
-                'token' => $token,
-                'message' => "This invitation was already confirmed.",
-            ]);
-        }
-        
-        return view('rh.show', [
-            'token' => $token,
-            'user' => User::find($user_organization->user_id),
-            'organization' => Organization::find($user_organization->organization_id),
-        ]);
+        }catch (\Exception $e) {
+            return redirect()->route('home')->with('error', 'This invitation was already confirmed');
+        }        
     }
-    public function confirm ($token){
-        
-        $confirmation = Confirmation::where('token', $token)->first();
-        if(!$confirmation){
-            dd('This invitation does not exist!');
-            return;
-        }
 
-        $user_organization = DB::table('user_organizations')->where('id', $confirmation->user_organization_id)->first();
-        if($user_organization->status !== User::STATUS_PENDING){
-            dd('Invitation Already confirmed!');
-            return;
-        }
-        $organization = Organization::find($user_organization->organization_id);
-        $user = User::find($user_organization->user_id);
+    public function confirm (Confirmation $confirmation){  
         try {
+            $user_organization = DB::table('user_organizations')->where('id', $confirmation->user_organization_id)->first();
+            if($user_organization->status !== User::STATUS_PENDING){
+                throw new Exception('This invitation was already confirmed');
+            }
+
+            $organization = Organization::find($user_organization->organization_id);
+            $user = User::find($user_organization->user_id);
+        
             $this->service->confirmInvitation($organization, $user, request()->all());
             return redirect()->route('home');
         } catch (ValidationException $e){

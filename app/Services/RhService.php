@@ -4,16 +4,16 @@ namespace App\Services;
 
 use App\Models\Organization;
 use App\Models\User;
+use App\Mail\MailInvite;
 use App\Repositories\UserRepository;
 use App\Repositories\InvitationRepository;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Mail\MailInvite;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Arr;
 
 class RhService
 {
@@ -35,11 +35,12 @@ class RhService
         }
 
         $this->userRepository->update($user, Arr::only($data, ['name', 'email']));
-        $this->userRepository->attachOrganization($user, $organization, $data['status'] ,$data['role']);
-        
-    }
-    public function confirmInvitation(Organization $organization, User $user, array $data):void{
 
+        $this->userRepository->attachOrganization($user, $organization, $data['status'] ,$data['role']);   
+    }
+
+    public function confirmInvitation(Organization $organization, User $user, array $data):void
+    {
         if(isset($data['password_confirmation'])) {
             
             if(Hash::check($data['password_confirmation'], $user->password)){
@@ -65,9 +66,9 @@ class RhService
 
                 throw ValidationException::withMessages($validator->errors()->toArray());
             }
-        }
-                
+        } 
     }
+
     public function save(Organization $organization, array $lotdata): void
     {
         $users = $lotdata['users'];
@@ -76,9 +77,7 @@ class RhService
             
             $user = User::find($userid);
 
-            
-            $data = array_merge(Arr::only($lotdata, ['role', 'status']), $user->toArray());
-            
+            $data = array_merge(Arr::only($lotdata, ['role', 'status']), $user->toArray());          
             
             $validator = Validator::make($data, $this->rules());
             
@@ -90,10 +89,10 @@ class RhService
            
             $confirmation = $this->invitationRepository->createConfirmationToken(['user_id'=>$user->id, 'organization_id'=>$organization->id]);
             
-            Mail::to($user->email)->send(new MailInvite($user, $organization, $confirmation->token));
-            
+            Mail::to($user->email)->send(new MailInvite($user, $organization, $confirmation)); 
         }
     }
+
     protected function rules(): array
     {
         return [
