@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Organization;
 use App\Models\User;
-use App\Models\Confirmation;
+use App\Models\Invite;
 use App\Services\RhService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,14 +60,14 @@ class RhController extends Controller
         return view('rh.edit', compact('organization', 'user'));
     }
     
-    public function show (Confirmation $confirmation){
+    public function invite (Invite $invitation){
         try{
-            $user_organization = DB::table('user_organizations')->where('id', $confirmation->user_organization_id)->first();
+            $user_organization = DB::table('user_organizations')->where('id', $invitation->user_organization_id)->first();
             if($user_organization->status !== User::STATUS_PENDING){
                 throw new Exception('This invitation was already confirmed');
             }
-            return view('rh.show', [
-                'confirmation' => $confirmation,
+            return view('rh.invite', [
+                'invitation' => $invitation,
                 'user' => User::find($user_organization->user_id),
                 'organization' => Organization::find($user_organization->organization_id),
             ]);
@@ -76,9 +76,9 @@ class RhController extends Controller
         }        
     }
 
-    public function confirm (Confirmation $confirmation){  
+    public function confirm (Invite $invitation){  
         try {
-            $user_organization = DB::table('user_organizations')->where('id', $confirmation->user_organization_id)->first();
+            $user_organization = DB::table('user_organizations')->where('id', $invitation->user_organization_id)->first();
             if($user_organization->status !== User::STATUS_PENDING){
                 throw new Exception('This invitation was already confirmed');
             }

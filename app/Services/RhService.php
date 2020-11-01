@@ -87,9 +87,9 @@ class RhService
 
             $this->userRepository->attachOrganization($user, $organization, $data['status'], $data['role']);
            
-            $confirmation = $this->invitationRepository->createConfirmationToken(['user_id'=>$user->id, 'organization_id'=>$organization->id]);
+            $invitation = $this->invitationRepository->createConfirmationToken(['user_id'=>$user->id, 'organization_id'=>$organization->id]);
             
-            Mail::to($user->email)->send(new MailInvite($user, $organization, $confirmation)); 
+            Mail::to($user->email)->send(new MailInvite($user, $organization, $invitation)); 
         }
     }
 

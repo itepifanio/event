@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConfirmationsTable extends Migration
+class CreateInvitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateConfirmationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('confirmations', function (Blueprint $table) {
+        Schema::create('invites', function (Blueprint $table) {
             $table->increments('id');
             $table->string('token');
             $table->unsignedInteger('user_organization_id');
@@ -32,6 +32,6 @@ class CreateConfirmationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('confirmations');
+        Schema::dropIfExists('invites');
     }
 }

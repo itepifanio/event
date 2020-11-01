@@ -3,25 +3,25 @@
 namespace App\Repositories;
 
 
-use App\Models\Confirmation;
+use App\Models\Invite;
 use Illuminate\Support\Facades\DB;
 
 class InvitationRepository
 {
-    public function createConfirmationToken(array $data): Confirmation
+    public function createConfirmationToken(array $data): Invite
     {   
         $user_organization = DB::table('user_organizations')->where('user_id', $data['user_id'])->where('organization_id', $data['organization_id'])->first();
         $token = md5(time());
 
-        $confirmation = new Confirmation();
+        $invitation = new Invite();
         
-        $confirmation->token = $token;
-        $confirmation->user_organization_id = $user_organization->id;
+        $invitation->token = $token;
+        $invitation->user_organization_id = $user_organization->id;
         
 
-        $confirmation->save();
+        $invitation->save();
 
-        return $confirmation;
+        return $invitation;
             
     }
 }

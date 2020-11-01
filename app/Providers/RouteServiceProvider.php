@@ -6,7 +6,7 @@ use App\Models\Attendance;
 use App\Models\Event;
 use App\Models\Organization;
 use App\Models\User;
-use App\Models\Confirmation;
+use App\Models\Invite;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\RateLimiter;
@@ -60,6 +60,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('organization', Organization::class);
         Route::model('profile', User::class);
         Route::model('attendance', Attendance::class);
-        Route::model('confirmation:token', Confirmation::class);
+        Route::model('invitation:token', Invite::class);
     }
 }

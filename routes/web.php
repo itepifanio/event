@@ -49,5 +49,5 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('invitation/{confirmation:token}', [RhController::class, 'show'])->name('invitation.confirm');
-Route::post('invitation/{confirmation:token}', [RhController::class, 'confirm'])->name('invitation.confirm');
+Route::get('invitation/{invitation:token}', [RhController::class, 'invite'])->name('invitation.confirm');
+Route::post('invitation/{invitation:token}', [RhController::class, 'confirm'])->name('invitation.confirm');
