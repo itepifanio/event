@@ -12,6 +12,7 @@ class CreateUserOrganizationsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('organization_id');
+            $table->string('status');
             $table->timestamps();
 
             $table->foreign('user_id')

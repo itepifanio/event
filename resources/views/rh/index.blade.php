@@ -11,7 +11,10 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Organizations</h3>
-
+                        <a href="{{ route('organizations.rh.create', $organization->id) }}"
+                           class="btn btn-sm btn-primary float-right">
+                            Invite
+                        </a>
                     </div>
                     <div class="card-body">
 
@@ -19,8 +22,9 @@
                             <table id="datatable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th class="col-md-6">Name</th>
+                                    <th class="col-md-4">Name</th>
                                     <th class="col-md-2">Role</th>
+                                    <th class="col-md-2">Status</th>
                                     <th class="col-md-4">Options</th>
                                 </tr>
                                 </thead>
@@ -29,9 +33,36 @@
                                     <tr>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ ucfirst($user->pivot->role) }}</td>
+                                        <td>{{ ucfirst($user->pivot->status) }}</td>
                                         <td>
                                             <a href="{{ route('organizations.rh.edit', [$organization->id, $user->id]) }}"
                                                class="btn btn-xs btn-warning">Edit</a>
+                                            @if( $user->pivot->status !== \App\Models\User::STATUS_PENDING)
+                                                <form method="POST" action="{{ route('organizations.rh.update', [$organization->id, $user->id]) }}" style="display: inline">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <input type="hidden" name="name" value="{{$user->name}}"/>
+                                                    <input type="hidden" name="email" value="{{$user->email}}"/>
+                                                    <input type="hidden" name="role" value="{{$user->pivot->role}}"/>
+
+                                                    @if( $user->pivot->status === \App\Models\User::STATUS_ACTIVE)
+                                                        <input type="hidden" name="status" value="{{\App\Models\User::STATUS_DISABLED}}"/>
+                                                        <button class="btn btn-xs btn-danger" type="submit"
+                                                            onclick="return confirm('Do you want disable this user?');">
+                                                            Disable
+                                                        </button>
+                                                    @endif
+
+                                                    @if( $user->pivot->status === \App\Models\User::STATUS_DISABLED)
+                                                        <input type="hidden" name="status" value="{{\App\Models\User::STATUS_ACTIVE}}"/>
+                                                        <button class="btn btn-xs btn-success" type="submit"
+                                                            onclick="return confirm('Do you want enable this user?');">
+                                                            Enable
+                                                        </button>
+                                                    @endif
+
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

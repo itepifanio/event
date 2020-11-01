@@ -1,0 +1,12 @@
+.tag{
+    background-color: #f012be;
+    padding: 5px;
+    border-radius: .25rem;
+    color: white !important;
+    font-size: x-small;
+    margin: 0 5px 0 5px;
+    cursor: pointer;
+}
+.tag i{
+    margin-left: 3px;
+}

@@ -19,6 +19,17 @@ class User extends Authenticatable
         self::ROLES_COMMON,
     ];
 
+    const STATUS_ACTIVE = 'active';
+    const STATUS_PENDING = 'pending';
+    const STATUS_REFUSED = 'refused';
+    const STATUS_DISABLED = 'disabled';
+    const STATUS = [
+        self::STATUS_ACTIVE,
+        self::STATUS_PENDING,
+        self::STATUS_REFUSED,
+        self::STATUS_DISABLED
+    ];
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -34,7 +45,7 @@ class User extends Authenticatable
     public function organizations()
     {
         return $this->belongsToMany(Organization::class, 'user_organizations')
-                ->withPivot('role');
+                ->withPivot('role', 'status');
     }
 
     public function address()

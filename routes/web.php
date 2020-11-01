@@ -9,6 +9,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\RhController;
 use App\Http\Controllers\CertificateController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,13 +26,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('events', EventController::class, [
             'as' => 'organizations',
         ]);
-
         Route::resource('rh', RhController::class, [
             'as' => 'organizations',
-        ])->only(['index', 'edit', 'update'])
-            ->middleware('hasRole:admin,owner')
+        ])->except(['destroy','show'])
+            ->middleware(['hasRole:admin,owner', 'hasStatus:active'])
             ->parameters(['rh' => 'user']);
-
+        
+            
         Route::group(['prefix' => 'events/{event}'], function (){
             Route::get('attendances', [AttendanceController::class, 'index'])->name('organizations.events.attendances.index');
             Route::put('attendances', [AttendanceController::class, 'update'])->name('organizations.events.attendances.update');
@@ -51,3 +52,5 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('invitation/{invitation:token}', [RhController::class, 'invite'])->name('invitation.confirm');
+Route::post('invitation/{invitation:token}', [RhController::class, 'confirm'])->name('invitation.confirm');

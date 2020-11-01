@@ -47,6 +47,7 @@
                                         <div class="invalid-feedback" style="display: unset">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <input type="hidden" name="status" value="{{$user->organizations->first()->pivot->status}}"/>                                
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
