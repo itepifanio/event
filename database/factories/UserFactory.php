@@ -34,7 +34,8 @@ class UserFactory extends Factory
             if ($organizationId != -1) {
                 $user->organizations()->sync([
                     $organizationId => [
-                        'role' => $role,
+                        'role'   => $role,
+                        'status' => User::STATUS_ACTIVE,
                     ]
                 ]);
                 return $user;
@@ -46,7 +47,8 @@ class UserFactory extends Factory
 
             return $user->organizations()->sync([
                 $organization->id => [
-                    'role' => $role,
+                    'role'   => $role,
+                    'status' => User::STATUS_ACTIVE,
                 ]
             ]);
         });
@@ -56,8 +58,8 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function (User $user) use ($eventId) {
             Subscription::factory()->create([
-               'user_id' => $user->id,
-               'event_id' => $eventId,
+                'user_id' => $user->id,
+                'event_id' => $eventId,
             ]);
 
             return $user;
