@@ -31,14 +31,16 @@
                                         </span>
                                 </div>
                             </p>
-                            <form action= "{{ route('events.subscription.destroy', [$event->id, $event->subscriptions->where('user_id', '=', auth()->user()->id)[0]->id ]) }}" method="POST">
-                                @method('DELETE')
-                                @csrf
-                                <button type='submit' class="btn-card" onclick="return confirm('You will be unsubscribed to this event.');"> Unsubscribe </button>
-                            </form>
-                            @if($event->hasCertificate(Auth::user()->id))
-                                <a href="{{ route('certificate.show', [$event->id, Auth::user()->id]) }}" class="btn-card btn-card-success">Download Certificate</a>
-                            @endif
+                            <div class="multiple-buttons row">
+                                <form action= "{{ route('events.subscription.destroy', [$event->id, $event->subscriptions->where('user_id', '=', auth()->user()->id)[0]->id ]) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type='submit' class="btn-card" onclick="return confirm('You will be unsubscribed to this event.');"> Unsubscribe </button>
+                                </form>
+                                @if($event->hasCertificate(Auth::user()->id))
+                                    <a href="{{ route('certificate.show', [$event->id, Auth::user()->id]) }}" class="btn-card btn-card-success"> Download Certificate</a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
