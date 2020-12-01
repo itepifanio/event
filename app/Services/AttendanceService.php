@@ -3,14 +3,14 @@
 namespace App\Services;
 
 use App\Exceptions\UserNotSubscribed;
-use App\Models\Attendance;
-use App\Models\Event;
+use App\Geoevent\Services\AttendanceService as GeoAttendanceService;
+use App\Models\Geoevent\Event;
 use App\Repositories\AttendanceRepository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-class AttendanceService
+class AttendanceService extends GeoAttendanceService
 {
     private AttendanceRepository $repository;
 
@@ -41,7 +41,7 @@ class AttendanceService
         return $this->repository->createOrUpdate($data);
     }
 
-    private function rules(): array
+    protected function rules(): array
     {
         return [
             '*.percentage' => ['required', 'integer', 'between:0,100'],

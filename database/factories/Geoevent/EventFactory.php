@@ -1,9 +1,10 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Geoevent;
 
-use App\Models\Address;
-use App\Models\Event;
+
+use App\Models\Geoevent\Address;
+use App\Models\Geoevent\Event;
 use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Event;
+use App\Models\Geoevent\Event;
 use App\Models\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;

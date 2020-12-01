@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Geoevent\Services;
 
 use GuzzleHttp\Client;
 
-class Geolocalization
+class GeolocalizationService
 {
     private Client $geoApi;
     private string $geoUrl;

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\UserNotSubscribed;
-use App\Models\Event;
+
+use App\Models\Geoevent\Event;
 use App\Models\Organization;
 use App\Services\AttendanceService;
 use Illuminate\Validation\ValidationException;

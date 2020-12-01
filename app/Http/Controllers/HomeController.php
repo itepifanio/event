@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Geoevent\Event;
+use App\Models\Geoevent\Subscription;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Subscription;
-use App\Models\Event;
 
 class HomeController extends Controller
 {

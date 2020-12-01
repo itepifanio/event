@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
         $user->organizations()->sync([
             $organization->id => [
                 'role' => User::ROLES_OWNER,
+                'status' => User::STATUS_ACTIVE,
             ]
         ]);
 

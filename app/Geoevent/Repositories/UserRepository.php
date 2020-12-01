@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Geoevent\Repositories;
 
-use App\Geoevent\Repositories\UserRepository as GeoUserRepository;
-use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 
-class UserRepository extends GeoUserRepository
+class UserRepository
 {
     public function save(array $data) : User
     {
@@ -22,15 +20,5 @@ class UserRepository extends GeoUserRepository
     public function update(User $user, array $data) : User
     {
         return tap($user)->update(Arr::except($data, 'id'));
-    }
-
-    public function attachOrganization(User $user, Organization $organization, string $status, string $role)
-    {
-        $user->organizations()->sync([
-            $organization->id => [
-                'role' => $role,
-                'status'=> $status
-            ]
-        ]);
     }
 }

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Geoevent\Repositories;
 
-use App\Geoevent\Repositories\EventRepository as GeoEventRepository;
+use App\Geoevent\Facades\Geolocalization;
 use App\Models\Geoevent\Event;
+use Illuminate\Database\Eloquent\Collection;
 
-class EventRepository extends GeoEventRepository
+class EventRepository
 {
     public function save(array $data) : Event
     {
@@ -15,7 +16,6 @@ class EventRepository extends GeoEventRepository
         $event->description = $data['description'];
         $event->start_date = $data['start_date'];
         $event->end_date = $data['end_date'];
-        $event->organization_id = $data['organization_id'];
 
         $event->save();
 
@@ -44,5 +44,15 @@ class EventRepository extends GeoEventRepository
     public function delete(Event $event) : void
     {
         $event->delete();
+    }
+
+    public function getEventsByLocation(int $lat, int $lng) : Collection
+    {
+        return Event::closestTo($lat, $lng)->with('subscriptions')->get();
+    }
+
+    public function getUserCurrentLocation()
+    {
+        return Geolocalization::current();
     }
 }

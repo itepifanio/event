@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Geoevent\Event;
+use App\Models\Geoevent\Subscription;
 use Illuminate\Http\Request;
-use App\Models\Event;
-use App\Models\Subscription;
 use App\Models\User;
 use App\Services\SubscriptionService;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +44,7 @@ class SubscriptionsController extends Controller
 
             Mail::to(Auth::user()->email)->send(new MailSubscription(Auth::user(), $event));
             return redirect()->back()->with('success', 'User subscribed with success.');
-            
+
         } catch (ValidationException $e){
             return redirect()->back()->withErrors($e->validator->getMessageBag());
         } catch (\Exception $e) {
@@ -55,7 +55,7 @@ class SubscriptionsController extends Controller
     public function destroy(Event $event, $id)
     {
         $subscription = Subscription::find($id)->first();
-        
+
         try {
             $this->service->delete($subscription);
             return redirect()->back()->with('success', 'Unsubscribed with success.');

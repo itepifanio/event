@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Attendance;
-use App\Models\Event;
+use App\Models\Geoevent\Attendance;
+use App\Models\Geoevent\Event;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\Invite;
@@ -43,7 +43,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
         });
-        
+
     }
 
     protected function configureRateLimiting()

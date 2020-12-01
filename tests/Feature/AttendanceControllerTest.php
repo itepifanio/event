@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Exceptions\UserNotSubscribed;
-use App\Models\Attendance;
-use App\Models\Event;
+use App\Models\Geoevent\Attendance;
+use App\Models\Geoevent\Event;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -34,12 +33,14 @@ class AttendanceControllerTest extends TestCase
     {
         $this->actingAs($this->organization->owner);
 
-        $this->get(
+        $response = $this->get(
             route(
                 'organizations.events.attendances.index',
                 [$this->event->organization->id, $this->event->id]
             )
-        )->assertStatus(200);
+        );
+//        ->assertStatus(200)
+        dd($response);
     }
 
     /** @test */

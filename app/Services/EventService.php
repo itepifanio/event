@@ -3,22 +3,15 @@
 namespace App\Services;
 
 use App\Exceptions\EventDoesntBelongOrganization;
-use App\Models\Event;
-use App\Models\Organization;
+use App\Geoevent\Services\EventService as GeoEventService;
+use App\Models\Geoevent\Event;
 use App\Repositories\EventRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-class EventService
+class EventService extends GeoEventService
 {
-    private EventRepository $eventRepository;
-
-    public function __construct()
-    {
-        $this->eventRepository = new EventRepository();
-    }
-
-    public function save(Organization $organization, array $data) : Event
+    public function save(array $data) : Event
     {
         $validator = Validator::make($data, $this->rules());
 
@@ -26,10 +19,10 @@ class EventService
             throw ValidationException::withMessages($validator->errors()->toArray());
         }
 
-        return $this->eventRepository->save($organization, $data);
+        return (new EventRepository)->save($data);
     }
 
-    public function update(Organization $organization, Event $event, array $data) : Event
+    public function update(Event $event, array $data) : Event
     {
         $validator = Validator::make($data, $this->rules());
 
@@ -37,25 +30,15 @@ class EventService
             throw ValidationException::withMessages($validator->errors()->toArray());
         }
 
-        if($event->organization->id != $organization->id)
+        if($event->organization->id != $data['organization_id'])
         {
             throw new EventDoesntBelongOrganization;
         }
 
-        return $this->eventRepository->update($event, $data);
+        return (new EventRepository)->update($event, $data);
     }
 
-    public function delete(Organization $organization, Event $event) : void
-    {
-        if($event->organization->id !== $organization->id)
-        {
-            throw new EventDoesntBelongOrganization;
-        }
-
-        $this->eventRepository->delete($event);
-    }
-
-    private function rules() : array
+    protected function rules() : array
     {
         return [
             'name' => 'required|string',

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Geoevent;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,10 +23,12 @@ class Subscription extends Model
     {
         return $this->hasMany(Event::class);
     }
+
     public function scopeOfEvent($query, $id)
     {
         return $query->whereEventId($id);
     }
+
     public function scopeOfUser($query, $id)
     {
         return $query->whereUserId($id);

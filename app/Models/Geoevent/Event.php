@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Geoevent;
 
+use App\Models\Organization;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
