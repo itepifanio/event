@@ -83,7 +83,7 @@ class Event extends Model
         $alias = 'events.name as event_name, addresses.name as address_name';
 
         return $query->join('addresses', 'events.id', '=', 'addresses.addressable_id')
-            ->where('addressable_type', 'App\Models\Event')
+            ->where('addressable_type', 'App\Models\Geoevent\Event')
             ->selectRaw("*, {$alias}, {$haversine} as distance")
             ->whereRaw("{$haversine} <= ?", $dist)
             ->limit($limit);
