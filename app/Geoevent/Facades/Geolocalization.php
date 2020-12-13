@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Facades;
+namespace App\Geoevent\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use App\Geoevent\Services\GeolocalizationService;
 
 class Geolocalization extends Facade
 {
@@ -13,6 +14,6 @@ class Geolocalization extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'geolocalization';
+        return GeolocalizationService::class;
     }
 }

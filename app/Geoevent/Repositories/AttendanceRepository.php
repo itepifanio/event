@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Geoevent\Repositories;
 
-use App\Geoevent\Repositories\AttendanceRepository as GeoAttendanceRepository;
 use App\Models\Geoevent\Attendance;
 
-class AttendanceRepository extends GeoAttendanceRepository
+class AttendanceRepository
 {
     public function createOrUpdate(array $data): bool
     {

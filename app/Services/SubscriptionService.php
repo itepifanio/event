@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Subscription;
+use App\Models\Geoevent\Subscription;
 use App\Repositories\SubscriptionRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use App\Geoevent\Services\SubscriptionService as GeoSubscriptionService;
 
-class SubscriptionService
+class SubscriptionService extends GeoSubscriptionService
 {
     private SubscriptionRepository $subscriptionRepository;
 
@@ -16,23 +17,7 @@ class SubscriptionService
         $this->subscriptionRepository = new SubscriptionRepository();
     }
 
-    public function save(array $data) : Subscription
-    {
-        $validator = Validator::make($data, $this->rules());
-
-        if($validator->fails()){
-            throw ValidationException::withMessages($validator->errors()->toArray());
-        }
-
-        return $this->subscriptionRepository->save($data);
-    }
-
-    public function delete(Subscription $subscription) : void
-    {
-        $this->subscriptionRepository->delete($subscription);
-    }
-
-    private function rules() : array
+    protected function rules() : array
     {
         return [
             'user_id' => 'required',

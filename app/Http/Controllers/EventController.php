@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\EventDoesntBelongOrganization;
-use App\Facades\Geolocalization;
-use App\Models\Event;
+use App\Geoevent\Facades\Geolocalization;
+use App\Models\Geoevent\Event;
 use App\Models\Organization;
 use App\Services\EventService;
 use Illuminate\Http\Request;
@@ -46,15 +46,18 @@ class EventController extends Controller
     public function store(Request $request, Organization $organization)
     {
         try {
-            $this->service->save($organization, $request->all());
+            $request->merge(['organization_id' => $organization->id]);
+            $this->service->save($request->all());
 
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
                 'organization' => $organization,
             ])->with('success', 'Event created with success.');
         } catch (ValidationException $e){
+            dd($e);
             return redirect()->back()->withErrors($e->validator->getMessageBag());
         } catch (\Exception $e) {
+            dd($e);
             return redirect()->back()->with('error', 'Failed to create event.');
         }
     }
@@ -78,7 +81,8 @@ class EventController extends Controller
     public function update(Request $request, Organization $organization, Event $event)
     {
         try {
-            $this->service->update($organization, $event, $request->all());
+            $request->merge(['organization_id' => $organization->id]);
+            $this->service->update($event, $request->all());
 
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),
@@ -96,7 +100,7 @@ class EventController extends Controller
     public function destroy(Organization $organization, Event $event)
     {
         try {
-            $this->service->delete($organization, $event);
+            $this->service->delete($event);
 
             return redirect()->route('organizations.events.index', [
                 'events' => Event::ofOrganization($organization->id)->get(),

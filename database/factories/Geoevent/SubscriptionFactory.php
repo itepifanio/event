@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Geoevent;
 
-use App\Models\Event;
-use App\Models\Subscription;
+use App\Models\Geoevent\Event;
+use App\Models\Geoevent\Subscription;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

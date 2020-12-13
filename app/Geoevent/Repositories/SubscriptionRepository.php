@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Geoevent\Repositories;
 
-use App\Geoevent\Repositories\SubscriptionRepository as GeoSubscriptionRepository;
 use App\Models\Geoevent\Subscription;
 
-class SubscriptionRepository extends GeoSubscriptionRepository
+class SubscriptionRepository
 {
     public function save(array $data) : Subscription
     {

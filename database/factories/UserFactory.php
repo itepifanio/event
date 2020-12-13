@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Geoevent\Subscription;
 use App\Models\Organization;
-use App\Models\Subscription;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;

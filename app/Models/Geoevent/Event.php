@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Geoevent;
 
+use App\Models\Organization;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
@@ -82,7 +83,7 @@ class Event extends Model
         $alias = 'events.name as event_name, addresses.name as address_name';
 
         return $query->join('addresses', 'events.id', '=', 'addresses.addressable_id')
-            ->where('addressable_type', 'App\Models\Event')
+            ->where('addressable_type', 'App\Models\Geoevent\Event')
             ->selectRaw("*, {$alias}, {$haversine} as distance")
             ->whereRaw("{$haversine} <= ?", $dist)
             ->limit($limit);

@@ -2,14 +2,13 @@
 
 namespace App\Services;
 
+use App\Geoevent\Services\RegisterService as GeoRegisterService;
 use App\Models\User;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
-class RegisterService
+class RegisterService extends GeoRegisterService
 {
     private UserRepository $userRepository;
     private OrganizationRepository $organizationRepository;
@@ -20,14 +19,8 @@ class RegisterService
         $this->organizationRepository = new OrganizationRepository();
     }
 
-    public function save(array $data): User
+    public function createUser(array $data): User
     {
-        $validator = Validator::make($data, $this->rules());
-
-        if($validator->fails()){
-            throw ValidationException::withMessages($validator->errors()->toArray());
-        }
-
         $user = $this->userRepository->save(Arr::only($data, ['name', 'email', 'password']));
 
         if (isset($data['is_organization'])) {
@@ -40,7 +33,7 @@ class RegisterService
         return $user;
     }
 
-    private function rules(): array
+    protected function rules(): array
     {
         return [
             'name' => 'required|string|max:255',
